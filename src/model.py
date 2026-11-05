@@ -55,6 +55,21 @@ def required_cooling(year, flow, target=T_TARGET):
     return max(0.0, heat_input(year) - RHO * CP * flow * (target - T0))
 
 
+def low_flow_prevention(year, target=T_TARGET):
+    upstream = max(0.0, heat_input(year) - RHO * CP * Q_MIN * (T_BOIL - T0))
+    downstream = RHO * CP * Q_MIN * max(0.0, T_BOIL - target)
+    return {
+        "raw_c": T_BOIL,
+        "outlet_c": target,
+        "upstream_mw": upstream / 1e6,
+        "downstream_mw": downstream / 1e6,
+        "total_mw": (upstream + downstream) / 1e6,
+        "full_mechanical_electric_mw": (upstream + downstream) / real_cooling_cop() / 1e6,
+        "fan_mw": (upstream + downstream) / 1e6 * 0.01 * (1 + 1 / real_cooling_cop()),
+        "pump_mw": RHO * 9.81 * Q_MIN * 140.0 / 0.75 / 1e6,
+    }
+
+
 def required_cooling_temperature_slope(year, flow, target=T_TARGET):
     raw = T0 + (T_BOIL - T0) * year / YEARS_TO_BOIL
     return RHO * CP * flow * max(0.0, raw - target)
@@ -173,8 +188,11 @@ def growth_economics(electricity_eur_mwh=120.0, discount=0.03,
         electricity_gwh = sum(row["electric_gwh"] for row in rows)
         maintenance = 0.025 * (fixed_eur + modules * module_eur)
         operating = electricity_gwh * 1000 * electricity_eur_mwh + maintenance
+        if year == 1:
+            operating += 50e6
+        if year == 15:
+            replacement_eur = 100e6 * modules / 13
         npv += operating / (1 + discount) ** year
-        replacement_eur = 100e6 * modules / 13
         schedule.append({
             "year": year,
             "modules": modules,
@@ -305,6 +323,11 @@ def run(output_dir):
 
     raw_max = liquid_temperature_before_capping(10.0, Q_MAX)
     process_max = required_process_flow(Q_MAX, raw_max)
+    low_flow = low_flow_prevention(10.0)
+    low_flow_annual_gwh = 8.76 * (
+        low_flow["full_mechanical_electric_mw"] + low_flow["fan_mw"] + low_flow["pump_mw"]
+    )
+    low_flow_annual_cost_meur = low_flow_annual_gwh * 0.12 + 12.5
     annual_base = economics(rows)
     annual_base["present_cost_20y_meur"] = stationary["present_cost_20y_meur"]
     annual_base["replacement_meur"] = stationary["replacement_meur"]
@@ -337,6 +360,11 @@ def run(output_dir):
         "cooling_year10_mean_mw": required_cooling(10.0, Q_MEAN) / 1e6,
         "cooling_year10_min_mw": design_cooling / 1e6,
         "cooling_year10_max_mw": required_cooling(10.0, Q_MAX) / 1e6,
+        "low_flow_prevention": low_flow,
+        "low_flow_continuous_annual_gwh": low_flow_annual_gwh,
+        "low_flow_continuous_annual_cost_meur": low_flow_annual_cost_meur,
+        "low_yield_npv_constant_meur": stationary["present_cost_20y_meur"] + 240.0 + 0.025 * 240.0 * annuity,
+        "steady_annual_cost_constant_meur": annual_base["annual_cost_meur"] + 100.0 / 15.0,
         "natural_year10_min_c": natural_temperature(10.0, Q_MIN),
         "natural_year10_max_c": natural_temperature(10.0, Q_MAX),
         "uncapped_year10_min_c": liquid_temperature_before_capping(10.0, Q_MIN),
@@ -393,7 +421,10 @@ def run(output_dir):
     assert math.isclose(RHO * CP * process_max * (raw_max - 9.5), required_cooling(10.0, Q_MAX), rel_tol=1e-12)
     assert 13 * 1.55 >= process_max
     assert math.isclose(sum(CAPEX_BREAKDOWN_MEUR.values()), 500.0)
-    assert all(math.isclose(row["outlet_c"], T_NORMAL) for row in monthly_design(flow=Q_MIN))
+    assert math.isclose(low_flow["total_mw"] * 1e6, design_cooling, rel_tol=1e-12)
+    assert math.isclose(low_flow["raw_c"], T_BOIL)
+    assert math.isclose(low_flow["outlet_c"], T_TARGET)
+    assert math.isclose(growth["replacement_meur"], 130.769230769, rel_tol=1e-8)
     assert abs(sum(row["hours"] for row in rows) - 8760) == 0
     assert all(row["raw_c"] >= T_BOIL - 1e-9 for row in rows)
     assert all(row["heat_removed_mw"] >= row["dry_cooling_mw"] + row["trim_cooling_mw"] - 1e-8 for row in rows)
