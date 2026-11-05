@@ -40,7 +40,7 @@ th, td { border: 0.6pt solid #9db4b9; padding: 4pt 5pt; vertical-align: top; }
 code { font-family: "Courier New", monospace; font-size: 12pt; hyphens: none; }
 .keys { margin: 3pt 0; }
 .keys th, .keys td { padding: 1pt 3pt; }
-.keys td:first-child { width: 45%; overflow-wrap: anywhere; }
+.keys td:first-child { width: 62%; overflow-wrap: normal; }
 .checklist li { margin-bottom: 4pt; }
 .dense { line-height: 1.0; }
 .dense p { margin-bottom: 4pt; }
@@ -68,7 +68,7 @@ code { font-family: "Courier New", monospace; font-size: 12pt; hyphens: none; }
 <p>Die nötige Leistung folgt direkt aus dem genannten Temperaturtrend. Im zehnten Jahr müssen bei maximalem Abfluss 11,77 Gigawatt abgeführt werden. Eine kleine Kühlspirale im Quelltopf reicht deshalb nicht. Die kleinere Anlage mit fester Wärmeleistung gilt nur, falls Messungen stattdessen eine feste Wärmequelle bestätigen.</p>
 <p>Unsere Anlage nutzt zuerst Wärme für Gebäude oder Betriebe. Trockenkühler geben den Rest an die Luft ab. Nur wenn das nicht reicht, springt eine elektrische Nachkühlung an. 160 Module mit zusammen 12,8 Gigawatt schaffen Reserve. Auch nach dem Ausfall eines Moduls bleiben 12,72 Gigawatt.</p>
 <p>Das Kostenszenario nennt 4,91 Milliarden Euro für den Bau bei maximalem Abfluss. Der Strombedarf im zehnten Jahr liegt bei 0,03 Terawattstunden bei Niedrigwasser, 0,30 im Mittel und 4,37 bei maximalem Abfluss. Für mittleren bis maximalen Abfluss ergeben sich über zwanzig Jahre 7,76 bis 14,42 Milliarden Euro bei konstanter Temperatur nach Jahr zehn und 11,92 bis 18,98 Milliarden bei weiterem Anstieg. Bei unbegrenztem Wachstum ist kein endlicher Barwert möglich.</p>
-<div class="result"><b>Antwort.</b> Bei unbegrenzt linearem Temperaturanstieg gibt es keine endliche dauerhafte Lösung. Die Wärmeschleuse ist eine befristete Brücke. Bleibt die Temperatur nach Jahr zehn konstant, kann sie dauerhaft schützen. Steigt sie weiter, muss die Wärmequelle begrenzt werden. Dafür enthalten wir einen 250-Mio.-€-Prüfpfad mit Erkundungsbohrung und Verpressung. Ist er undurchführbar, bleibt die Aufgabe physikalisch unlösbar.</div>
+<div class="result"><b>Antwort.</b> Bei unbegrenzt linearem Temperaturanstieg gibt es keine endliche dauerhafte Lösung. Die Wärmeschleuse ist eine befristete Brücke. Bleibt die Temperatur nach Jahr zehn konstant, kann sie dauerhaft schützen. Steigt sie weiter, muss die Wärmequelle begrenzt werden. Dafür enthalten wir einen 250-Mio.-€-Prüfpfad mit Erkundungsbohrung und Verpressung. Ist er undurchführbar, bleibt keine endliche dauerhafte Lösung möglich.</div>
 </section>
 
 <section class="sheet">
@@ -133,7 +133,7 @@ code { font-family: "Courier New", monospace; font-size: 12pt; hyphens: none; }
 <tr><td>Alternative A: Wärmeleistung wächst linear</td><td>keine Flüssigkeitsauslegung</td><td>817,6 MW</td><td>437,0 MW</td></tr>
 </table>
 <h2>Speicherung im Quelltopf</h2>
-<p>Als geometrisches Szenario dienen ein Kreis mit 40 m Durchmesser und 6,84 m mittlerer Tiefe. Daraus folgen A = π·(20 m)² = 1.257 m² und V = A·6,84 m = 8.598 m³. Diese Näherung ist kein Messwert. Speichern oder Beschatten löst das Problem nicht.</p>
+<p>Als geometrisches Szenario dienen ein Kreis mit 40 m Durchmesser und 6,84 m mittlerer Tiefe. Die mittlere Tiefe ist ein Szenariowert, die maximale Quelltiefe beträgt 20,6 m. [2] Daraus folgen A = π·(20 m)² = 1.257 m² und V = A·6,84 m = 8.598 m³. Diese Näherung ist kein Messwert. Speichern oder Beschatten löst das Problem nicht.</p>
 </section>
 
 <section class="sheet dense model">
@@ -151,7 +151,7 @@ code { font-family: "Courier New", monospace; font-size: 12pt; hyphens: none; }
 <p class="caption">Abbildung 1: Förderung und Injektion liegen im Zufluss, nicht im sichtbaren Quelltopf. [10]</p>
 <p>Markierungsversuche und Geophysik legen die Brunnen außerhalb des Quellbereichs. Richtbohrungen schonen die Höhlen, Packer trennen kaltes Injektat und warmes Ansaugwasser.</p>
 <p>Im Auslegungsfall B beträgt die Temperatur überall 98,3 °C. Für 12 °C nach Mischung gilt q·9,5 °C + q<sub>B</sub>·98,3 °C = Q·12 °C. Daraus folgen q = 31,750 m³/s und q<sub>B</sub> = 0,920 m³/s. Die Wärmebilanz ergibt ρcq(98,3−9,5) = 11,77 GW. Für das Normalziel 9,5 °C wird der volle Abfluss gefördert.</p>
-<p>23 Paare à 1,55 m³/s liefern nach einem Ausfall 34,10 m³/s. Die angenommene Ergiebigkeit von 15,5 L/s pro Meter ergibt 100 m Absenkung, die in den 140 m Gesamtdruckhöhe enthalten ist; bei 75 % Wirkungsgrad sind 58,02 MW nötig. 67 ertragsschwache Paare à 0,5 m³/s kosten 440 Mio. € mehr. Pilotbohrungen prüfen diese Annahmen. Alternative A nutzt bei 12 °C 14 Paare und 18,35 m³/s, bei 9,5 °C und den A-Kosten am Maximalabfluss 23 Paare, 32,67 m³/s und 90 Mio. € Mehrkosten.</p>
+<p>23 Paare à 1,55 m³/s liefern nach einem Ausfall 34,10 m³/s. Die angenommene Ergiebigkeit von 15,5 L/s pro Meter ergibt 100 m Absenkung, die in den 140 m Gesamtdruckhöhe enthalten ist. Für den Prozessstrom von 31,75 m³/s sind bei 75 % Wirkungsgrad 58,02 MW nötig. 67 ertragsschwache Paare à 0,5 m³/s kosten 440 Mio. € mehr. Pilotbohrungen prüfen diese Annahmen. Alternative A nutzt bei 12 °C 14 Paare und 18,35 m³/s, bei 9,5 °C und den A-Kosten am Maximalabfluss 23 Paare, 32,67 m³/s und 90 Mio. € Mehrkosten.</p>
 </section>
 
 <section class="sheet dense">
@@ -187,7 +187,7 @@ code { font-family: "Courier New", monospace; font-size: 12pt; hyphens: none; }
 <h1>7. Sommerbetrieb und Wirtschaftlichkeit</h1>
 <img class="figure short" src="build/kaelte-monate.svg" alt="Monatliche Kühlkaskade">
 <p class="caption">Abbildung 4: Monatskaskade bei maximalem Abfluss und Normalziel 9,5 °C. [10]</p>
-<p>Alle drei Fälle verwenden dieselbe Monatskaskade mit Normalziel 9,5 °C. Im Auslegungsjahr sind es 33,5 GWh bei Niedrigwasser, 303,9 GWh im Mittel und 4.374,3 GWh bei maximalem Abfluss. Die Jahreskosten einschließlich Wartung betragen 126,8, 159,2 und 647,7 Mio. €. Ohne Abflussganglinie ist kein gewichteter Mittelwert seriös.</p>
+<p>Alle drei Fälle verwenden dieselbe Monatskaskade mit Normalziel 9,5 °C. Im Auslegungsjahr sind es 33,5 GWh bei Niedrigwasser, 303,9 GWh im Mittel und 4.374,3 GWh bei maximalem Abfluss. Die Jahreskosten einschließlich Wartung betragen 126,8, 159,2 und 647,7 Mio. €. Angesetzt sind 120 €/MWh Strom, 2,5 % Wartung der Investition pro Jahr und 3 % Diskont; Wärmeverkäufe bleiben null. Ohne Abflussganglinie ist kein gewichteter Mittelwert seriös.</p>
 <table>
 <tr><th>Auslegung B bei maximalem Abfluss</th><th>Wert</th></tr>
 <tr><td>Kumulierte Investition, Jahr 10</td><td>110 + 160 × 30 = 4.910 Mio. €</td></tr>
@@ -204,7 +204,7 @@ code { font-family: "Courier New", monospace; font-size: 12pt; hyphens: none; }
 <tr><th>Sensitivität im zehnten Jahr</th><th>5 K</th><th>12 K</th><th>2 % Ventilator</th><th>100 m Druckhöhe</th></tr>
 <tr><th>Strom in GWh</th><td>3.193,6</td><td>4.969,3</td><td>5.462,6</td><td>4.224,9</td></tr>
 </table>
-<p>Die Basis nutzt 10 K, 1 % Ventilator und 140 m. Konstante Barwerte für Mittel/Maximum sind A 1.281/3.618 und B 7.755/14.424 Mio. €, Wachstum B 11.918/18.985 Mio. €, mit Quellprüfpfad 19.171 Mio. € bei Maximum. Die kumulierte Investition in Jahr 10/20 beträgt für A-Mittel 500/800, A-Max 590/890 und B 4.910/9.740 Mio. €. Allein der Zubau in Jahr 20 kostet A 30 und B 930 Mio. €. A wird nach Siedebeginn nicht als Dauerbetrieb verwendet. Unbegrenztes Wachstum hat keine endliche Lösung.</p>
+<p>Die Basis nutzt 10 K, 1 % Ventilator und 140 m. Konstante Barwerte für Mittel/Maximum sind A 1.281/3.618 und B 7.755/14.424 Mio. €, Wachstum B 11.918/18.985 Mio. €, mit Quellprüfpfad 19.171 Mio. € bei Maximum. Die kumulierte Investition in Jahr 10/20 beträgt für A-Mittel 500/800, A-Max 590/890 und B 4.910/9.740 Mio. €. Der allein im Jahr 20 fällige Zubau kostet A 30 Mio. € für ein Modul und B 930 Mio. € für 31 Module. A wird nach Siedebeginn nicht als Dauerbetrieb verwendet. Unbegrenztes Wachstum hat keine endliche Lösung.</p>
 </section>
 
 <section class="sheet">
