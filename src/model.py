@@ -186,8 +186,7 @@ def economics(rows, capex_eur=500e6, electricity_eur_mwh=120.0,
 
 def growth_economics(electricity_eur_mwh=120.0, discount=0.03,
                      module_eur=30e6, constant_after_year=None,
-                     monthly_options=None, model="B"):
-    fixed_eur = 110e6
+                     monthly_options=None, model="B", fixed_eur=110e6):
     modules = 3
     monthly_options = dict(monthly_options or {})
     monthly_options.setdefault("flow", Q_MAX if model == "B" else Q_MEAN)
@@ -226,16 +225,34 @@ def growth_economics(electricity_eur_mwh=120.0, discount=0.03,
     }
 
 
-def write_svg(path, title, x_label, y_label, series, width=900, height=540):
-    left, right, top, bottom = 160, 30, 200 if len(series) >= 3 else 60, 90
+def write_svg(path, title, x_label, y_label, series, width=900, height=540,
+              secondary_series=None, secondary_y_label=""):
+    secondary_series = secondary_series or []
+    left = 160
+    right = 150 if secondary_series else 30
+    top = 200 if len(series) + len(secondary_series) >= 3 else 60
+    bottom = 90
     pw, ph = width - left - right, height - top - bottom
     all_points = [point for _, points, _ in series for point in points]
     xmin = min(p[0] for p in all_points)
     xmax = max(p[0] for p in all_points)
     ymin = min(0.0, min(p[1] for p in all_points))
-    ymax = max(p[1] for p in all_points)
-    if ymax == ymin:
-        ymax = ymin + 1
+
+    def rounded_axis(value):
+        rough_step = value / 5
+        magnitude = 10 ** math.floor(math.log10(rough_step))
+        step = next(
+            magnitude * factor
+            for factor in (1, 2, 2.5, 5, 10)
+            if rough_step <= magnitude * factor
+        )
+        return 5 * step, step
+
+    ymax, y_step = rounded_axis(max(p[1] for p in all_points))
+    if secondary_series:
+        secondary_max, secondary_step = rounded_axis(
+            max(p[1] for _, points, _ in secondary_series for p in points)
+        )
 
     def sx(x):
         return left + (x - xmin) / (xmax - xmin) * pw
@@ -243,14 +260,17 @@ def write_svg(path, title, x_label, y_label, series, width=900, height=540):
     def sy(y):
         return top + (ymax - y) / (ymax - ymin) * ph
 
+    def sy_secondary(y):
+        return top + (secondary_max - y) / secondary_max * ph
+
     parts = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">',
         '<rect width="100%" height="100%" fill="white"/>',
         '<style>text{font-family:Arial,sans-serif;fill:#18242c;font-size:36px}.title{font-size:42px;font-weight:700}.grid{stroke:#dce3e8;stroke-width:1}.axis{stroke:#536570;stroke-width:1.5}</style>',
         f'<text class="title" x="{left}" y="45">{title}</text>',
     ]
-    for i in range(6):
-        value = ymin + (ymax - ymin) * i / 5
+    for i in range(round(ymax / y_step) + 1):
+        value = i * y_step
         y = sy(value)
         parts.append(f'<line class="grid" x1="{left}" y1="{y:.2f}" x2="{width-right}" y2="{y:.2f}"/>')
         parts.append(f'<text x="{left-10}" y="{y+5:.2f}" text-anchor="end">{value:.0f}</text>')
@@ -263,17 +283,27 @@ def write_svg(path, title, x_label, y_label, series, width=900, height=540):
     parts.append(f'<line class="axis" x1="{left}" y1="{top}" x2="{left}" y2="{height-bottom}"/>')
     parts.append(f'<text x="{left+pw/2}" y="{height-15}" text-anchor="middle">{x_label}</text>')
     parts.append(f'<text x="35" y="{top+ph/2}" text-anchor="middle" transform="rotate(-90 35 {top+ph/2})">{y_label}</text>')
-    for index, (name, points, color) in enumerate(series):
-        coords = " ".join(f"{sx(x):.2f},{sy(y):.2f}" for x, y in points)
-        parts.append(f'<polyline points="{coords}" fill="none" stroke="{color}" stroke-width="3"/>')
-        if len(series) >= 3:
-            lx = left + 15 + (index % 2) * 410
-            legend_rows = (len(series) + 1) // 2
+    if secondary_series:
+        parts.append(f'<line class="axis" x1="{width-right}" y1="{top}" x2="{width-right}" y2="{height-bottom}"/>')
+        for i in range(1, round(secondary_max / secondary_step) + 1):
+            value = i * secondary_step
+            y = sy_secondary(value)
+            parts.append(f'<text x="{width-right+10}" y="{y+5:.2f}">{value:.0f}</text>')
+        parts.append(f'<text x="{width-25}" y="{top+ph/2}" text-anchor="middle" transform="rotate(90 {width-25} {top+ph/2})">{secondary_y_label}</text>')
+    legend_series = series + secondary_series
+    for index, (name, points, color) in enumerate(legend_series):
+        y_scale = sy_secondary if index >= len(series) else sy
+        coords = " ".join(f"{sx(x):.2f},{y_scale(y):.2f}" for x, y in points)
+        dash = ' stroke-dasharray="10 7"' if name.startswith("N+1") else ""
+        parts.append(f'<polyline points="{coords}" fill="none" stroke="{color}" stroke-width="3"{dash}/>')
+        if len(legend_series) >= 3:
+            lx = left + 15 + (index % 2) * 350
+            legend_rows = (len(legend_series) + 1) // 2
             ly = top - 50 - (legend_rows - 1) * 40 + (index // 2) * 40
         else:
             lx = left + 15 + index * 245
             ly = top + 18
-        parts.append(f'<line x1="{lx}" y1="{ly}" x2="{lx+25}" y2="{ly}" stroke="{color}" stroke-width="3"/>')
+        parts.append(f'<line x1="{lx}" y1="{ly}" x2="{lx+25}" y2="{ly}" stroke="{color}" stroke-width="3"{dash}/>')
         parts.append(f'<text x="{lx+32}" y="{ly+5}">{name}</text>')
     parts.append('</svg>')
     path.write_text("\n".join(parts), encoding="utf-8")
@@ -292,8 +322,13 @@ def run(output_dir):
     stationary_b_mean = growth_economics(model="B", monthly_options={"flow": Q_MEAN}, constant_after_year=10)
     growth_a = growth_economics(model="A")
     stationary_a = growth_economics(model="A", constant_after_year=10)
-    growth_a_max = growth_economics(model="A", monthly_options={"flow": Q_MAX})
-    stationary_a_max = growth_economics(model="A", monthly_options={"flow": Q_MAX}, constant_after_year=10)
+    growth_a_max = growth_economics(model="A", monthly_options={"flow": Q_MAX}, fixed_eur=200e6)
+    stationary_a_max = growth_economics(
+        model="A", monthly_options={"flow": Q_MAX}, constant_after_year=10, fixed_eur=200e6
+    )
+    stationary_b_low = growth_economics(
+        model="B", monthly_options={"flow": Q_MIN}, constant_after_year=10
+    )
     rows_b_low = monthly_design(flow=Q_MIN, capacity=installed_b, model="B")
 
     with (output_dir / "verlauf.csv").open("w", newline="", encoding="utf-8") as handle:
@@ -365,12 +400,15 @@ def run(output_dir):
     write_svg(
         output_dir / "kaelte-monate.svg",
         "Kaskade, Jahr 10, maximaler Abfluss",
-        "Monat", "Leistung in MW",
+        "Monat", "Wärmeleistung in MW",
         [
             ("Trockenkühlung", [(r["month"], r["dry_cooling_mw"]) for r in rows_b], "#00798c"),
             ("Nachkühlung", [(r["month"], r["trim_cooling_mw"]) for r in rows_b], "#edae49"),
+        ],
+        secondary_series=[
             ("Strom mit Hilfsenergie", [(r["month"], r["electric_mw"]) for r in rows_b], "#d1495b"),
         ],
+        secondary_y_label="Elektrische Leistung in MW",
     )
 
     process_b = required_process_flow(Q_MAX, T_BOIL)
@@ -378,12 +416,16 @@ def run(output_dir):
     annual_b["present_cost_20y_meur"] = stationary_b["present_cost_20y_meur"]
     annual_b["replacement_meur"] = stationary_b["replacement_meur"]
     annual_b_mean = economics(rows_b_mean, capex_eur=4910e6)
+    annual_b_mean["present_cost_20y_meur"] = stationary_b_mean["present_cost_20y_meur"]
+    annual_b_mean["replacement_meur"] = stationary_b_mean["replacement_meur"]
     annual_a = economics(rows_a)
     annual_a["present_cost_20y_meur"] = stationary_a["present_cost_20y_meur"]
     annual_a["replacement_meur"] = stationary_a["replacement_meur"]
     annual_b_low = economics(rows_b_low, capex_eur=4910e6)
+    annual_b_low["present_cost_20y_meur"] = stationary_b_low["present_cost_20y_meur"]
+    annual_b_low["replacement_meur"] = stationary_b_low["replacement_meur"]
     annual_a_max = economics(
-        monthly_design(flow=Q_MAX, capacity=13 * 80e6, model="A"), capex_eur=500e6
+        monthly_design(flow=Q_MAX, capacity=13 * 80e6, model="A"), capex_eur=590e6
     )
     annual_a_max["present_cost_20y_meur"] = stationary_a_max["present_cost_20y_meur"]
     annual_a_max["replacement_meur"] = stationary_a_max["replacement_meur"]
@@ -443,6 +485,7 @@ def run(output_dir):
         "baseline_stationary": stationary_b,
         "baseline_mean_growth": growth_b_mean,
         "baseline_mean_stationary": stationary_b_mean,
+        "baseline_low_stationary": stationary_b_low,
         "baseline_backup_gw": 7.0,
         "baseline_grid_feed_gw": 7.5,
         "energy_sensitivity_gwh": energy_sensitivity,
@@ -480,6 +523,12 @@ def run(output_dir):
     assert required_modules(10.0, "A") == 13
     assert math.isclose(growth_a["replacement_meur"], 200 * 17 / 13, rel_tol=1e-12)
     assert math.isclose(growth_b["replacement_meur"], 200 * 229 / 13, rel_tol=1e-12)
+    assert annual_b_mean["present_cost_20y_meur"] == stationary_b_mean["present_cost_20y_meur"]
+    assert annual_b_low["present_cost_20y_meur"] == stationary_b_low["present_cost_20y_meur"]
+    assert annual_b_mean["replacement_meur"] == stationary_b["replacement_meur"]
+    assert annual_b_low["replacement_meur"] == stationary_b["replacement_meur"]
+    assert annual_a_max["capex_meur"] == 590.0
+    assert (summary["baseline_well_pairs"] - 1) * 1.55 >= Q_MAX
     assert math.isclose(sum(CAPEX_BREAKDOWN_MEUR.values()), 500.0)
     assert math.isclose(summary["baseline_exact_installed_threshold_year"], 10.848175090270153, rel_tol=1e-12)
     assert math.isclose(summary["baseline_exact_n_plus_one_threshold_year"], 10.782473660009718, rel_tol=1e-12)

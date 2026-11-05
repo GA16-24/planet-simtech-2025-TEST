@@ -36,7 +36,7 @@ th, td { border: 0.6pt solid #9db4b9; padding: 4pt 5pt; vertical-align: top; }
 .figure.medium { height: 70mm; object-fit: contain; }
 .caption { font-size: 12pt; color: #536570; margin: 2pt 0 7pt; text-align: left; }
 .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 10pt; }
-.refs p { font-size: 12pt; margin-bottom: 8pt; overflow-wrap: anywhere; text-align: left; }
+.refs p { font-size: 12pt; margin-bottom: 8pt; overflow-wrap: anywhere; word-break: break-all; hyphens: none; text-align: left; }
 code { font-family: "Courier New", monospace; font-size: 12pt; }
 .checklist li { margin-bottom: 4pt; }
 .dense { line-height: 1.0; }
@@ -64,7 +64,7 @@ code { font-family: "Courier New", monospace; font-size: 12pt; }
 <p>Wir schlagen vor, das Wasser schon unter der Erde zu kühlen, bevor es in den Blautopf fließt. Brunnen holen es nach oben. Wärmetauscher entziehen die Hitze. Danach kommt dieselbe Wassermenge in den unterirdischen Fluss zurück. Der sichtbare Quelltopf bleibt frei von Maschinen.</p>
 <p>Die nötige Leistung folgt direkt aus dem genannten Temperaturtrend. Im zehnten Jahr müssen bei maximalem Abfluss 11,77 Gigawatt abgeführt werden. Eine kleine Kühlspirale im Quelltopf reicht deshalb nicht. Die kleinere Anlage mit fester Wärmeleistung gilt nur, falls Messungen stattdessen eine feste Wärmequelle bestätigen.</p>
 <p>Unsere Anlage nutzt zuerst Wärme für Gebäude oder Betriebe. Trockenkühler geben den Rest an die Luft ab. Nur wenn das nicht reicht, springt eine elektrische Nachkühlung an. 160 Module mit zusammen 12,8 Gigawatt schaffen Reserve. Auch nach dem Ausfall eines Moduls bleiben 12,72 Gigawatt.</p>
-<p>Das Kostenszenario nennt 4,91 Milliarden Euro für den Bau. Der Strombedarf im zehnten Jahr liegt bei 0,03 Terawattstunden bei Niedrigwasser, 0,30 im Mittel und 4,37 bei maximalem Abfluss. Über zwanzig Jahre ergeben sich 14,42 Milliarden Euro bei konstanter Temperatur nach Jahr zehn und 18,98 Milliarden bei weiterem Anstieg. Das sind keine Kosten für Unendlichkeit.</p>
+<p>Das Kostenszenario nennt 4,91 Milliarden Euro für den Bau bei maximalem Abfluss. Der Strombedarf im zehnten Jahr liegt bei 0,03 Terawattstunden bei Niedrigwasser, 0,30 im Mittel und 4,37 bei maximalem Abfluss. Über zwanzig Jahre ergeben sich je nach Abfluss 7,76 bis 14,42 Milliarden Euro bei konstanter Temperatur nach Jahr zehn und 11,92 bis 18,98 Milliarden bei weiterem Anstieg. Bei unbegrenztem Wachstum ist kein endlicher Barwert möglich.</p>
 <div class="result"><b>Antwort.</b> Bei unbegrenzt linearem Temperaturanstieg gibt es keine endliche dauerhafte Lösung. Die Wärmeschleuse ist eine befristete Brücke. Bleibt die Temperatur nach Jahr zehn konstant, kann sie dauerhaft schützen. Steigt sie weiter, muss die Wärmequelle begrenzt werden. Dafür enthalten wir einen 250-Mio.-€-Prüfpfad mit Erkundungsbohrung und Verpressung. Ist er undurchführbar, bleibt die Aufgabe physikalisch unlösbar.</div>
 </section>
 
@@ -103,7 +103,7 @@ code { font-family: "Courier New", monospace; font-size: 12pt; }
 <p><b>A2.</b> Die Wärmequelle verteilt ihre Leistung auf den betrachteten Zufluss. Kaltes Wasser aus anderen Karstbereichen mischt sich hinzu. Für den Naturfall vernachlässigen wir Wärmeverluste an Gestein und Luft. Das ist konservativ. Nach Siedebeginn ist das Naturmodell keine vollständige Wasser-Dampf-Bilanz mehr und wird deshalb nicht weiter ausgewertet.</p>
 <p><b>A3.</b> Die Wärmeschleuse führt den geförderten Massenstrom vollständig zurück. Der unterirdische Abfluss bleibt in der Bilanz unverändert. Bei Hochwasser kann ein ungekühlter Anteil vorbeifließen, weil die Verdünnung die Temperatur senkt.</p>
 <p><b>A4.</b> Nach Jahr zehn bleibt die Wärme entweder konstant oder wächst linear weiter. Im ersten Fall reicht die feste Anlage mit Wartung. Im zweiten ist nur ein adaptiver Pfad möglich. Unbegrenztes Wachstum hat weder eine endliche Anlage noch endliche Kosten über unendliche Zeit.</p>
-<p><b>A5.</b> Wetter, Preise und Investitionen sind Szenariowerte, keine Angebote. Wärmeverkäufe sind nicht sicherheitsrelevant. Für heiße Jahre ist der Kreislauf auf 14 bar ausgelegt. Bei 187,6 °C in Jahr 20 bleibt Wasser damit flüssig. Die Pumpen überwinden im Auslegungsfall 140 m Gesamtdruckhöhe einschließlich Verlusten, Druckhaltung und Injektion.</p>
+<p><b>A5.</b> Wetter, Preise und Investitionen sind Szenariowerte, keine Angebote. Wärmeverkäufe sind nicht sicherheitsrelevant. Für heiße Jahre ist der Kreislauf auf 14 bar ausgelegt. Bei 187,6 °C in Jahr 20 bleibt Wasser damit flüssig. Die 140 m Gesamtdruckhöhe enthalten die angenommenen 100 m Absenkung sowie 40 m für statische Höhenunterschiede, Rohrverluste, Druckhaltung und Injektion. Die Absenkung wird also nicht doppelt angesetzt.</p>
 <div class="note"><b>Offene Ursache.</b> Vulkanische Aktivität ist eine Vermutung, kein Messergebnis. Unsere Anlage wirkt unabhängig von der Ursache. Ihre Standortplanung braucht dennoch Temperaturprofile, Wasserchemie, Gase, Seismik und Markierungsversuche. Erst diese Daten zeigen, wo und wie viel Wärme in welchen Zufluss gelangt.</div>
 </section>
 
@@ -114,7 +114,7 @@ code { font-family: "Courier New", monospace; font-size: 12pt; }
 <span class="eq">T(t) = 9 °C + 8,93 K/a · t und P<sub>K</sub>(t,Q) = ρcQ[T(t)−12 °C]</span>
 <p>Damit ist der wörtliche Trend der Auslegungsfall. Nach dem Sieden betrachten wir den Naturzustand nicht weiter; die Anlage wirkt bereits davor.</p>
 <table>
-<tr><th>Fall im zehnten Jahr</th><td>Q = 0,25 m³/s</td><td>Q = 2,27 m³/s</td><td>Q = 32,67 m³/s</td></tr>
+<tr><th>Fall im zehnten Jahr</th><th>Q = 0,25 m³/s</th><th>Q = 2,27 m³/s</th><th>Q = 32,67 m³/s</th></tr>
 <tr><th>Temperatur ohne Eingriff</th><td>98,3 °C</td><td>98,3 °C</td><td>98,3 °C</td></tr>
 <tr><th>Kälteleistung für 12 °C</th><td>90,0 MW</td><td>817,6 MW</td><td>11,77 GW</td></tr>
 <tr><th>Prozessstrom für 12 °C</th><td>0,243 m³/s</td><td>2,206 m³/s</td><td>31,750 m³/s</td></tr>
@@ -125,12 +125,12 @@ code { font-family: "Courier New", monospace; font-size: 12pt; }
 <h2>Alternative Wärmeleistungsdeutung</h2>
 <p>Modell A beschreibt eine örtlich begrenzte Wärmequelle, deren Leistung unabhängig vom Abfluss um 84,6 MW/a wächst. Beim mittleren Abfluss ergibt sich ebenfalls 98,3 °C nach zehn Jahren. Der Niedrigwasserfall würde schon nach 1,10 Jahren sieden. Wegen des Phasenwechsels wird er nicht für eine Flüssigwasser-Kühlung oder Kostenrechnung verwendet. Beim Maximum genügen 437,0 MW. Diese Deutung kann eine kleinere Anlage rechtfertigen, wird aber nicht vorausgesetzt.</p>
 <table>
-<tr><th>Kälteleistung im zehnten Jahr</th><td>Minimum</td><td>Mittel</td><td>Maximum</td></tr>
+<tr><th>Kälteleistung im zehnten Jahr</th><th>Minimum</th><th>Mittel</th><th>Maximum</th></tr>
 <tr><td>Auslegung B: Temperatur wächst linear</td><td>90,0 MW</td><td>817,6 MW</td><td>11,77 GW</td></tr>
 <tr><td>Alternative A: Wärmeleistung wächst linear</td><td>keine Flüssigkeitsauslegung</td><td>817,6 MW</td><td>437,0 MW</td></tr>
 </table>
 <h2>Speicherung im Quelltopf</h2>
-<p>Die etwa 8600 m³ im Quelltopf würden sich ohne Abfuhr stark erwärmen. Speichern oder Beschatten löst das Problem nicht.</p>
+<p>Als geometrisches Szenario dienen ein Kreis mit 40 m Durchmesser und 6,84 m mittlerer Tiefe. Daraus folgen A = π·(20 m)² = 1.257 m² und V = A·6,84 m = 8.598 m³. Diese Näherung ist kein Messwert. Speichern oder Beschatten löst das Problem nicht.</p>
 </section>
 
 <section class="sheet dense model">
@@ -138,17 +138,17 @@ code { font-family: "Courier New", monospace; font-size: 12pt; }
 <table>
 <tr><th>Ansatz</th><th>Physikalische Prüfung</th><th>Bewertung</th></tr>
 <tr><td>Kaltes Wasser beimischen</td><td>Beim maximalen Abfluss wären für 12 °C rund 939,8 m³/s Kaltwasser nötig.</td><td>Verworfen. Abfluss würde stark verändert.</td></tr>
-<tr><td>Flächenkühlung im Quelltopf</td><td>11,77 GW erfordern rund 784.500 m² statt 1260 m² Oberfläche.</td><td>Verworfen. Zu wenig Fläche.</td></tr>
-<tr><td>Abwärme in die Blau leiten</td><td>Die Wärme wird nur verschoben und belastet die Blau. [6]</td><td>Verworfen.</td></tr>
+<tr><td>Flächenkühlung im Quelltopf</td><td>11,77 GW erfordern rund 784.500 m² statt der angenommenen 1260 m² Oberfläche.</td><td>Verworfen. Zu wenig Fläche.</td></tr>
+<tr><td>Abwärme in die Blau leiten</td><td>Schon 817,6 MW würden 2,27 m³/s rechnerisch um 86,3 K erwärmen. [6]</td><td>Verworfen. Ökologisch unzulässig.</td></tr>
 <tr><td>Wärmequelle abdichten</td><td>Lage und Wege im Karst sind unbekannt.</td><td>Nur nach Ursachenforschung prüfen.</td></tr>
 <tr><td>Wärmeschleuse</td><td>Entzieht die Überschusswärme und injiziert dieselbe Menge.</td><td>Modular und messbar.</td></tr>
 </table>
 <h2>Aufbau der Wärmeschleuse</h2>
 <img class="figure short" src="report/anlage.svg" alt="Schematische Wärmeschleuse">
-<p class="caption">Abbildung 1: Kimi Code mit SVG, ohne menschliche Nachbearbeitung. Förderung und Injektion liegen im Zufluss, nicht im sichtbaren Quelltopf. [10]</p>
-<p>Mehrere Brunnenpaare verteilen die Förderung. Ihre Lage folgt aus Markierungsversuchen und Geophysik. Richtbohrungen von außerhalb des Quellbereichs schonen die Höhlen. Packer verhindern einen Kurzschluss zwischen kaltem Injektat und warmem Ansaugwasser.</p>
+<p class="caption">Abbildung 1: Förderung und Injektion liegen im Zufluss, nicht im sichtbaren Quelltopf. [10]</p>
+<p>Markierungsversuche und Geophysik legen die Brunnen außerhalb des Quellbereichs. Richtbohrungen schonen die Höhlen, Packer trennen kaltes Injektat und warmes Ansaugwasser.</p>
 <p>Im Auslegungsfall B beträgt die Temperatur überall 98,3 °C. Für 12 °C nach Mischung gilt q·9,5 °C + q<sub>B</sub>·98,3 °C = Q·12 °C. Daraus folgen q = 31,750 m³/s und q<sub>B</sub> = 0,920 m³/s. Die Wärmebilanz ergibt ρcq(98,3−9,5) = 11,77 GW. Für das Normalziel 9,5 °C wird der volle Abfluss gefördert.</p>
-<p>Das Szenario nutzt 23 Paare mit je 1,55 m³/s; nach einem Ausfall bleiben 34,10 m³/s und damit mehr als der volle Normalabfluss. Bei 1 m Durchmesser strömt Wasser mit rund 2 m/s ein. Eine Ergiebigkeit von 15,5 L/s pro Meter ergäbe 100 m Absenkung. Bei nur 0,5 m³/s je Paar wären 67 nötig, mit etwa 440 Mio. € Mehrkosten. Für 14 bar und 140 m Gesamtdruckhöhe sind bei 75 % Wirkungsgrad 58,02 MW nötig. Diese Werte sind Annahmen. Erst Pilotbohrungen können Ergiebigkeit, Druck und Abfangwirksamkeit bestätigen. Alternative A käme mit 14 Paare und 18,35 m³/s Prozessstrom aus.</p>
+<p>23 Paare à 1,55 m³/s liefern nach einem Ausfall 34,10 m³/s. Die angenommene Ergiebigkeit von 15,5 L/s pro Meter ergibt 100 m Absenkung, die in den 140 m Gesamtdruckhöhe enthalten ist; bei 75 % Wirkungsgrad sind 58,02 MW nötig. 67 ertragsschwache Paare à 0,5 m³/s kosten 440 Mio. € mehr. Pilotbohrungen prüfen diese Annahmen. Alternative A nutzt bei 12 °C 14 Paare und 18,35 m³/s, bei 9,5 °C und den A-Kosten am Maximalabfluss 23 Paare, 32,67 m³/s und 90 Mio. € Mehrkosten.</p>
 </section>
 
 <section class="sheet dense">
@@ -172,7 +172,7 @@ code { font-family: "Courier New", monospace; font-size: 12pt; }
 <section class="sheet">
 <h1>6. Ergebnisse der Zeitrechnung</h1>
 <img class="figure medium" src="build/temperaturverlauf.svg" alt="Temperaturverlauf ohne Eingriff und mit fester Kälteleistung">
-<p class="caption">Abbildung 2: Kimi Code und Python, keine menschliche Nachbearbeitung. Natur bis Sieden, geregelter Ausbau bis 187,6 °C und 25,68 GW, Normalziel 9,5 °C. [10]</p>
+<p class="caption">Abbildung 2: Natur bis Sieden. Ohne Ausbau erreicht die feste 12,8-GW-Anlage in Jahr 20 etwa 93,7 °C, der Ausbau hält 9,5 °C. Für den ungebremsten Trend von 187,6 °C sind 25,68 GW vorgesehen. [10]</p>
 <p>Die Naturkurve endet am Siedepunkt. Die exakten Grenzen bei maximalem Abfluss liegen bei 10,848 Jahren mit 12,8 GW und 10,782 Jahren mit 12,72 GW. Im 0,1-Jahresgitter wird 12 °C erstmals bei 10,9 beziehungsweise 10,8 überschritten.</p>
 <p>Das Wachstumsszenario erweitert deshalb auf 321 Module mit 25,68 GW bis Jahr 20. Nach einem Modulausfall bleiben 25,6 GW und damit rund 5,4 % Reserve. Der Ausbau ist eine Bedingung für diesen Pfad, kein nachträglicher Zusatz.</p>
 <img class="figure medium" src="build/schuettung.svg" alt="Einfluss der Schüttung auf die Temperatur">
@@ -183,11 +183,11 @@ code { font-family: "Courier New", monospace; font-size: 12pt; }
 <section class="sheet dense model">
 <h1>7. Sommerbetrieb und Wirtschaftlichkeit</h1>
 <img class="figure short" src="build/kaelte-monate.svg" alt="Monatliche Kühlkaskade">
-<p class="caption">Abbildung 4: Kimi Code und Python, keine menschliche Nachbearbeitung. Maximaler Abfluss, Normalziel 9,5 °C. [10]</p>
+<p class="caption">Abbildung 4: Monatskaskade bei maximalem Abfluss und Normalziel 9,5 °C. [10]</p>
 <p>Alle drei Fälle verwenden dieselbe Monatskaskade mit Normalziel 9,5 °C. Im Auslegungsjahr sind es 33,5 GWh bei Niedrigwasser, 303,9 GWh im Mittel und 4.374,3 GWh bei maximalem Abfluss. Die Jahreskosten einschließlich Wartung betragen 126,8, 159,2 und 647,7 Mio. €. Ohne Abflussganglinie ist kein gewichteter Mittelwert seriös.</p>
 <table>
-<tr><th>Auslegung B</th><th>Wert</th></tr>
-<tr><td>Investition: 110 Mio. € fest + 160 × 30 Mio. €</td><td>4.910 Mio. €</td></tr>
+<tr><th>Auslegung B bei maximalem Abfluss</th><th>Wert</th></tr>
+<tr><td>Kumulierte Investition, Jahr 10</td><td>110 + 160 × 30 = 4.910 Mio. €</td></tr>
 <tr><td>Barwert, Temperatur nach Jahr 10 konstant</td><td>14.424,2 Mio. €</td></tr>
 <tr><td>Barwert, Temperatur steigt weiter</td><td>18.984,9 Mio. €</td></tr>
 <tr><td>Ersatz in Jahr 15, konstant mit 160 Modulen</td><td>2.461,5 Mio. €</td></tr>
@@ -198,10 +198,10 @@ code { font-family: "Courier New", monospace; font-size: 12pt; }
 </table>
 <p>Jedes Zusatzmodul kostet 30 Mio. €: 15,4 Mio. € Kühltechnik und 14,6 Mio. € Hydraulik, Netz und Reserve. Die Ersatzkosten ersetzen nur diese Kühltechnik mit 200 Mio. € pro 13 Modulen. Brunnen, Netz und Leittechnik bleiben erhalten. Ein Jahr Notkühlung mit 50 Mio. € ist in beiden Barwerten enthalten. Wärmeverkäufe werden nicht vorausgesetzt.</p>
 <table>
-<tr><th>Sensitivität im zehnten Jahr</th><td>5 K</td><td>12 K</td><td>2 % Ventilator</td><td>100 m Druckhöhe</td></tr>
+<tr><th>Sensitivität im zehnten Jahr</th><th>5 K</th><th>12 K</th><th>2 % Ventilator</th><th>100 m Druckhöhe</th></tr>
 <tr><th>Strom in GWh</th><td>3.193,6</td><td>4.969,3</td><td>5.462,6</td><td>4.224,9</td></tr>
 </table>
-<p>Die Basis nutzt 10 K, 1 % Ventilator und 140 m. Nach zehn Jahren konstant kosten A 1.281/3.494 Mio. € und B 7.755/14.424 Mio. €, im Wachstum B 11.918/18.985 Mio. €, jeweils Mittel/Maximum. Mit Quellprüfpfad sind es 19.171 Mio. € bei Maximum. Die Investition in Jahr 10 beträgt für A 500 und für B 4.910 Mio. €, der Ausbau in Jahr 20 für A 800 und für B 9.740 Mio. €. A wird nach Siedebeginn nicht als Dauerbetrieb verwendet. Unbegrenztes Wachstum hat keine endliche Lösung.</p>
+<p>Die Basis nutzt 10 K, 1 % Ventilator und 140 m. Konstante Barwerte für Mittel/Maximum sind A 1.281/3.618 und B 7.755/14.424 Mio. €, Wachstum B 11.918/18.985 Mio. €, mit Quellprüfpfad 19.171 Mio. € bei Maximum. Die kumulierte Investition beträgt für A 590/890 und für B 4.910/9.740 Mio. € in Jahr 10/20, der Zubau in Jahr 20 kostet A 30 und B 930 Mio. €. A wird nach Siedebeginn nicht als Dauerbetrieb verwendet. Unbegrenztes Wachstum hat keine endliche Lösung.</p>
 </section>
 
 <section class="sheet">
@@ -273,7 +273,7 @@ code { font-family: "Courier New", monospace; font-size: 12pt; }
 </table>
 <h2>Nachrechnen der Alternativen</h2>
 <p>Für die Mischung gilt T<sub>M</sub> = (Q<sub>h</sub>T<sub>h</sub> + Q<sub>k</sub>T<sub>k</sub>)/(Q<sub>h</sub> + Q<sub>k</sub>). Auflösen nach dem Kaltwasseranteil ergibt Q<sub>k</sub>/Q<sub>h</sub> = (T<sub>h</sub>−T<sub>M</sub>)/(T<sub>M</sub>−T<sub>k</sub>). Mit 98,3 °C, 12 °C und 9 °C erhält man 28,77. Beim Auslegungsabfluss von 32,67 m³/s folgt Q<sub>k</sub> = 28,77 × 32,67 m³/s = 939,8 m³/s. Das ist keine lokale Beimischung mehr, sondern ein neuer Fluss.</p>
-<p>Bei der Flächenkühlung ist P = UAΔT. Für P = 11,767 GW, U = 500 W/(m²K) und ΔT = 30 K folgt A = 784.467 m². Selbst eine höhere Wärmedurchgangszahl ändert nicht die Größenordnung. Zudem würde eine Wärmepumpe im Quelltopf ihre Kondensatorwärme an anderer Stelle abgeben müssen.</p>
+<p>Bei der Flächenkühlung ist P = UAΔT. Für P = 11,767 GW, U = 500 W/(m²K) und ΔT = 30 K folgt A = 784.467 m². Der Wert U ist bewusst großzügig zugunsten dieser Alternative gewählt und kein gemessener Koeffizient einer freien Wasseroberfläche. Selbst damit fehlt die Fläche um mehr als zwei Größenordnungen. Zudem würde eine Wärmepumpe im Quelltopf ihre Kondensatorwärme an anderer Stelle abgeben müssen.</p>
 <h2>Barwert</h2>
 <p>Für jede Zahlung K<sub>t</sub> im Jahr t gilt BW = Σ K<sub>t</sub>/(1+i)<sup>t</sup>. Die Anfangszahlung umfasst 110 Mio. € feste Anteile und drei Module. Jedes weitere Modul kostet 30 Mio. € in seinem Baujahr. Betrieb und Wartung werden jährlich berechnet. Die Ersatzinvestition in Jahr 15 beträgt 200 Mio. € × Modulzahl in Jahr 15/13, im Wachstumsfall also 3.523,08 Mio. €. Das erste Jahr enthält 50 Mio. € Notkühlung. So entstehen 14.424,20 Mio. € bei konstanter Temperatur und 18.984,91 Mio. € im Wachstumspfad. Der mit 3 % abgezinste Quellprüfpfad von 250 Mio. € in Jahr 10 erhöht den Wachstumsbarwert auf 19.170,92 Mio. €.</p>
 <p class="small">Alle verwendeten Internetquellen sind frei zugänglich. Die Wiedergabe der Aufgabenstellung auf dem Deckblatt ist gekürzt und als solche durch [1] belegt. Die ausführliche Originalfassung bleibt beim Wettbewerb verlinkt.</p>
@@ -295,7 +295,7 @@ code { font-family: "Courier New", monospace; font-size: 12pt; }
 </ul>
 <h2>Monatsannahmen</h2>
 <table>
-<tr><th>Monat</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td></tr>
+<tr><th>Monat</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th></tr>
 <tr><th>Luft in °C</th><td>0</td><td>1</td><td>4</td><td>8</td><td>13</td><td>16</td><td>18</td><td>18</td><td>14</td><td>9</td><td>4</td><td>1</td></tr>
 </table>
 <p>Die Monatswerte bilden ein mildes bis warmes Jahresszenario ab. Sie ersetzen keine Auslegung mit stündlichen Extremwerten. Der separate Sommerfall verwendet deshalb die volle Restlast und den berechneten COP statt der Jahresmittel.</p>
@@ -308,7 +308,7 @@ code { font-family: "Courier New", monospace; font-size: 12pt; }
 <section class="sheet">
 <h1>Anhang B: Prüfprotokoll und Abgabecheck</h1>
 <h2>Herleitung und Eigenständigkeit</h2>
-<p>Die Arbeit verwendet keine früheren Wettbewerbslösungen. Ausgangspunkte sind die Aufgabe, die zitierten Standortdaten und die Energiebilanz. Die Wärmeschleuse, die Mischungsformel für den Hochwasserfall und die wärmemengenbasierte Regelung wurden daraus neu entwickelt. Sämtliche zentralen Zahlen lassen sich mit dem mitgelieferten Programm reproduzieren.</p>
+<p>Die Arbeit verwendet keine früheren Wettbewerbslösungen. Ausgangspunkte sind die Aufgabe, die zitierten Standortdaten und die Energiebilanz. Die Wärmeschleuse und die wärmemengenbasierte Regelung wurden daraus neu entwickelt. Die Mischungsformel ist eine klassische Massen- und Energiebilanz. Ihre Verknüpfung mit der leistungsbasierten Hochwassersteuerung gehört zum eigenen Lösungsansatz. Sämtliche zentralen Zahlen lassen sich mit dem mitgelieferten Programm reproduzieren.</p>
 <table>
 <tr><th>Prüfschritt</th><th>Ergebnis und Beleg</th></tr>
 <tr><td>Wärmebedarf</td><td>Der Temperaturtrend verlangt 90,0 MW, 817,6 MW und 11,77 GW nach Abfluss.</td></tr>

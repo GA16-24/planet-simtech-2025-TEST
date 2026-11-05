@@ -8,7 +8,7 @@
 <ellipse cx="855" cy="320" rx="105" ry="42" fill="#78c6d4" stroke="#00798c" stroke-width="3"/>
 <text class="s" x="810" y="305">Blautopf</text><text class="s" x="820" y="355">9-12 °C</text>
 <path class="hot" d="M90 425 Q220 390 315 415 L315 175"/>
-<path class="cold" d="M445 175 L445 425 Q620 460 750 365"/>
+<path class="cold" d="M445 175 L445 425 Q570 450 680 360"/>
 <text class="s" x="70" y="465">Zufluss</text>
 <text class="s" x="272" y="465">Pumpe</text><text class="s" x="415" y="465">Injektion</text>
 <rect class="box" x="260" y="85" width="240" height="90" rx="8"/><text x="292" y="110">Wärme</text><text class="s" x="285" y="166">2 Wände</text>
