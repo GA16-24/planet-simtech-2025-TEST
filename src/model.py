@@ -88,7 +88,14 @@ def controlled_temperature(year, flow, capacity, target=T_TARGET, model="B"):
 def required_modules(year, model="B"):
     flow = Q_MAX if model == "B" else Q_MEAN
     required = required_cooling_model(year, flow, T_NORMAL, model)
-    baseline = (160 if model == "B" else 13) if year >= 10 else 3
+    if model == "B" and year >= 20:
+        baseline = 321
+    elif model == "B" and year >= 10:
+        baseline = 160
+    elif model == "A" and year >= 10:
+        baseline = 13
+    else:
+        baseline = 3
     return max(3, baseline, math.ceil(required / 80e6) + 1)
 
 
@@ -219,8 +226,8 @@ def growth_economics(electricity_eur_mwh=120.0, discount=0.03,
     }
 
 
-def write_svg(path, title, x_label, y_label, series, width=900, height=480):
-    left, right, top, bottom = 80, 30, 85 if len(series) >= 4 else 55, 65
+def write_svg(path, title, x_label, y_label, series, width=900, height=540):
+    left, right, top, bottom = 120, 30, 130 if len(series) >= 4 else 60, 90
     pw, ph = width - left - right, height - top - bottom
     all_points = [point for _, points, _ in series for point in points]
     xmin = min(p[0] for p in all_points)
@@ -239,8 +246,8 @@ def write_svg(path, title, x_label, y_label, series, width=900, height=480):
     parts = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">',
         '<rect width="100%" height="100%" fill="white"/>',
-        '<style>text{font-family:Arial,sans-serif;fill:#18242c;font-size:20px}.title{font-size:28px;font-weight:700}.grid{stroke:#dce3e8;stroke-width:1}.axis{stroke:#536570;stroke-width:1.5}</style>',
-        f'<text class="title" x="{left}" y="38">{title}</text>',
+        '<style>text{font-family:Arial,sans-serif;fill:#18242c;font-size:36px}.title{font-size:42px;font-weight:700}.grid{stroke:#dce3e8;stroke-width:1}.axis{stroke:#536570;stroke-width:1.5}</style>',
+        f'<text class="title" x="{left}" y="45">{title}</text>',
     ]
     for i in range(6):
         value = ymin + (ymax - ymin) * i / 5
@@ -255,13 +262,13 @@ def write_svg(path, title, x_label, y_label, series, width=900, height=480):
     parts.append(f'<line class="axis" x1="{left}" y1="{height-bottom}" x2="{width-right}" y2="{height-bottom}"/>')
     parts.append(f'<line class="axis" x1="{left}" y1="{top}" x2="{left}" y2="{height-bottom}"/>')
     parts.append(f'<text x="{left+pw/2}" y="{height-15}" text-anchor="middle">{x_label}</text>')
-    parts.append(f'<text x="20" y="{top+ph/2}" text-anchor="middle" transform="rotate(-90 20 {top+ph/2})">{y_label}</text>')
+    parts.append(f'<text x="35" y="{top+ph/2}" text-anchor="middle" transform="rotate(-90 35 {top+ph/2})">{y_label}</text>')
     for index, (name, points, color) in enumerate(series):
         coords = " ".join(f"{sx(x):.2f},{sy(y):.2f}" for x, y in points)
         parts.append(f'<polyline points="{coords}" fill="none" stroke="{color}" stroke-width="3"/>')
         if len(series) >= 4:
             lx = left + 15 + (index % 2) * 410
-            ly = top + 18 + (index // 2) * 30
+            ly = top + 18 + (index // 2) * 40
         else:
             lx = left + 15 + index * 245
             ly = top + 18
@@ -337,9 +344,10 @@ def run(output_dir):
         "Temperaturtrend bei maximalem Abfluss",
         "Zeit in Jahren", "Temperatur in °C",
         [
-            ("ohne Eingriff", [(y, min(T_BOIL, raw_temperature(y, Q_MAX, "B"))) for y in years], "#d1495b"),
-            ("12,8 GW", [(y, controlled_temperature(y, Q_MAX, installed_b, T_TARGET, "B")) for y in years], "#00798c"),
+            ("ohne Eingriff", [(y, raw_temperature(y, Q_MAX, "B")) for y in years], "#d1495b"),
+            ("12,8 GW fest", [(y, controlled_temperature(y, Q_MAX, installed_b, T_TARGET, "B")) for y in years], "#00798c"),
             ("N+1: 12,72 GW", [(y, controlled_temperature(y, Q_MAX, n_plus_one_b, T_TARGET, "B")) for y in years], "#edae49"),
+            ("Ausbau", [(y, controlled_temperature(y, Q_MAX, required_modules(y, "B") * 80e6, T_TARGET, "B")) for y in years], "#6a8b59"),
             ("Grenze", [(y, T_TARGET) for y in years], "#384d48"),
         ],
     )
@@ -355,7 +363,7 @@ def run(output_dir):
     )
     write_svg(
         output_dir / "kaelte-monate.svg",
-        "Kaskade im zehnten Jahr bei maximalem Abfluss",
+        "Kaskade, Jahr 10, maximaler Abfluss",
         "Monat", "Leistung in MW",
         [
             ("Trockenkühlung", [(r["month"], r["dry_cooling_mw"]) for r in rows_b], "#00798c"),
@@ -379,7 +387,7 @@ def run(output_dir):
     annual_a_max["present_cost_20y_meur"] = stationary_a_max["present_cost_20y_meur"]
     annual_a_max["replacement_meur"] = stationary_a_max["replacement_meur"]
     annuity = (1 - 1.03 ** -20) / 0.03
-    low_yield_npv_b = stationary_b["present_cost_20y_meur"] + 430.0 + 0.025 * 430.0 * annuity
+    low_yield_npv_b = stationary_b["present_cost_20y_meur"] + 440.0 + 0.025 * 440.0 * annuity
     energy_sensitivity = {}
     for name, options in [
         ("approach_5k", {"approach": 5.0}),
@@ -405,9 +413,17 @@ def run(output_dir):
         "baseline_process_flow_year10_max_m3s": process_b,
         "baseline_bypass_flow_year10_max_m3s": Q_MAX - process_b,
         "baseline_pump_power_year10_max_mw": RHO * 9.81 * process_b * 140.0 / 0.75 / 1e6,
-        "baseline_well_pairs": math.ceil(process_b / 1.55) + 1,
-        "baseline_low_yield_well_pairs": math.ceil(process_b / 0.5) + 1,
+        "baseline_well_pairs": math.ceil(Q_MAX / 1.55) + 1,
+        "baseline_low_yield_well_pairs": math.ceil(Q_MAX / 0.5) + 1,
         "baseline_low_yield_npv_constant_meur": low_yield_npv_b,
+        "baseline_year20_modules": required_modules(20.0, "B"),
+        "baseline_year20_n_plus_one_capacity_gw": (required_modules(20.0, "B") - 1) * 0.080,
+        "baseline_year20_capex_meur": 110.0 + required_modules(20.0, "B") * 30.0,
+        "source_control_scenario": {
+            "method": "Erkundungsbohrung, Packer und Verpressung des heißen Zuflusses",
+            "cost_meur": 250.0,
+            "feasibility_gate": "Nur nach nachgewiesener Lage, Dichtheit und Druckbeständigkeit",
+        },
         "baseline_installed_threshold_year": next(
             y for y in years if controlled_temperature(y, Q_MAX, installed_b, T_TARGET, "B") > T_TARGET + 1e-9
         ),
@@ -424,8 +440,8 @@ def run(output_dir):
         "baseline_stationary": stationary_b,
         "baseline_mean_growth": growth_b_mean,
         "baseline_mean_stationary": stationary_b_mean,
-        "baseline_backup_gw": 3.3,
-        "baseline_grid_feed_gw": 3.5,
+        "baseline_backup_gw": 7.0,
+        "baseline_grid_feed_gw": 7.5,
         "energy_sensitivity_gwh": energy_sensitivity,
         "alternative_a": {
             "h10_mw": H10 / 1e6,
@@ -448,6 +464,15 @@ def run(output_dir):
     assert n_plus_one_b >= required_cooling_model(10.0, Q_MAX, T_NORMAL, "B")
     assert math.isclose(RHO * CP * process_b * (T_BOIL - T_NORMAL), required_cooling_model(10.0, Q_MAX, T_TARGET, "B"), rel_tol=1e-12)
     assert (summary["baseline_well_pairs"] - 1) * 1.55 >= process_b
+    assert (summary["baseline_well_pairs"] - 1) * 1.55 >= Q_MAX
+    assert required_modules(20.0, "B") == 321
+    assert (required_modules(20.0, "B") - 1) * 80e6 >= 1.051 * required_cooling_model(20.0, Q_MAX, T_NORMAL, "B")
+    full_year20 = (
+        required_cooling_model(20.0, Q_MAX, T_NORMAL, "B") / real_cooling_cop()
+        + required_cooling_model(20.0, Q_MAX, T_NORMAL, "B") * 0.01 * (1 + 1 / real_cooling_cop())
+        + RHO * 9.81 * Q_MAX * 140.0 / 0.75
+    )
+    assert full_year20 < 7e9
     assert required_modules(10.0, "B") == 160
     assert required_modules(10.0, "A") == 13
     assert math.isclose(growth_a["replacement_meur"], 200 * 17 / 13, rel_tol=1e-12)
