@@ -32,8 +32,8 @@ table { border-collapse: collapse; width: 100%; margin: 6pt 0 9pt; font-size: 12
 th { background: #dfeff1; color: #153e45; text-align: left; }
 th, td { border: 0.6pt solid #9db4b9; padding: 4pt 5pt; vertical-align: top; }
 .figure { width: 100%; margin: 5pt 0 2pt; }
-.figure.short { height: 57mm; object-fit: contain; }
-.figure.medium { height: 64mm; object-fit: contain; }
+.figure.short { height: 65mm; object-fit: contain; }
+.figure.medium { height: 70mm; object-fit: contain; }
 .caption { font-size: 12pt; color: #536570; margin: 2pt 0 7pt; text-align: left; }
 .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 10pt; }
 .refs p { font-size: 12pt; margin-bottom: 8pt; overflow-wrap: anywhere; text-align: left; }
@@ -44,7 +44,7 @@ code { font-family: "Courier New", monospace; font-size: 12pt; }
 .dense h2 { margin: 7pt 0 3pt; }
 .dense table { font-size: 12pt; margin: 4pt 0 6pt; }
 .dense th, .dense td { padding: 3pt 4pt; }
-.dense .figure.short { height: 50mm; }
+.dense .figure.short { height: 65mm; }
 .model p { margin-bottom: 4pt; }
 .model h2 { margin: 6pt 0 3pt; }
 .model .eq { margin: 5pt auto; }
@@ -62,9 +62,9 @@ code { font-family: "Courier New", monospace; font-size: 12pt; }
 <section class="sheet">
 <h1>Zusammenfassung</h1>
 <p>Wir schlagen vor, das Wasser schon unter der Erde zu kühlen, bevor es in den Blautopf fließt. Brunnen holen es nach oben. Wärmetauscher entziehen die Hitze. Danach kommt dieselbe Wassermenge in den unterirdischen Fluss zurück. Der sichtbare Quelltopf bleibt frei von Maschinen.</p>
-<p>Die nötige Leistung folgt direkt aus dem genannten Temperaturtrend. Im zehnten Jahr müssen bei maximalem Abfluss 11,77 Gigawatt abgeführt werden. Eine kleine Kühlspirale im Quelltopf reicht deshalb nicht. Die kleinere 1-GW-Variante gilt nur, falls Messungen stattdessen eine feste Wärmequelle bestätigen.</p>
+<p>Die nötige Leistung folgt direkt aus dem genannten Temperaturtrend. Im zehnten Jahr müssen bei maximalem Abfluss 11,77 Gigawatt abgeführt werden. Eine kleine Kühlspirale im Quelltopf reicht deshalb nicht. Die kleinere Anlage mit fester Wärmeleistung gilt nur, falls Messungen stattdessen eine feste Wärmequelle bestätigen.</p>
 <p>Unsere Anlage nutzt zuerst Wärme für Gebäude oder Betriebe. Trockenkühler geben den Rest an die Luft ab. Nur wenn das nicht reicht, springt eine elektrische Nachkühlung an. 160 Module mit zusammen 12,8 Gigawatt schaffen Reserve. Auch nach dem Ausfall eines Moduls bleiben 12,72 Gigawatt.</p>
-<p>Das Kostenszenario nennt 4,91 Milliarden Euro für den Bau. Der Strombedarf im zehnten Jahr liegt bei 0,21 Terawattstunden bei Niedrigwasser, 0,30 im Mittel und 4,37 bei maximalem Abfluss. Über zwanzig Jahre ergeben sich 14,42 Milliarden Euro bei konstanter Temperatur nach Jahr zehn und 18,70 Milliarden bei weiterem Anstieg. Das sind keine Kosten für Unendlichkeit.</p>
+<p>Das Kostenszenario nennt 4,91 Milliarden Euro für den Bau. Der Strombedarf im zehnten Jahr liegt bei 0,03 Terawattstunden bei Niedrigwasser, 0,30 im Mittel und 4,37 bei maximalem Abfluss. Über zwanzig Jahre ergeben sich 14,42 Milliarden Euro bei konstanter Temperatur nach Jahr zehn und 18,70 Milliarden bei weiterem Anstieg. Das sind keine Kosten für Unendlichkeit.</p>
 <div class="result"><b>Antwort.</b> Die Wärmeschleuse kann dauerhaft schützen, wenn Messungen ihren Standort bestätigen und Betreiber die Module rechtzeitig erweitern. Eine einmal gebaute Anlage reicht bei endlos wachsender Hitze nicht. Dann müssen weitere Module folgen oder die Wärmequelle selbst muss begrenzt werden.</div>
 </section>
 
@@ -121,15 +121,14 @@ code { font-family: "Courier New", monospace; font-size: 12pt; }
 </table>
 <p>Der Prozessstrom wird auf 9,5 °C gekühlt und mit dem ungekühlten Rest gemischt. Beim Maximum sind das 31,750 m³/s, der Bypass beträgt 0,920 m³/s. Für das Normalziel 9,5 °C wird der gesamte Abfluss gekühlt, dafür sind 12,11 GW nötig.</p>
 <h2>Reserve und Zeitgrenzen</h2>
-<p>160 Module mit je 80 MW liefern 12,8 GW. Nach einem Modulausfall bleiben 12,72 GW, also 5,1 % Reserve über dem Normalbedarf. Die exakten 12-°C-Grenzen liegen bei 10,878 Jahren mit 12,8 GW und 10,810 Jahren mit 12,72 GW. Im 0,1-Jahresgitter wird die Grenze erstmals bei 10,9 beziehungsweise 10,8 überschritten. Zusatzmodule müssen vorher fertig sein.</p>
+<p>160 Module mit je 80 MW liefern 12,8 GW. Nach einem Modulausfall bleiben 12,72 GW, also 5,1 % Reserve über dem Normalbedarf. Die exakten 12-°C-Grenzen liegen bei 10,848 Jahren mit 12,8 GW und 10,782 Jahren mit 12,72 GW. Im 0,1-Jahresgitter wird die Grenze erstmals bei 10,9 beziehungsweise 10,8 überschritten. Zusatzmodule müssen vorher fertig sein.</p>
 <h2>Alternative Wärmeleistungsdeutung</h2>
-<p>Modell A beschreibt eine örtlich begrenzte Wärmequelle, deren Leistung unabhängig vom Abfluss um 84,6 MW/a wächst. Beim mittleren Abfluss ergibt sich ebenfalls 98,3 °C nach zehn Jahren. Der Niedrigwasserfall würde schon nach 1,10 Jahren sieden und erfordert 842,9 MW, beim Maximum nur 437,0 MW. Diese Deutung kann die kleinere 1-GW-Anlage rechtfertigen, wird aber nicht vorausgesetzt.</p>
+<p>Modell A beschreibt eine örtlich begrenzte Wärmequelle, deren Leistung unabhängig vom Abfluss um 84,6 MW/a wächst. Beim mittleren Abfluss ergibt sich ebenfalls 98,3 °C nach zehn Jahren. Der Niedrigwasserfall würde schon nach 1,10 Jahren sieden. Wegen des Phasenwechsels wird er nicht für eine Flüssigwasser-Kühlung oder Kostenrechnung verwendet. Beim Maximum genügen 437,0 MW. Diese Deutung kann eine kleinere Anlage rechtfertigen, wird aber nicht vorausgesetzt.</p>
 <table>
 <tr><th>Kälteleistung im zehnten Jahr</th><td>Minimum</td><td>Mittel</td><td>Maximum</td></tr>
 <tr><td>Auslegung B: Temperatur wächst linear</td><td>90,0 MW</td><td>817,6 MW</td><td>11,77 GW</td></tr>
-<tr><td>Alternative A: Wärmeleistung wächst linear</td><td>842,9 MW</td><td>817,6 MW</td><td>437,0 MW</td></tr>
+<tr><td>Alternative A: Wärmeleistung wächst linear</td><td>keine Flüssigkeitsauslegung</td><td>817,6 MW</td><td>437,0 MW</td></tr>
 </table>
-<p>In A werden vor dem Sieden 752,9 MW und danach weitere 90,0 MW abgeführt. Der formale Naturwert 819,8 °C ist dabei ausdrücklich kein verwendeter Wasserzustand.</p>
 <h2>Speicherung im Quelltopf</h2>
 <p>Die etwa 8600 m³ im Quelltopf würden sich ohne Abfuhr stark erwärmen. Speichern oder Beschatten löst das Problem nicht.</p>
 </section>
@@ -157,13 +156,13 @@ code { font-family: "Courier New", monospace; font-size: 12pt; }
 <h2>Drei Stufen statt eines großen Kälteaggregats</h2>
 <p><b>Stufe 1 nutzt Wärme.</b> Wärmetauscher liefern zuerst Wärme an ein Netz oder einen Betrieb. Blaubeuren untersucht bereits den Ausbau seiner Wärmenetze. [9] Die Sicherheitsrechnung nimmt keinen Wärmeabsatz an.</p>
 <p><b>Stufe 2 kühlt trocken.</b> Geschlossene Wasser-Luft-Kühler erreichen im Basisszenario Lufttemperatur plus 10 K. Es gibt keine Verdunstung und keine Einleitung in die Blau. Ihre Ventilatoren treiben 1 % der gesamten Abfuhr an, einschließlich der Kondensatorwärme des Kältekreises.</p>
-<p><b>Stufe 3 kühlt nach.</b> Der Kältekreis deckt die Restlast. Bei 7 °C Verdampfung und 45 °C Kondensation ist die Carnot-Zahl 7,37. Mit dem eigenen Gütegrad-Szenario 0,55 ergibt sich COP = 4,05. [5] Vollmechanische Kühlung bei maximalem Abfluss erfordert 2,90 GW. Zwei Netzanschlüsse mit je 3,2 GW und ein 3,1-GW-Notstromsystem decken Nachkühlung, Ventilatoren und Pumpen im Auslegungsfall.</p>
+<p><b>Stufe 3 kühlt nach.</b> Der Kältekreis deckt die Restlast. Bei 7 °C Verdampfung und 45 °C Kondensation ist die Carnot-Zahl 7,37. Mit dem eigenen Gütegrad-Szenario 0,55 ergibt sich COP = 4,05. [5] Vollmechanische Kühlung auf 9,5 °C erfordert mit Hilfsenergie 3,20 GW. Zwei Netzanschlüsse mit je 3,5 GW und ein 3,3-GW-Notstromsystem decken Nachkühlung, Ventilatoren und Pumpen im Auslegungsfall.</p>
 <h2>Regelgesetz statt Preisoptimierung</h2>
 <p>Wärmezähler messen an jeder Leitung ρcq(T<sub>ein</sub>−T<sub>aus</sub>). Ihre Summe steuert die Kaskade. Zuerst bedient die Anlage gesicherte Wärmeabnehmer, danach die Trockenkühler. Reicht das nicht für 9,5 °C, folgt die Nachkühlung. Bei 11 °C werden Wärmeverkäufe und Preislogik abgeschaltet. Bei 12 °C laufen alle verfügbaren Module. Bei Sensorfehlern gilt die höhere Temperatur zweier unabhängiger Sonden.</p>
 <table>
 <tr><th>Ausfall</th><th>Reaktion und Reserve</th></tr>
 <tr><td>Kälte-, Trockenkühl- oder Pumpenmodul</td><td>N+1 reicht im Auslegungsjahr. Wartung nur innerhalb dieser Reserve.</td></tr>
-<tr><td>Netz oder Notstrom</td><td>Zwei getrennte Zuleitungen, danach 3,1 GW Notstrom. Ohne beide bleibt kein sicherer Dauerbetrieb möglich.</td></tr>
+<tr><td>Netz oder Notstrom</td><td>Zwei getrennte Zuleitungen, danach 3,3 GW Notstrom. Ohne beide bleibt kein sicherer Dauerbetrieb möglich.</td></tr>
 <tr><td>Temperatur- oder Wärmezähler</td><td>Redundante Messung, konservativer Ersatzwert und Nachkühlung bis zur Kontrolle.</td></tr>
 </table>
 <h2>Warum 160 Module</h2>
@@ -174,7 +173,7 @@ code { font-family: "Courier New", monospace; font-size: 12pt; }
 <h1>6. Ergebnisse der Zeitrechnung</h1>
 <img class="figure medium" src="build/temperaturverlauf.svg" alt="Temperaturverlauf ohne Eingriff und mit fester Kälteleistung">
 <p class="caption">Abbildung 2: Kimi Code und Python, keine menschliche Nachbearbeitung. Maximaler Abfluss 32,67 m³/s, 12,8 GW und N+1 mit 12,72 GW. [10]</p>
-<p>Die Kurven folgen dem wörtlichen Temperaturtrend. Die exakten Grenzen bei maximalem Abfluss liegen bei 10,878 Jahren mit 12,8 GW und 10,810 Jahren mit 12,72 GW. Im 0,1-Jahresgitter wird 12 °C erstmals bei 10,9 beziehungsweise 10,8 überschritten.</p>
+<p>Die Kurven folgen dem wörtlichen Temperaturtrend. Die exakten Grenzen bei maximalem Abfluss liegen bei 10,848 Jahren mit 12,8 GW und 10,782 Jahren mit 12,72 GW. Im 0,1-Jahresgitter wird 12 °C erstmals bei 10,9 beziehungsweise 10,8 überschritten.</p>
 <p>Das Wachstumsszenario erweitert deshalb auf 305 Module mit 24,4 GW bis Jahr 20. Ein Modul kann dabei weiterhin ausfallen. Der Ausbau ist eine Bedingung für diesen Pfad, kein nachträglicher Zusatz.</p>
 <img class="figure medium" src="build/schuettung.svg" alt="Einfluss der Schüttung auf die Temperatur">
 <p class="caption">Abbildung 3: Alternative A mit festem Wärmefluss. Nach Siedebeginn endet die gültige Naturbetrachtung. [10]</p>
@@ -185,7 +184,7 @@ code { font-family: "Courier New", monospace; font-size: 12pt; }
 <h1>7. Sommerbetrieb und Wirtschaftlichkeit</h1>
 <img class="figure short" src="build/kaelte-monate.svg" alt="Monatliche Kühlkaskade">
 <p class="caption">Abbildung 4: Kimi Code und Python, keine menschliche Nachbearbeitung. Maximaler Abfluss, Normalziel 9,5 °C. [10]</p>
-<p>Der Strombedarf hängt vom Abfluss ab. Im Auslegungsjahr sind es 208,4 GWh bei Niedrigwasser, 303,9 GWh im Mittel und 4.374,3 GWh bei maximalem Abfluss. Die Jahreskosten einschließlich Wartung betragen 147,8, 159,2 und 647,7 Mio. €. Ohne Abflussganglinie ist kein gewichteter Mittelwert seriös.</p>
+<p>Alle drei Fälle verwenden dieselbe Monatskaskade mit Normalziel 9,5 °C. Im Auslegungsjahr sind es 33,5 GWh bei Niedrigwasser, 303,9 GWh im Mittel und 4.374,3 GWh bei maximalem Abfluss. Die Jahreskosten einschließlich Wartung betragen 126,8, 159,2 und 647,7 Mio. €. Ohne Abflussganglinie ist kein gewichteter Mittelwert seriös.</p>
 <table>
 <tr><th>Auslegung B</th><th>Wert</th></tr>
 <tr><td>Investition: 110 Mio. € fest + 160 × 30 Mio. €</td><td>4.910 Mio. €</td></tr>
@@ -193,7 +192,7 @@ code { font-family: "Courier New", monospace; font-size: 12pt; }
 <tr><td>Barwert, Temperatur steigt weiter</td><td>18.704,5 Mio. €</td></tr>
 <tr><td>Ersatz in Jahr 15, konstant mit 160 Modulen</td><td>2.461,5 Mio. €</td></tr>
 <tr><td>Ersatz in Jahr 15, Wachstum mit 229 Modulen</td><td>3.523,1 Mio. €</td></tr>
-<tr><td>Langfristige Jahreskosten, konstanter Fall</td><td>661,0 Mio. €/a</td></tr>
+<tr><td>Langfristige Jahreskosten, konstanter Fall</td><td>811,8 Mio. €/a</td></tr>
 <tr><td>Barwert mit 65 ertragsschwachen Brunnenpaaren</td><td>etwa 15.014 Mio. €</td></tr>
 </table>
 <p>Jedes Zusatzmodul kostet 30 Mio. €: 15,4 Mio. € Kühltechnik und 14,6 Mio. € Hydraulik, Netz und Reserve. Die Ersatzkosten ersetzen nur diese Kühltechnik mit 200 Mio. € pro 13 Modulen. Brunnen, Netz und Leittechnik bleiben erhalten. Ein Jahr Notkühlung mit 50 Mio. € ist in beiden Barwerten enthalten. Wärmeverkäufe werden nicht vorausgesetzt.</p>
@@ -201,7 +200,7 @@ code { font-family: "Courier New", monospace; font-size: 12pt; }
 <tr><th>Sensitivität im zehnten Jahr</th><td>5 K</td><td>12 K</td><td>2 % Ventilator</td><td>100 m Druckhöhe</td></tr>
 <tr><th>Strom in GWh</th><td>3.193,6</td><td>4.969,3</td><td>5.462,6</td><td>4.224,9</td></tr>
 </table>
-<p>Die Basis nutzt 10 K, 1 % Ventilator und 140 m. Alternative A benötigt nur 500 Mio. € Investition sowie 1.281,3 Mio. € bei konstanter und 1.563,9 Mio. € bei wachsender Wärmeleistung. Diese Einsparung ist nur nach einer anderen messtechnisch bestätigten Ursache zulässig. Unbegrenztes Wachstum hat keine endliche Dauerlösung.</p>
+<p>Die Basis nutzt 10 K, 1 % Ventilator und 140 m. Bei mittlerem Abfluss kosten A 1.281/1.564 und B 7.755/11.638 Mrd. €, bei maximalem Abfluss A 3.494/4.181 und B 14.424/18.705 Mrd. €, jeweils konstant/Wachstum. Die Investition beträgt für A 500/800 Mio. € und für B 4.910/9.260 Mio. € in Jahr 10/20. Unbegrenztes Wachstum hat keine endliche Dauerlösung.</p>
 </section>
 
 <section class="sheet">
@@ -236,7 +235,7 @@ code { font-family: "Courier New", monospace; font-size: 12pt; }
 </table>
 <h2>Schlussfolgerung</h2>
 <p>Das Kochen lässt sich verhindern, indem man die Überschusswärme aus dem unterirdischen Zufluss entfernt. Unsere Wärmeschleuse fördert erhitztes Wasser, kühlt es außerhalb des Quelltopfs und injiziert dieselbe Menge zurück. Der wörtliche Temperaturtrend erfordert im zehnten Jahr bei maximalem Abfluss 11,77 GW. Eine Kaskade aus Wärmenutzung, Trockenkühlung und mechanischer Nachkühlung hält höchstens 12 °C ein. Der Normalbetrieb bleibt nahe bei der natürlichen Temperatur.</p>
-<p>Die Kosten hängen von der Prognosedeutung ab. Nur in Alternative A entlastet Hochwasser durch Verdünnung und erlaubt die 1-GW-Variante. Im Auslegungsfall B bestimmt der Hochabfluss die 160 Module, die Brunnen und die Kosten. Diese Unterscheidung muss die Messkampagne aufklären.</p>
+<p>Die Kosten hängen von der Prognosedeutung ab. Nur in Alternative A entlastet Hochwasser durch Verdünnung und erlaubt die Anlage mit fester Wärmeleistung. Im Auslegungsfall B bestimmt der Hochabfluss die 160 Module, die Brunnen und die Kosten. Diese Unterscheidung muss die Messkampagne aufklären.</p>
 <p>Die Lösung ist aufwendig, aber physikalisch geschlossen und schrittweise prüfbar. Sie verbraucht kein Kühlwasser und schiebt die Wärme nicht in die Blau. Ihre größten Risiken sind die unbekannte räumliche Wärmequelle, die Karsthydraulik und die Kosten der Bohrungen. Deshalb gehören Messkampagne und Pilotanlage untrennbar zum Vorschlag.</p>
 <div class="result"><b>Dauerhaft heißt anpassungsfähig.</b> Bei einer nach Jahr zehn konstanten Wärmezufuhr reicht die vorgeschlagene Anlage mit Wartung und Reserve dauerhaft. Bei unbegrenzt weiter linearem Wachstum existiert keine endliche Einmalinvestition, die den Siedepunkt für immer verhindert. Dann müssen Kapazität und Ursachenbekämpfung folgen.</div>
 <p class="small"><b>Weiterarbeit:</b> Abflussganglinie, räumliches Karstmodell, Kostenverteilungen und Pinch-Analyse.</p>
@@ -314,7 +313,7 @@ code { font-family: "Courier New", monospace; font-size: 12pt; }
 <tr><td>Wärmebedarf</td><td>Der Temperaturtrend verlangt 90,0 MW, 817,6 MW und 11,77 GW nach Abfluss.</td></tr>
 <tr><td>Prognosealternativen</td><td>Auslegung B ist der wörtliche Temperaturtrend. Alternative A bleibt separat ausgewiesen.</td></tr>
 <tr><td>Hydraulik</td><td>31,750 m³/s Prozessstrom plus 0,920 m³/s Bypass ergeben 32,67 m³/s und 11,77 GW Abfuhr.</td></tr>
-<tr><td>Redundanz</td><td>160 × 80 MW ergeben 12,8 GW, nach einem Modulausfall 12,72 GW. Die Grenzen 10,878 und 10,810 Jahre sind berechnet.</td></tr>
+<tr><td>Redundanz</td><td>160 × 80 MW ergeben 12,8 GW, nach einem Modulausfall 12,72 GW. Die Grenzen 10,848 und 10,782 Jahre sind berechnet.</td></tr>
 <tr><td>Wirtschaftlichkeit</td><td>Investition, Ersatzinvestition, Hilfsenergie und jährlicher Ausbau sind getrennt ausgewiesen.</td></tr>
 <tr><td>Unabhängige Gegenprüfung</td><td>Kimi und zwei DeepSeek-Modelle prüften Bericht und Code. Ihre Einwände zu Phasenwechsel, Hochwasser, Hilfsenergie und Ausbau sind eingearbeitet. Eine menschliche Prüfung wird nicht vorweggenommen.</td></tr>
 </table>

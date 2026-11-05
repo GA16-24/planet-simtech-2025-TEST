@@ -55,19 +55,12 @@ def required_cooling(year, flow, target=T_TARGET):
     return max(0.0, heat_input(year) - RHO * CP * flow * (target - T0))
 
 
-def low_flow_prevention(year, target=T_TARGET):
-    upstream = max(0.0, heat_input(year) - RHO * CP * Q_MIN * (T_BOIL - T0))
-    downstream = RHO * CP * Q_MIN * max(0.0, T_BOIL - target)
-    return {
-        "raw_c": T_BOIL,
-        "outlet_c": target,
-        "upstream_mw": upstream / 1e6,
-        "downstream_mw": downstream / 1e6,
-        "total_mw": (upstream + downstream) / 1e6,
-        "full_mechanical_electric_mw": (upstream + downstream) / real_cooling_cop() / 1e6,
-        "fan_mw": (upstream + downstream) / 1e6 * 0.01 * (1 + 1 / real_cooling_cop()),
-        "pump_mw": RHO * 9.81 * Q_MIN * 140.0 / 0.75 / 1e6,
-    }
+def exact_threshold_year(capacity, flow, model="B"):
+    year10 = 10.0
+    year11 = 11.0
+    required10 = required_cooling_model(year10, flow, T_TARGET, model)
+    annual_increase = required_cooling_model(year11, flow, T_TARGET, model) - required10
+    return year10 + (capacity - required10) / annual_increase
 
 
 def required_cooling_temperature_slope(year, flow, target=T_TARGET):
@@ -93,7 +86,7 @@ def controlled_temperature(year, flow, capacity, target=T_TARGET, model="B"):
 
 
 def required_modules(year, model="B"):
-    flow = Q_MAX if model == "B" else Q_MIN
+    flow = Q_MAX if model == "B" else Q_MEAN
     required = required_cooling_model(year, flow, T_NORMAL, model)
     baseline = (160 if model == "B" else 13) if year >= 10 else 3
     return max(3, baseline, math.ceil(required / 80e6) + 1)
@@ -227,7 +220,7 @@ def growth_economics(electricity_eur_mwh=120.0, discount=0.03,
 
 
 def write_svg(path, title, x_label, y_label, series, width=900, height=480):
-    left, right, top, bottom = 80, 30, 55, 65
+    left, right, top, bottom = 80, 30, 85 if len(series) >= 4 else 55, 65
     pw, ph = width - left - right, height - top - bottom
     all_points = [point for _, points, _ in series for point in points]
     xmin = min(p[0] for p in all_points)
@@ -246,8 +239,8 @@ def write_svg(path, title, x_label, y_label, series, width=900, height=480):
     parts = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">',
         '<rect width="100%" height="100%" fill="white"/>',
-        '<style>text{font-family:Arial,sans-serif;fill:#18242c;font-size:15px}.title{font-size:23px;font-weight:700}.grid{stroke:#dce3e8;stroke-width:1}.axis{stroke:#536570;stroke-width:1.5}</style>',
-        f'<text class="title" x="{left}" y="32">{title}</text>',
+        '<style>text{font-family:Arial,sans-serif;fill:#18242c;font-size:20px}.title{font-size:28px;font-weight:700}.grid{stroke:#dce3e8;stroke-width:1}.axis{stroke:#536570;stroke-width:1.5}</style>',
+        f'<text class="title" x="{left}" y="38">{title}</text>',
     ]
     for i in range(6):
         value = ymin + (ymax - ymin) * i / 5
@@ -266,9 +259,14 @@ def write_svg(path, title, x_label, y_label, series, width=900, height=480):
     for index, (name, points, color) in enumerate(series):
         coords = " ".join(f"{sx(x):.2f},{sy(y):.2f}" for x, y in points)
         parts.append(f'<polyline points="{coords}" fill="none" stroke="{color}" stroke-width="3"/>')
-        lx = left + 15 + index * 245
-        parts.append(f'<line x1="{lx}" y1="{top+18}" x2="{lx+25}" y2="{top+18}" stroke="{color}" stroke-width="3"/>')
-        parts.append(f'<text x="{lx+32}" y="{top+23}">{name}</text>')
+        if len(series) >= 4:
+            lx = left + 15 + (index % 2) * 410
+            ly = top + 18 + (index // 2) * 30
+        else:
+            lx = left + 15 + index * 245
+            ly = top + 18
+        parts.append(f'<line x1="{lx}" y1="{ly}" x2="{lx+25}" y2="{ly}" stroke="{color}" stroke-width="3"/>')
+        parts.append(f'<text x="{lx+32}" y="{ly+5}">{name}</text>')
     parts.append('</svg>')
     path.write_text("\n".join(parts), encoding="utf-8")
 
@@ -282,8 +280,13 @@ def run(output_dir):
     rows_a = monthly_design(flow=Q_MEAN, capacity=13 * 80e6, model="A")
     growth_b = growth_economics(model="B")
     stationary_b = growth_economics(model="B", constant_after_year=10)
+    growth_b_mean = growth_economics(model="B", monthly_options={"flow": Q_MEAN})
+    stationary_b_mean = growth_economics(model="B", monthly_options={"flow": Q_MEAN}, constant_after_year=10)
     growth_a = growth_economics(model="A")
     stationary_a = growth_economics(model="A", constant_after_year=10)
+    growth_a_max = growth_economics(model="A", monthly_options={"flow": Q_MAX})
+    stationary_a_max = growth_economics(model="A", monthly_options={"flow": Q_MAX}, constant_after_year=10)
+    rows_b_low = monthly_design(flow=Q_MIN, capacity=installed_b, model="B")
 
     with (output_dir / "verlauf.csv").open("w", newline="", encoding="utf-8") as handle:
         writer = csv.writer(handle)
@@ -311,6 +314,10 @@ def run(output_dir):
         writer = csv.DictWriter(handle, fieldnames=list(rows_a[0]))
         writer.writeheader()
         writer.writerows(rows_a)
+    with (output_dir / "monate-niedrig.csv").open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=list(rows_b_low[0]))
+        writer.writeheader()
+        writer.writerows(rows_b_low)
     with (output_dir / "ausbau.csv").open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=list(growth_b["schedule"][0]))
         writer.writeheader()
@@ -365,15 +372,14 @@ def run(output_dir):
     annual_a = economics(rows_a)
     annual_a["present_cost_20y_meur"] = stationary_a["present_cost_20y_meur"]
     annual_a["replacement_meur"] = stationary_a["replacement_meur"]
+    annual_b_low = economics(rows_b_low, capex_eur=4910e6)
+    annual_a_max = economics(
+        monthly_design(flow=Q_MAX, capacity=13 * 80e6, model="A"), capex_eur=800e6
+    )
+    annual_a_max["present_cost_20y_meur"] = stationary_a_max["present_cost_20y_meur"]
+    annual_a_max["replacement_meur"] = stationary_a_max["replacement_meur"]
     annuity = (1 - 1.03 ** -20) / 0.03
     low_yield_npv_b = stationary_b["present_cost_20y_meur"] + 430.0 + 0.025 * 430.0 * annuity
-    low_a = low_flow_prevention(10.0)
-    low_a_gwh = 8.76 * (low_a["full_mechanical_electric_mw"] + low_a["fan_mw"] + low_a["pump_mw"])
-    low_b_heat = required_cooling_model(10.0, Q_MIN, T_TARGET, "B")
-    low_b_electric = low_b_heat / real_cooling_cop()
-    low_b_fan = low_b_heat * 0.01 * (1 + 1 / real_cooling_cop())
-    low_b_pump = RHO * 9.81 * Q_MIN * 140.0 / 0.75
-    low_b_gwh = 8.76 * (low_b_electric + low_b_fan + low_b_pump) / 1e6
     energy_sensitivity = {}
     for name, options in [
         ("approach_5k", {"approach": 5.0}),
@@ -408,24 +414,30 @@ def run(output_dir):
         "baseline_n_plus_one_threshold_year": next(
             y for y in years if controlled_temperature(y, Q_MAX, n_plus_one_b, T_TARGET, "B") > T_TARGET + 1e-9
         ),
+        "baseline_exact_installed_threshold_year": exact_threshold_year(installed_b, Q_MAX, "B"),
+        "baseline_exact_n_plus_one_threshold_year": exact_threshold_year(n_plus_one_b, Q_MAX, "B"),
         "baseline_annual_max": annual_b,
         "baseline_annual_mean": annual_b_mean,
-        "baseline_low_flow_annual_gwh": low_b_gwh,
-        "baseline_low_flow_annual_cost_meur": low_b_gwh * 0.12 + 122.75,
-        "baseline_steady_annual_cost_meur": annual_b["annual_cost_meur"] + 200.0 / 15.0,
+        "baseline_annual_low": annual_b_low,
+        "baseline_steady_annual_cost_meur": annual_b["annual_cost_meur"] + stationary_b["replacement_meur"] / 15.0,
         "baseline_growth": growth_b,
         "baseline_stationary": stationary_b,
+        "baseline_mean_growth": growth_b_mean,
+        "baseline_mean_stationary": stationary_b_mean,
+        "baseline_backup_gw": 3.3,
+        "baseline_grid_feed_gw": 3.5,
         "energy_sensitivity_gwh": energy_sensitivity,
         "alternative_a": {
             "h10_mw": H10 / 1e6,
             "cooling_year10_min_mw": required_cooling(10.0, Q_MIN) / 1e6,
             "cooling_year10_mean_mw": required_cooling(10.0, Q_MEAN) / 1e6,
             "cooling_year10_max_mw": required_cooling(10.0, Q_MAX) / 1e6,
-            "low_flow_prevention": low_a,
-            "low_flow_annual_gwh": low_a_gwh,
             "annual_mean": annual_a,
+            "annual_max": annual_a_max,
             "growth": growth_a,
             "stationary": stationary_a,
+            "growth_max": growth_a_max,
+            "stationary_max": stationary_a_max,
             "capex_breakdown_meur": CAPEX_BREAKDOWN_MEUR,
         },
     }
@@ -441,7 +453,9 @@ def run(output_dir):
     assert math.isclose(growth_a["replacement_meur"], 200 * 17 / 13, rel_tol=1e-12)
     assert math.isclose(growth_b["replacement_meur"], 200 * 229 / 13, rel_tol=1e-12)
     assert math.isclose(sum(CAPEX_BREAKDOWN_MEUR.values()), 500.0)
-    assert math.isclose(low_a["total_mw"] * 1e6, required_cooling(10.0, Q_MIN), rel_tol=1e-12)
+    assert math.isclose(summary["baseline_exact_installed_threshold_year"], 10.848175090270153, rel_tol=1e-12)
+    assert math.isclose(summary["baseline_exact_n_plus_one_threshold_year"], 10.782473660009718, rel_tol=1e-12)
+    assert math.isclose(summary["baseline_annual_low"]["annual_electricity_gwh"], 33.47328203696136, rel_tol=1e-12)
     assert all(math.isclose(row["outlet_c"], T_NORMAL) for row in monthly_design(flow=Q_MIN, model="B"))
     assert abs(sum(row["hours"] for row in rows_b) - 8760) == 0
     assert all(row["raw_c"] >= T_BOIL - 1e-9 for row in rows_b)

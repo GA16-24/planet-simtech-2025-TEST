@@ -6,7 +6,7 @@ Wissenschaftlicher Lösungsentwurf für die PlaNeT-SimTech-Aufgabe 2025/26. Das 
 
 Die Wärmeschleuse entnimmt erhitztes Karstwasser über Brunnen vor dem Quelltopf, kühlt es in einer Kaskade aus Wärmenutzung, Trockenkühlung und mechanischer Nachkühlung und speist dieselbe Wassermenge wieder in den Zufluss ein. Der Auslegungsfall folgt wörtlich dem linearen Temperaturanstieg auf 98,3 °C in zehn Jahren. Bei maximalem Abfluss sind 11,77 GW abzuführen. Das normale Ziel sind 9,5 °C, die technische Obergrenze liegt bei 12 °C. Der Quelltopf selbst bleibt ohne technische Einbauten.
 
-160 Module liefern 12,8 GW, nach dem Ausfall eines Moduls bleiben 12,72 GW. Ein zweiter Rechenpfad berücksichtigt den weiteren Temperaturanstieg und den Ausbau auf 305 Module bis Jahr 20. Eine einmal gebaute Anlage kann einen unbegrenzten Anstieg nicht für immer ausgleichen. Alternative A mit fester Wärmeleistung und einer kleineren 1-GW-Anlage bleibt als separates Szenario erhalten.
+160 Module liefern 12,8 GW, nach dem Ausfall eines Moduls bleiben 12,72 GW. Ein zweiter Rechenpfad berücksichtigt den weiteren Temperaturanstieg und den Ausbau auf 305 Module bis Jahr 20. Eine einmal gebaute Anlage kann einen unbegrenzten Anstieg nicht für immer ausgleichen. Alternative A mit fester Wärmeleistung bleibt als separates Szenario ohne Flüssigkeitsauslegung nach Siedebeginn erhalten.
 
 ## Dateien
 
@@ -25,7 +25,7 @@ Python 3 genügt. Das Modell benötigt keine externen Python-Pakete.
 python3 src/model.py --output-dir build
 ```
 
-Das Programm prüft Siedepunkte, Wärme- und Massenbilanzen, Brunnenreserve, Investitionssumme und Jahresstunden. Es erzeugt `verlauf.csv`, `monate.csv`, `ausbau.csv`, `kennwerte.json` und drei SVG-Dateien neu.
+Das Programm prüft Zeitgrenzen, Wärme- und Massenbilanzen, Brunnenreserve, Ersatzkosten und Jahresstunden. Es erzeugt `verlauf.csv`, `monate.csv`, `monate-mittel.csv`, `monate-niedrig.csv`, `monate-waermeleistung.csv`, `ausbau.csv`, `konstant.csv`, `ausbau-waermeleistung.csv`, `kennwerte.json` und drei SVG-Dateien neu.
 
 ## Bericht erzeugen
 
