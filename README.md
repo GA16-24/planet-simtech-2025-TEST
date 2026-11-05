@@ -6,7 +6,7 @@ Wissenschaftlicher Lösungsentwurf für die PlaNeT-SimTech-Aufgabe 2025/26. Das 
 
 Die Wärmeschleuse entnimmt erhitztes Karstwasser über Brunnen vor dem Quelltopf, kühlt es in einer Kaskade aus Wärmenutzung, Trockenkühlung und mechanischer Nachkühlung und speist dieselbe Wassermenge wieder in den Zufluss ein. Der Auslegungsfall folgt wörtlich dem linearen Temperaturanstieg auf 98,3 °C in zehn Jahren. Bei maximalem Abfluss sind 11,77 GW abzuführen. Das normale Ziel sind 9,5 °C, die technische Obergrenze liegt bei 12 °C. Der Quelltopf selbst bleibt ohne technische Einbauten.
 
-160 Module liefern 12,8 GW, nach dem Ausfall eines Moduls bleiben 12,72 GW. Ein zweiter Rechenpfad berücksichtigt den weiteren Temperaturanstieg und den Ausbau auf 321 Module bis Jahr 20. Nach einem Ausfall bleiben auch dann 25,6 GW und damit 5,1 % Reserve. Eine einmal gebaute Anlage kann einen unbegrenzten Anstieg nicht für immer ausgleichen. Dafür ist ein 250-Mio.-€-Prüfpfad zur Quellbegrenzung enthalten. Alternative A mit fester Wärmeleistung bleibt als separates Szenario ohne Flüssigkeitsauslegung nach Siedebeginn erhalten.
+160 Module liefern 12,8 GW, nach dem Ausfall eines Moduls bleiben 12,72 GW. Ein zweiter Rechenpfad berücksichtigt den weiteren Temperaturanstieg und den Ausbau auf 321 Module bis Jahr 20. Nach einem Ausfall bleiben auch dann 25,6 GW und damit 5,4 % Reserve. Eine einmal gebaute Anlage kann einen unbegrenzten Anstieg nicht für immer ausgleichen. Dafür ist ein 250-Mio.-€-Prüfpfad zur Quellbegrenzung enthalten. Alternative A mit fester Wärmeleistung bleibt als separates Szenario ohne Flüssigkeitsauslegung nach Siedebeginn erhalten.
 
 ## Dateien
 
