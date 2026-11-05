@@ -44,7 +44,7 @@ code { font-family: "Courier New", monospace; font-size: 9.5pt; }
 .dense h2 { margin: 8pt 0 4pt; }
 .dense table { font-size: 9.5pt; margin: 4pt 0 6pt; }
 .dense th, .dense td { padding: 3pt 4pt; }
-.dense .figure.short { height: 48mm; }
+.dense .figure.short { height: 60mm; }
 .model p { margin-bottom: 4pt; }
 .model h2 { margin: 6pt 0 3pt; }
 .model .eq { margin: 5pt auto; }
@@ -64,7 +64,7 @@ code { font-family: "Courier New", monospace; font-size: 9.5pt; }
 <p>Wir schlagen vor, das Wasser schon unter der Erde zu kühlen, bevor es in den Blautopf fließt. Brunnen holen es nach oben. Wärmetauscher entziehen die Hitze. Danach kommt dieselbe Wassermenge in den unterirdischen Fluss zurück. Der sichtbare Quelltopf bleibt frei von Maschinen.</p>
 <p>Die nötige Leistung ist enorm. Im zehnten Jahr müssen im ungünstigsten Fall 843 Megawatt abgeführt werden. Das entspricht ungefähr der Leistung von 200 großen Windrädern. Eine kleine Kühlspirale im Quelltopf reicht deshalb nicht.</p>
 <p>Unsere Anlage nutzt zuerst Wärme für Gebäude oder Betriebe. Trockenkühler geben den Rest an die Luft ab. Nur wenn das nicht reicht, springt eine elektrische Nachkühlung an. Dreizehn Module mit zusammen 1040 Megawatt schaffen Reserve. Auch nach dem Ausfall eines Moduls bleiben 960 Megawatt.</p>
-<p>Das grobe Kostenszenario nennt 400 Millionen Euro für den Bau und 185 Gigawattstunden Strom im zehnten Jahr. Über zwanzig Jahre kostet der Schutz in diesem Szenario rund 944 Millionen Euro nach heutigem Geld. Wachst die Wärme weiter, steigt der Betrag auf rund 1,07 Milliarden Euro.</p>
+<p>Das grobe Kostenszenario nennt 500 Millionen Euro für den Bau und 304 Gigawattstunden Strom im zehnten Jahr. Über zwanzig Jahre kostet der Schutz in diesem Szenario rund 1,17 Milliarden Euro nach heutigem Geld. Wächst die Wärme weiter, steigt der Betrag auf rund 1,46 Milliarden Euro. Das sind keine Kosten für Unendlichkeit, sondern für zwanzig Jahre mit einer Ersatzinvestition.</p>
 <div class="result"><b>Antwort.</b> Die Wärmeschleuse kann dauerhaft schützen, wenn Messungen ihren Standort bestätigen und Betreiber die Module rechtzeitig erweitern. Eine einmal gebaute Anlage reicht bei endlos wachsender Hitze nicht. Dann müssen weitere Module folgen oder die Wärmequelle selbst muss begrenzt werden.</div>
 </section>
 
@@ -82,7 +82,7 @@ code { font-family: "Courier New", monospace; font-size: 9.5pt; }
 <h2>Was wir selbst entwickeln</h2>
 <p>Neu ist die Kombination aus leistungsbasierter Hochwasserverdünnung, hydraulisch geschlossener Wärmeschleuse und bedarfsgeführter Kühlkaskade. Die Regelgröße ist die gemessene Wärmemenge, nicht allein die Temperatur im Quelltopf. Dadurch kann die Anlage auf eine Veränderung des Zuflusses reagieren, bevor sich die Quelle spürbar erwärmt.</p>
 <h2>Transparenz und Quellen</h2>
-<p>Kimi Code von Moonshot AI erstellte den initialen Lösungsansatz, Programmcode und Berichtsentwurf. Zwei weitere KI-Modelle prüften die Arbeit in einem Council. Alle Zahlenquellen sind gekennzeichnet. Frühere Lösungen und Siegerberichte des Wettbewerbs wurden nicht gelesen oder verwendet. Vor einer Einreichung muss das Team jede Herleitung und jeden Text selbst prüfen. Diese Offenlegung folgt den KI-Regeln des Wettbewerbs. [4]</p>
+<p>Kimi Code von Moonshot AI, Modell K3.1 Pro, erstellte Lösungsansatz, Programmcode, Bericht und SVG-Abbildungen. DeepSeek V4 Pro prüfte Runde 1, DeepSeek V4.1 Flash und Kimi K3.1 Pro prüften Runde 2. Ihre Einwände führten zu mehreren überarbeiteten Fassungen. Eine menschliche Nachbearbeitung ist bisher nicht erfolgt und wird nicht behauptet. Die unabhängige Herleitung des KI-Arbeitsteams ist im Prüfprotokoll dokumentiert. Frühere Lösungen und Siegerberichte wurden nicht verwendet. Vor einer echten Einreichung muss das menschliche Team alle Herleitungen selbst prüfen und diese Offenlegung an seine tatsächliche Arbeit anpassen. [4]</p>
 </section>
 
 <section class="sheet">
@@ -92,17 +92,17 @@ code { font-family: "Courier New", monospace; font-size: 9.5pt; }
 <tr><td>Natürliche Temperatur T₀</td><td>9 °C</td><td>Stadt Blaubeuren [3]</td></tr>
 <tr><td>Mittlere Schüttung Q̄</td><td>2,27 m³/s</td><td>LGRB [2], Kalibrierung</td></tr>
 <tr><td>Minimale und maximale Schüttung</td><td>0,25 und 32,67 m³/s</td><td>LGRB [2], Extremfälle</td></tr>
-<tr><td>Siedetemperatur T<sub>b</sub></td><td>98,3 °C</td><td>Gerundet auf 512 m Höhe [8]</td></tr>
+<tr><td>Siedetemperatur T<sub>b</sub></td><td>98,3 °C</td><td>Eigene Höhenannahme 512 m, Formel [8]</td></tr>
 <tr><td>Wärmeleistung nach 10 Jahren H₁₀</td><td>846,0 MW</td><td>Aus der Prognose berechnet</td></tr>
 <tr><td>Regelgrenze T<sub>Z</sub></td><td>12 °C</td><td>Eigene Annahme, Normalziel 9,5 °C</td></tr>
 <tr><td>Dichte und Wärmekapazität</td><td>998 kg/m³, 4182 J/(kg K)</td><td> Konstante Näherung für Wasser</td></tr>
 </table>
 <h2>Modellannahmen</h2>
-<p><b>A1.</b> Die "zeitlich konstante Zunahme" deuten wir als linearen Anstieg der zugeführten Wärmeleistung. Bei unverändertem Durchfluss entspricht das einem linearen Temperaturanstieg. Diese Deutung erlaubt eine sinnvolle Bilanz bei wechselnder Schüttung.</p>
-<p><b>A2.</b> Die Wärmequelle verteilt ihre Leistung auf den betrachteten Zufluss. Kaltes Wasser aus anderen Teilen des Karsts mischt sich hinzu. Für den Naturfall vernachlässigen wir Wärmeverluste an Gestein und Luft. Das ist konservativ, weil dadurch mehr Wärme im Wasser bleibt.</p>
+<p><b>A1.</b> Wir deuten die Zunahme als linear wachsende Wärmeleistung. Eine räumlich begrenzte magmatische Wärmequelle kann ihre Leistung unabhängig vom Regen abgeben. Dann verdünnt zusätzliches Grundwasser die Wärme. Die lokale Tiefenmessung darf dagegen nicht auf den ganzen Zufluss übertragen werden. Modell B prüft genau diese andere Lesart.</p>
+<p><b>A2.</b> Die Wärmequelle verteilt ihre Leistung auf den betrachteten Zufluss. Kaltes Wasser aus anderen Karstbereichen mischt sich hinzu. Für den Naturfall vernachlässigen wir Wärmeverluste an Gestein und Luft. Das ist konservativ. Nach Siedebeginn ist das Naturmodell keine vollständige Wasser-Dampf-Bilanz mehr und wird deshalb nicht weiter ausgewertet.</p>
 <p><b>A3.</b> Die Wärmeschleuse führt den geförderten Massenstrom vollständig zurück. Der unterirdische Abfluss bleibt in der Bilanz unverändert. Bei Hochwasser kann ein ungekühlter Anteil vorbeifließen, weil die Verdünnung die Temperatur senkt.</p>
-<p><b>A4.</b> Nach dem zehnten Jahr betrachten wir zwei Fälle. Im Auslegungsfall bleibt H₁₀ konstant. Im mathematischen Grenzfall wächst die Wärme linear weiter. Nur im ersten Fall kann eine fest dimensionierte Anlage dauerhaft ausreichen.</p>
-<p><b>A5.</b> Monatliche Lufttemperaturen, Preise und Investitionskosten sind Szenariowerte. Sie sind keine Standortmessungen oder Angebote. Die Sicherheitsrechnung zählt keine Wärmeverkäufe als notwendige Einnahmen.</p>
+<p><b>A4.</b> Nach Jahr zehn bleibt die Wärme entweder konstant oder wächst linear weiter. Im ersten Fall reicht die feste Anlage mit Wartung. Im zweiten ist nur ein adaptiver Pfad möglich. Unbegrenztes Wachstum hat weder eine endliche Anlage noch endliche Kosten über unendliche Zeit.</p>
+<p><b>A5.</b> Wetter, Preise und Investitionen sind Szenariowerte, keine Angebote. Wärmeverkäufe sind nicht sicherheitsrelevant. Für heiße Jahre ist der Kreislauf auf 14 bar ausgelegt. Bei 187,6 °C in Jahr 20 bleibt Wasser damit flüssig. Die Pumpen überwinden im Auslegungsfall 140 m Gesamtdruckhöhe einschließlich Verlusten, Druckhaltung und Injektion.</p>
 <div class="note"><b>Offene Ursache.</b> Vulkanische Aktivität ist eine Vermutung, kein Messergebnis. Unsere Anlage wirkt unabhängig von der Ursache. Ihre Standortplanung braucht dennoch Temperaturprofile, Wasserchemie, Gase, Seismik und Markierungsversuche. Erst diese Daten zeigen, wo und wie viel Wärme in welchen Zufluss gelangt.</div>
 </section>
 
@@ -123,7 +123,7 @@ code { font-family: "Courier New", monospace; font-size: 9.5pt; }
 <tr><th>Temperatur ohne Eingriff</th><td>98,3 °C, Sieden ab 1,10 a</td><td>98,3 °C</td><td>15,2 °C</td></tr>
 <tr><th>Kälteleistung für 12 °C</th><td>842,9 MW</td><td>817,6 MW</td><td>437,0 MW</td></tr>
 </table>
-<p>Das Normalziel von 9,5 °C lässt Abstand zur 12-°C-Grenze. Im Niedrigwasserfall reichen 1040 MW bis Jahr 12,4. Nach einem Modulausfall bleiben 960 MW bis Jahr 11,4. Neue Module müssen vorher fertig sein.</p>
+<p>Das Normalziel von 9,5 °C lässt Abstand zur 12-°C-Grenze. Die exakten Grenzen liegen bei 12,33 Jahren mit 1040 MW und 11,38 Jahren nach einem Modulausfall mit 960 MW. Im Jahresgitter wird die Grenze erstmals bei 12,4 beziehungsweise 11,4 Jahren überschritten. Neue Module müssen vorher fertig sein.</p>
 <h2>Sensitivität der Prognosedeutung</h2>
 <p>Die Aufgabe misst nur eine lokale Tiefentemperatur. Unsere Wärmeleistungsdeutung ist eine Hypothese. Alternativ steigt die Temperatur am gesamten Zufluss linear. Dann wächst der Bedarf mit Q statt mit 1/Q:</p>
 <table>
@@ -131,12 +131,12 @@ code { font-family: "Courier New", monospace; font-size: 9.5pt; }
 <tr><td>Modell A: Wärmeleistung wächst linear</td><td>842,9 MW</td><td>817,6 MW</td><td>437,0 MW</td></tr>
 <tr><td>Modell B: Tiefentemperatur wächst linear</td><td>90,0 MW</td><td>817,6 MW</td><td>11,77 GW</td></tr>
 </table>
-<p>Der Entwurf nutzt Modell A. Die Messkampagne muss ihn gegen B prüfen, denn für B reicht 1 GW beim Extremabfluss nicht.</p>
+<p>Der Entwurf nutzt Modell A. Vor dem Ausbau muss die Messkampagne diese Wahl bestätigen. Falls B zutrifft, wird die 1-GW-Anlage nicht gebaut. Dann sind ein Eingriff an der Wärmequelle oder ein neuer Entwurf für 11,77 GW nötig. Die hier genannten Kosten gelten ausdrücklich nicht für diesen Fall.</p>
 <h2>Speicherung im Quelltopf</h2>
 <p>Der kegelförmige Topf enthält grob 8600 m³, die im Mittel nur eine Stunde gespeichert werden. H₁₀ würde sie ohne Abfuhr um über 80 Kelvin pro Stunde erwärmen. Speichern oder Beschatten löst das Problem nicht.</p>
 </section>
 
-<section class="sheet dense">
+<section class="sheet dense model">
 <h1>4. Vergleich der Lösungsansätze</h1>
 <table>
 <tr><th>Ansatz</th><th>Physikalische Prüfung</th><th>Bewertung</th></tr>
@@ -148,54 +148,63 @@ code { font-family: "Courier New", monospace; font-size: 9.5pt; }
 </table>
 <h2>Aufbau der Wärmeschleuse</h2>
 <img class="figure short" src="report/anlage.svg" alt="Schematische Wärmeschleuse">
-<p class="caption">Abbildung 1: Eigene Darstellung. Förderung und Injektion liegen im Zufluss, nicht im sichtbaren Quelltopf.</p>
-<p>Mehrere Brunnenpaare verteilen die Förderung. Ihre Lage folgt aus Markierungsversuchen und geophysikalischen Messungen. Richtbohrungen von außerhalb des empfindlichen Quellbereichs verringern die Beeinträchtigung der Höhlen. Packern und Abstandsregelung verhindern einen hydraulischen Kurzschluss zwischen gekühltem Injektat und warmem Ansaugwasser.</p>
-<p>Beim Hochwasserfall kühlt die Anlage den Volumenstrom q auf 9,5 °C. Der Rest q<sub>B</sub> umgeht sie mit 15,2 °C. Für 12 °C nach vollständiger Mischung gilt qT<sub>kalt</sub> + q<sub>B</sub>T<sub>warm</sub> = Q·12 °C. Daraus folgen q = 18,35 m³/s und q<sub>B</sub> = 14,32 m³/s. Die Wärmebilanz ergibt ρcq(15,2−9,5) = 437 MW, exakt den Bedarf aus Abschnitt 3. Der mittlere Abfluss allein würde also nicht genügen.</p>
-<p>Als hydraulisches Szenario dienen 14 Brunnenpaare mit je 1,55 m³/s Spitzenförderung. Bei Ausfall eines Paars bleiben 20,15 m³/s und damit Reserve über 18,35 m³/s. Für 20 m Förderhöhe und 75 % Pumpenwirkungsgrad beträgt die Leistung im Hochwasserfall 4,79 MW. Fördermengen und Injektionsdrücke sind keine gemessenen Brunnendaten. Ergiebigkeit, Absenkung und Abfangwirksamkeit müssen die Pilotbohrungen nachweisen.</p>
+<p class="caption">Abbildung 1: Kimi Code mit SVG, ohne menschliche Nachbearbeitung. Förderung und Injektion liegen im Zufluss, nicht im sichtbaren Quelltopf. [10]</p>
+<p>Mehrere Brunnenpaare verteilen die Förderung. Ihre Lage folgt aus Markierungsversuchen und Geophysik. Richtbohrungen von außerhalb des Quellbereichs schonen die Höhlen. Packer verhindern einen Kurzschluss zwischen kaltem Injektat und warmem Ansaugwasser.</p>
+<p>Beim Hochwasserfall kühlt die Anlage q auf 9,5 °C. Der Rest q<sub>B</sub> umgeht sie mit 15,2 °C. Für 12 °C nach Mischung gilt qT<sub>kalt</sub> + q<sub>B</sub>T<sub>warm</sub> = Q·12 °C. Daraus folgen q = 18,35 m³/s und q<sub>B</sub> = 14,32 m³/s. Die Wärmebilanz ergibt ρcq(15,2−9,5) = 437 MW, exakt den Bedarf aus Abschnitt 3. Der mittlere Abfluss allein genügt nicht.</p>
+<p>Das Szenario nutzt 14 Paare mit je 1,55 m³/s; N+1 lässt 20,15 m³/s. Bei 1 m Durchmesser strömt Wasser mit rund 2 m/s ein. Eine Ergiebigkeit von 15,5 L/s pro Meter ergäbe 100 m Absenkung. Bei nur 0,5 m³/s je Paar wären 38 nötig, mit etwa dreifachen Bohrkosten. Für 14 bar und 140 m Gesamtdruckhöhe sind bei 75 % Wirkungsgrad 33,54 MW nötig. Diese Werte sind Annahmen. Erst Pilotbohrungen können Ergiebigkeit, Druck und Abfangwirksamkeit bestätigen.</p>
 </section>
 
-<section class="sheet">
+<section class="sheet dense">
 <h1>5. Kühlkaskade und Regelung</h1>
 <h2>Drei Stufen statt eines großen Kälteaggregats</h2>
-<p><b>Stufe 1 nutzt Wärme.</b> Bei ausreichender Quelltemperatur geben Wärmetauscher Wärme direkt an ein Wärmenetz oder einen Industrieprozess ab. Eine Wärmepumpe ist nur für das gewünschte Temperaturniveau nötig. Blaubeuren untersucht bereits den Ausbau seiner Wärmenetze. [9] Die Sicherheitsrechnung nimmt trotzdem keinen Wärmeabsatz an.</p>
-<p><b>Stufe 2 kühlt trocken.</b> Geschlossene Wasser-Luft-Kühler geben Wärme an die Umgebung ab. Im Modell erreicht das Wasser mindestens Lufttemperatur plus 5 K. Es gibt keine Verdunstung und keine Einleitung in die Blau. Im Winter reicht diese Stufe allein.</p>
-<p><b>Stufe 3 kühlt nach.</b> Ein mechanischer Kältekreis deckt die Restlast. Für den Sommerfall rechnen wir mit 7 °C Verdampfung und 45 °C Kondensation. Die Carnot-Kälteleistungszahl ist 280,15/38 = 7,37. Mit einem Gütegrad von 0,55 ergibt sich COP = 4,05. Diese Annahme ist konservativ gegenüber einer idealen Maschine und muss durch Angebote ersetzt werden. [5]</p>
-<h2>Neue Regelgröße</h2>
-<p>Wärmezähler an jeder Förderleitung messen ρc q(T<sub>ein</sub>−T<sub>aus</sub>). Ihre Summe ist die tatsächlich entzogene Leistung. Die Steuerung kombiniert diese Messung mit der Temperatur im Blautopf. Ein Energiepreisoptimierer darf nur die Verteilung auf Wärmenutzung, Trockenkühlung und Nachkühlung verändern:</p>
-<span class="eq">min J = p<sub>el</sub>P<sub>el</sub> + p<sub>W</sub>Q<sub>Wasser</sub> − p<sub>H</sub>P<sub>verkauft</sub> + λ max(0,T<sub>Quelle</sub>−12 °C)²</span>
-<p>Der Strafterm hat Vorrang. Normalkosten und Strompreise dürfen die Quelltemperatur nicht über die Grenze schieben. Der normale Sollwert von 9,5 °C lässt bis zur Grenze von 12 °C Zeit für Regelung und Diagnose.</p>
-<h2>Redundanz</h2>
-<p>Dreizehn Kälte- und Wärmetauscher-Module mit je 80 MW liefern 1040 MW. Nach Ausfall eines Moduls bleiben 960 MW, also 13,9 % Reserve über den 842,9 MW im Auslegungsfall. Die Trockenkühler und Nachkühler innerhalb der Module sind getrennt zuschaltbar. Förderpumpen und Sensoren erhalten dieselbe N+1-Logik. Zwei unabhängige Stromzuleitungen und Notstrom für den sicheren Betrieb begrenzen das Ausfallrisiko. Eine absolute Garantie gegen jedes gleichzeitige Versagen wäre unseriös.</p>
+<p><b>Stufe 1 nutzt Wärme.</b> Wärmetauscher liefern zuerst Wärme an ein Netz oder einen Betrieb. Blaubeuren untersucht bereits den Ausbau seiner Wärmenetze. [9] Die Sicherheitsrechnung nimmt keinen Wärmeabsatz an.</p>
+<p><b>Stufe 2 kühlt trocken.</b> Geschlossene Wasser-Luft-Kühler erreichen im Basisszenario Lufttemperatur plus 10 K. Es gibt keine Verdunstung und keine Einleitung in die Blau. Ihre Ventilatoren treiben 1 % der gesamten Abfuhr an, einschließlich der Kondensatorwärme des Kältekreises.</p>
+<p><b>Stufe 3 kühlt nach.</b> Der Kältekreis deckt die Restlast. Bei 7 °C Verdampfung und 45 °C Kondensation ist die Carnot-Zahl 7,37. Mit Gütegrad 0,55 ergibt sich COP = 4,05. [5] Für vollmechanische Kühlung bei Niedrigwasser stehen 208 MW Strom bereit. Zwei Netzanschlüsse mit je 300 MW und ein 250-MW-Notstromaggregat decken Nachkühlung, Ventilatoren und Pumpen im Auslegungsfall.</p>
+<h2>Regelgesetz statt Preisoptimierung</h2>
+<p>Wärmezähler messen an jeder Leitung ρcq(T<sub>ein</sub>−T<sub>aus</sub>). Ihre Summe steuert die Kaskade. Zuerst bedient die Anlage gesicherte Wärmeabnehmer, danach die Trockenkühler. Reicht das nicht für 9,5 °C, folgt die Nachkühlung. Bei 11 °C werden Wärmeverkäufe und Preislogik abgeschaltet. Bei 12 °C laufen alle verfügbaren Module. Bei Sensorfehlern gilt die höhere Temperatur zweier unabhängiger Sonden.</p>
+<table>
+<tr><th>Ausfall</th><th>Reaktion und Reserve</th></tr>
+<tr><td>Kälte-, Trockenkühl- oder Pumpenmodul</td><td>N+1 reicht im Auslegungsjahr. Wartung nur innerhalb dieser Reserve.</td></tr>
+<tr><td>Netz oder Notstrom</td><td>Zwei getrennte Zuleitungen, danach 250 MW Notstrom. Ohne beide bleibt kein sicherer Dauerbetrieb möglich.</td></tr>
+<tr><td>Temperatur- oder Wärmezähler</td><td>Redundante Messung, konservativer Ersatzwert und Nachkühlung bis zur Kontrolle.</td></tr>
+</table>
+<h2>Warum 13 Module</h2>
+<p>Dreizehn Module mit je 80 MW liefern 1040 MW. Nach einem Ausfall bleiben 960 MW, also 13,9 % Reserve über 842,9 MW. Das deckt Ablagerungen, gleichzeitige Wartung und rund ein Jahr Prognosewachstum ab. Zwölf Module böten nach einem Ausfall nur 4,4 % Reserve. Das 13. Modul ist damit eine bewusste Verfügbarkeitsentscheidung, keine Rechenreserve ohne Zweck.</p>
 </section>
 
 <section class="sheet">
 <h1>6. Ergebnisse der Zeitrechnung</h1>
 <img class="figure medium" src="build/temperaturverlauf.svg" alt="Temperaturverlauf ohne Eingriff und mit fester Kälteleistung">
-<p class="caption">Abbildung 2: Eigene Rechnung mit `src/model.py`. Gezeigt sind 1040 MW und der N+1-Fall mit 960 MW bei weiter wachsender Wärme.</p>
-<p>Die Kurven verwenden dieselbe Anlagenleistung wie der Vorschlag. Bei mittlerer Schüttung beträgt der Bedarf im zehnten Jahr 817,6 MW. Der Niedrigwasserfall ist belastender: Dort reichen 1040 MW bis Jahr 12,4 und 960 MW bis Jahr 11,4. Danach steigt die Quelltemperatur über 12 °C, wenn keine neuen Module ans Netz gehen.</p>
+<p class="caption">Abbildung 2: Kimi Code und Python, keine menschliche Nachbearbeitung. 1040 MW und N+1 mit 960 MW bei wachsender Wärme. [10]</p>
+<p>Die Kurven verwenden die Anlagenleistung des Vorschlags. Bei mittlerer Schüttung beträgt der Bedarf im zehnten Jahr 817,6 MW. Die exakten Niedrigwassergrenzen liegen bei 12,33 Jahren mit 1040 MW und 11,38 Jahren mit 960 MW. Im 0,1-Jahresgitter wird 12 °C erstmals bei 12,4 beziehungsweise 11,4 überschritten.</p>
 <p>Unser Wachstumsszenario erweitert deshalb auf 23 Module mit 1840 MW bis Jahr 20. Ein Modul kann dabei weiterhin ausfallen. Der Ausbau ist eine Bedingung für diesen Pfad, kein nachträglicher Zusatz.</p>
 <img class="figure medium" src="build/schuettung.svg" alt="Einfluss der Schüttung auf die Temperatur">
-<p class="caption">Abbildung 3: Eigene Rechnung. Der Maximalabfluss verdünnt dieselbe Wärmeleistung deutlich.</p>
+<p class="caption">Abbildung 3: Kimi Code und Python, keine menschliche Nachbearbeitung. Nach Siedebeginn endet die gültige Naturbetrachtung. [10]</p>
 <div class="result"><b>Ergebnis.</b> Im Wärmeleistungsmodell bestimmt Niedrigwasser die Kälteleistung. Hochwasser bestimmt Förderung, Mischung und Umgehung. Im alternativen Temperaturmodell kehrt sich die Belastung um. Deshalb gehört die Messung der Prognoseform zur Auslegung.</div>
 </section>
 
-<section class="sheet">
+<section class="sheet dense">
 <h1>7. Sommerbetrieb und Wirtschaftlichkeit</h1>
 <img class="figure short" src="build/kaelte-monate.svg" alt="Monatliche Kühlkaskade">
-<p class="caption">Abbildung 4: Normalziel 9,5 °C bei mittlerer Schüttung. Die Lufttemperaturen sind angenommene Monatsmittel.</p>
-<p>Bei Niedrigwasser und vollständig mechanischer Kühlung auf 12 °C wären 842,9/4,05 = 208 MW elektrische Leistung nötig. Im realistischeren Jahresszenario verteilt sich der Strom auf 110,8 GWh für Nachkühlung, 69,2 GWh für Ventilatoren und 5,2 GWh für Pumpen. Zusammen sind es 185,2 GWh. Ventilatorstrom und Pumpenarbeit fehlen also nicht in der Rechnung.</p>
+<p class="caption">Abbildung 4: Kimi Code und Python, keine menschliche Nachbearbeitung. Normalziel 9,5 °C, angenommene Monatsmittel. [10]</p>
+<p>Im zehnten Jahr verteilen sich 303,9 GWh Strom auf 192,0 GWh Nachkühlung, 75,6 GWh Ventilatoren und 36,3 GWh Pumpen. Die Ventilatorlast enthält die Kondensatorwärme. Betrieb und Wartung kosten 49,0 Mio. € im Jahr.</p>
 <table>
-<tr><th>Investitionsszenario</th><th>Mio. €</th><th>Jahresrechnung im zehnten Jahr</th><th>Wert</th></tr>
-<tr><td>Erkundung und Messnetz</td><td>30</td><td>Nachkühlung, Ventilatoren, Pumpen</td><td>185,2 GWh</td></tr>
-<tr><td>Bohrungen und Hydraulik</td><td>120</td><td>Strom zu 120 €/MWh</td><td>22,2 Mio. €</td></tr>
-<tr><td>Wärmetauscher</td><td>60</td><td>Wartung, 2,5 % der Investition</td><td>10,0 Mio. €</td></tr>
-<tr><td>Trockenkühler</td><td>80</td><td>Betrieb insgesamt</td><td>32,2 Mio. €</td></tr>
-<tr><td>Nachkühlmodule</td><td>60</td><td>Ersatzinvestition in Jahr 15</td><td>100 Mio. €</td></tr>
-<tr><td>Netz, Leittechnik, Notstrom</td><td>30</td><td>Realzins und Laufzeit</td><td>3 %, 20 Jahre</td></tr>
-<tr><td>Reserve</td><td>20</td><td>Barwert mit Ersatzinvestition</td><td>943,5 Mio. €</td></tr>
+<tr><th>Investition</th><th>Mio. €</th><th>Rechnung</th><th>Wert</th></tr>
+<tr><td>Erkundung und Messnetz</td><td>30</td><td>Strompreis</td><td>120 €/MWh</td></tr>
+<tr><td>Bohrungen und Hydraulik</td><td>120</td><td>Wartung, 2,5 % der Investition</td><td>12,5 Mio. €/a</td></tr>
+<tr><td>Wärmetauscher</td><td>60</td><td>Betrieb insgesamt</td><td>49,0 Mio. €/a</td></tr>
+<tr><td>Trockenkühler</td><td>80</td><td>Ersatzinvestition Jahr 15</td><td>100 Mio. €</td></tr>
+<tr><td>Nachkühlmodule</td><td>60</td><td>Realzins und Laufzeit</td><td>3 %, 20 Jahre</td></tr>
+<tr><td>Netz, Leittechnik, Notstrom</td><td>130</td><td>Konstanter Wärmepfad</td><td>1.168,5 Mio. €</td></tr>
+<tr><td>Reserve</td><td>20</td><td>Wachstumspfad</td><td>1.460,1 Mio. €</td></tr>
+<tr><td><b>Summe</b></td><td><b>500</b></td><td>Strom in Jahr 20, Wachstum</td><td>378,1 GWh</td></tr>
 </table>
-<p>Der Barwert umfasst Investition, Betrieb und die abgezinste Ersatzinvestition. Bei konstanter Wärme nach Jahr zehn bleibt der Jahresbedarf gleich. Bei weiterem linearen Wachstum umfasst die Rechnung den Ausbau auf 23 Module, 30 Mio. € pro Zusatzmodul und jährlich wachsende Hilfsenergie. Dann beträgt der Barwert 1,067 Mrd. €; im Jahr 20 werden 259,3 GWh Strom gebraucht.</p>
-<p>Die Unsicherheit bleibt groß. Der günstige Fall mit 250 Mio. € Investition und 80 €/MWh kommt auf 628 Mio. €, der teure Fall mit 650 Mio. € und 200 €/MWh auf 1,507 Mrd. €. Ein Verkauf von 100 GWh Wärme zu 45 €/MWh senkt den Barwert um 66,9 Mio. €. Diese Einnahme ist optional und sichert die Auslegung nicht ab. Vor einer Entscheidung brauchen wir Angebote, Bohrprognosen, Wärmeabnehmerprofile und stündliche Wetterdaten.</p>
+<p>Beide Pfade starten mit drei Modulen und wachsen bis Jahr zehn auf 13. Ein Zusatzmodul kostet 30 Mio. €: etwa 15,4 Mio. € Kühltechnik und 14,6 Mio. € weitere Hydraulik, Netz und Reserve. Der konstante Pfad behält danach Wärme und Module. Der Wachstumspfad erreicht 23 Module. Die Ersatzinvestition wächst von 100 auf 176,9 Mio. €. Alle Zahlungen werden in ihrem Bau- oder Betriebsjahr abgezinst.</p>
+<table>
+<tr><th>Sensitivität im zehnten Jahr</th><td>5 K Trockenkühler</td><td>12 K</td><td>2 % Ventilator</td><td>100 m Druckhöhe</td></tr>
+<tr><th>Strom in GWh</th><td>221,9</td><td>345,3</td><td>379,6</td><td>293,6</td></tr>
+</table>
+<p>Die Basis verwendet 10 K, 1 % Ventilator und 140 m. Ein günstiger Kostenfall kommt auf 711 Mio. €, ein teurer auf 1,676 Mrd. €. Ein Verkauf von 100 GWh Wärme senkt den Barwert um 66,9 Mio. €, ist aber nicht sicherheitsrelevant. Die 20-Jahres-Werte sind keine Kosten für Unendlichkeit. Für den Dauerbetrieb sind weitere Ersatzinvestitionen und jährliche N+1-Prüfungen vorgesehen.</p>
 </section>
 
 <section class="sheet">
@@ -214,7 +223,7 @@ code { font-family: "Courier New", monospace; font-size: 9.5pt; }
 <p>Kalkreiches Wasser kann bei Druckabfall und Entgasung Ausfällungen bilden. Wir halten den Grundwasserkreislauf druckbeaufschlagt und verwenden doppelwandige, reinigbare Wärmetauscher. Differenzdruck und Wärmeübergang zeigen Ablagerungen früh an. [7] Der geschlossene Sekundärkreis verhindert Stoffeinträge. Eine Leckage zwischen den Wänden löst Abschaltung aus.</p>
 <p>Notstrom und Redundanz verringern Ausfallwahrscheinlichkeiten, beseitigen sie aber nicht. Auch Naturgefahren und gemeinsame Fehlerursachen brauchen eine getrennte Risikoanalyse. Die Behauptung "nie mehr Sieden" wäre ohne diese Daten zu stark.</p>
 <h2>Entscheidung unter Unsicherheit</h2>
-<p>Wir empfehlen keine sofortige Großbaustelle. Zuerst folgen Messnetz und ein Pilotmodul. Seine Energiebilanz entscheidet, ob die Wärmeschleuse den heißen Zufluss tatsächlich erreicht. Erst danach wird modulartig erweitert. Diese Reihenfolge begrenzt Fehlinvestitionen und liefert genau die Daten, die unserem Modell noch fehlen.</p>
+<p>Wir empfehlen keine sofortige Großbaustelle. Zuerst folgen Messnetz und eine Pilotanlage aus drei Modulen. Ihre Energiebilanz entscheidet, ob die Wärmeschleuse den heißen Zufluss erreicht. Erst danach wird erweitert. Der historische Mindestabfluss muss nicht ab Projektbeginn dauerhaft auftreten. Falls eine solche Dürre schon vor Inbetriebnahme droht, überbrücken gemietete mobile Kältemodule mit 120 MW und eigener Stromversorgung. Das ist ein Szenario, kein zugesicherter Termin. Genehmigung, Lieferung und Bau bleiben kritische Pfade.</p>
 </section>
 
 <section class="sheet dense">
@@ -222,11 +231,11 @@ code { font-family: "Courier New", monospace; font-size: 9.5pt; }
 <h2>Stufenplan</h2>
 <table>
 <tr><th>Phase</th><th>Arbeit und Entscheidungsschwelle</th></tr>
-<tr><td>Sofort bis Jahr 0,5</td><td>Temperatur, Abfluss, Chemie, Gase, Seismik, Tracer und Geophysik parallel messen. Die Daten müssen Modelle A und B unterscheiden und die heißen Zuflüsse lokalisieren.</td></tr>
-<tr><td>Bis Jahr 1,0</td><td>Drei Pilotmodule mit 240 MW sowie erste Brunnen in Betrieb nehmen. Nach einem Modulausfall bleiben 160 MW für den Niedrigwasserbedarf von rund 90 MW beim frühesten Siedezeitpunkt 1,10 Jahre. Abbruchkriterien sind unzureichende Abfangwirksamkeit oder veränderte Quellschüttung.</td></tr>
-<tr><td>Jahr 1 bis 10</td><td>Nach gemessenem Bedarf auf 13 Module mit 1040 MW erweitern. Hydraulik und natürliche Umgehung rechtzeitig für 18,35 m³/s Prozessstrom und 14,32 m³/s Bypass ausbauen.</td></tr>
-<tr><td>Jahr 10 bis 20</td><td>Bei konstanter Wärme ist kein Ausbau nötig. Beim Wachstumspfad bis zu 23 Module mit 1840 MW errichten, jeweils vor Überschreiten der N+1-Schwelle.</td></tr>
-<tr><td>Dauerbetrieb</td><td>Ziel 9,5 °C, Alarm bei 12 °C und jährliche Bilanz. Falls die Wärme weiter wächst, Module und Ressourcen bereitstellen oder die Quelle selbst begrenzen.</td></tr>
+<tr><td>Sofort bis Jahr 0,5</td><td>Temperatur, Abfluss, Chemie, Gase, Seismik, Tracer und Geophysik parallel messen. Bei akuter Dürre decken mobile 120-MW-Mietmodule die Zeit bis zur Pilotanlage. Ihre Kosten fallen in die 20 Mio. € Reserve.</td></tr>
+<tr><td>Bis Jahr 1,0</td><td>Drei Pilotmodule mit 240 MW sowie erste Brunnen in Betrieb nehmen. Nach einem Modulausfall bleiben 160 MW für rund 90 MW beim frühesten Siedezeitpunkt 1,10 Jahre. Bei unzureichender Abfangwirksamkeit wird nicht erweitert.</td></tr>
+<tr><td>Jahr 1 bis 10</td><td>Nach gemessenem Bedarf auf 13 Module mit 1040 MW erweitern. Hydraulik und Umgehung für 18,35 m³/s Prozessstrom und 14,32 m³/s Bypass ausbauen.</td></tr>
+<tr><td>Jahr 10 bis 20</td><td>Bei konstanter Wärme ist kein Ausbau nötig. Beim Wachstumspfad bis zu 23 Module mit 1840 MW errichten, jeweils vor der N+1-Schwelle.</td></tr>
+<tr><td>Dauerbetrieb</td><td>Ziel 9,5 °C, Alarm bei 12 °C. Jährlich prüft die Betreiberin N+1 und bestellt Module vor der Schwellenüberschreitung. Alle 15 Jahre werden verbrauchte Module ersetzt. Ohne Ende des Wachstums ist keine endliche Dauerlösung möglich.</td></tr>
 </table>
 <h2>Schlussfolgerung</h2>
 <p>Das Kochen lässt sich verhindern, indem man die Überschusswärme aus dem unterirdischen Zufluss entfernt. Unsere Wärmeschleuse fördert erhitztes Wasser, kühlt es außerhalb des Quelltopfs und injiziert dieselbe Menge zurück. Die erforderliche Leistung beträgt im zehnten Jahr 843 MW im maßgebenden Niedrigwasserfall. Eine Kaskade aus Wärmenutzung, Trockenkühlung und mechanischer Nachkühlung hält höchstens 12 °C ein und senkt den Strombedarf. Der Normalbetrieb bleibt nahe bei der natürlichen Temperatur.</p>
@@ -248,7 +257,7 @@ code { font-family: "Courier New", monospace; font-size: 9.5pt; }
 <p>[7] Penot, C. et al.: Corrosion and Scaling in Geothermal Heat Exchangers. Applied Sciences 13, 11549, 2023. https://doi.org/10.3390/app132011549 (abgerufen 5.11.2026)</p>
 <p>[8] International Association for the Properties of Water and Steam: IAPWS Industrial Formulation 1997 for the Thermodynamic Properties of Water and Steam. Sättigungsdruck und Siedetemperatur. https://www.iapws.org/relguide/IF97-Rev.html (abgerufen 5.11.2026)</p>
 <p>[9] Stadt Blaubeuren: Kommunale Wärmeplanung. https://www.blaubeuren.de/de/Aktuelles/Kommunale-Waermeplanung (abgerufen 5.11.2026)</p>
-<p>[10] Eigener Programmcode: `src/model.py`, Version im Repository. Die erzeugten Dateien `build/kennwerte.json`, `build/verlauf.csv` und `build/monate.csv` enthalten alle im Bericht verwendeten Rechenergebnisse.</p>
+<p>[10] Eigener Programmcode: src/model.py, Version im Repository. Die erzeugten Dateien build/kennwerte.json, build/verlauf.csv und build/monate.csv enthalten alle im Bericht verwendeten Rechenergebnisse.</p>
 <h2>Hinweis zur Quellenwahl</h2>
 <p>Standortdaten stammen von der Stadt und der zuständigen geologischen Landesstelle. Die technischen Annahmen beruhen auf Fachliteratur und ausdrücklich genannten Szenarien. Frühere Wettbewerbslösungen wurden nicht verwendet.</p>
 </section>
@@ -270,7 +279,7 @@ code { font-family: "Courier New", monospace; font-size: 9.5pt; }
 <p>Für die Mischung gilt T<sub>M</sub> = (Q<sub>h</sub>T<sub>h</sub> + Q<sub>k</sub>T<sub>k</sub>)/(Q<sub>h</sub> + Q<sub>k</sub>). Auflösen nach dem Kaltwasseranteil ergibt Q<sub>k</sub>/Q<sub>h</sub> = (T<sub>h</sub>−T<sub>M</sub>)/(T<sub>M</sub>−T<sub>k</sub>). Mit 98,3 °C, 12 °C und 9 °C erhält man 28,77. Das ist keine lokale Beimischung mehr, sondern ein neuer Fluss.</p>
 <p>Bei der Flächenkühlung ist P = UAΔT. Für P = 817,6 MW, U = 500 W/(m²K) und ΔT = 30 K folgt A = 54.508 m². Selbst eine höhere Wärmedurchgangszahl ändert nicht die Größenordnung. Zudem würde eine Wärmepumpe im Quelltopf ihre Kondensatorwärme an anderer Stelle abgeben müssen.</p>
 <h2>Barwert</h2>
-<p>Der Annuitätenfaktor ist a = [1−(1+i)<sup>−n</sup>]/i. Für i = 0,03 und n = 20 ist a = 14,877. Der Barwert beträgt 400 + 14,877 × 32,2181 + 100/(1,03<sup>15</sup>) = 943,51 Mio. €. Der dritte Term ist die Ersatzinvestition in Jahr 15. Beim Wachstumspfad ersetzt das Programm den festen Jahresbetrag durch die jährlich wachsenden Stromkosten und diskontiert jedes neue Modul in seinem Baujahr. Wärmeverkäufe verringern nur die Kosten, nicht die nötige technische Leistung.</p>
+<p>Für jede Zahlung K<sub>t</sub> im Jahr t gilt BW = Σ K<sub>t</sub>/(1+i)<sup>t</sup>. Die Anfangszahlung umfasst 110 Mio. € feste Anteile und drei Module. Jedes weitere Modul kostet 30 Mio. € in seinem Baujahr. Betrieb und Wartung werden jährlich berechnet. Die Ersatzinvestition in Jahr 15 beträgt 100 Mio. € × Modulzahl/13. So entstehen 1.168,53 Mio. € bei konstanter Wärme und 1.460,12 Mio. € im Wachstumspfad. Der konstante Vergleich mit einmaligem Barwertfaktor 14,877 gilt nur für gleichbleibende Jahresbeträge, nicht für den gestuften Ausbau.</p>
 <p class="small">Alle verwendeten Internetquellen sind frei zugänglich. Die Wiedergabe der Aufgabenstellung auf dem Deckblatt ist gekürzt und als solche durch [1] belegt. Die ausführliche Originalfassung bleibt beim Wettbewerb verlinkt.</p>
 </section>
 
@@ -279,13 +288,13 @@ code { font-family: "Courier New", monospace; font-size: 9.5pt; }
 <h2>Ausführung</h2>
 <p>Das Modell verwendet nur die Python-Standardbibliothek. Folgender Befehl erzeugt die Ergebnisse neu:</p>
 <p><code>python3 src/model.py --output-dir build</code></p>
-<p>Die Datei `kennwerte.json` enthält die Auslegungswerte. `verlauf.csv` enthält die Jahresreihe von 0 bis 20 Jahren in Schritten von 0,1 Jahren. `monate.csv` enthält die monatliche Kaskade, `ausbau.csv` den Wachstumspfad. Die SVG-Abbildungen entstehen aus denselben Daten wie die Tabellen.</p>
+<p>Die Datei kennwerte.json enthält die Auslegungswerte. verlauf.csv enthält die Jahresreihe von 0 bis 20 Jahren in Schritten von 0,1 Jahren. monate.csv enthält die monatliche Kaskade, ausbau.csv den Wachstumspfad. Die SVG-Abbildungen entstehen aus denselben Daten wie die Tabellen.</p>
 <h2>Eingebaute Konsistenzprüfungen</h2>
 <ul class="checklist">
 <li>Die kalibrierte Naturtemperatur erreicht beim mittleren Abfluss nach zehn Jahren 98,3 °C. Niedrigwasser siedet nach 1,1013 Jahren.</li>
 <li>Die installierte Leistung hält den Mindestabfluss im zehnten Jahr bei höchstens 12 °C.</li>
 <li>Die Hochwasser-Mischung erfüllt Massen- und Energiebilanz. Die Kapazität nach Ausfall eines Brunnenpaars reicht für den Prozessstrom.</li>
-<li>Die Investitionspositionen summieren sich auf 400 Mio. €. Die Monatsstunden summieren sich auf 8760 Stunden.</li>
+<li>Die Investitionspositionen summieren sich auf 500 Mio. €. Die Monatsstunden summieren sich auf 8760 Stunden.</li>
 <li>Trockenkühlung und Nachkühlung überschreiten gemeinsam nicht die insgesamt abgeführte Wärme.</li>
 </ul>
 <h2>Monatsannahmen</h2>
@@ -295,7 +304,7 @@ code { font-family: "Courier New", monospace; font-size: 9.5pt; }
 </table>
 <p>Die Monatswerte bilden ein mildes bis warmes Jahresszenario ab. Sie ersetzen keine Auslegung mit stündlichen Extremwerten. Der separate Sommerfall verwendet deshalb die volle Restlast und den berechneten COP statt der Jahresmittel.</p>
 <h2>Lesen der JSON-Datei</h2>
-<p>`h10_mw` ist die kalibrierte Wärmeleistung. `cooling_year10_min_mw` ist der Auslegungsbedarf. `annual_electricity_gwh` steht innerhalb von `economics_base`. `installed_capacity_threshold_year` und `n_plus_one_threshold_year` bezeichnen die ersten Rechengitterjahre oberhalb von 12 °C bei weiter wachsender Quelle, keine vorhergesagten Anlagenschäden. `capex_breakdown_meur` enthält die Investitionspositionen.</p>
+<p>h10_mw ist die kalibrierte Wärmeleistung. cooling_year10_min_mw ist der Auslegungsbedarf. annual_electricity_gwh steht innerhalb von economics_base. installed_capacity_threshold_year und n_plus_one_threshold_year bezeichnen die ersten Rechengitterjahre oberhalb von 12 °C bei weiter wachsender Quelle, keine vorhergesagten Anlagenschäden. capex_breakdown_meur enthält die Investitionspositionen.</p>
 <h2>Grenzen der Dateien</h2>
 <p>Die CSV- und SVG-Dateien sind Rechenergebnisse, keine unabhängigen Belege. Ihre Aussagekraft entsteht aus den im Hauptteil genannten Annahmen. Diese Trennung verhindert, dass ein reproduzierter Rechenfehler als bestätigtes Ergebnis erscheint.</p>
 </section>
@@ -311,7 +320,7 @@ code { font-family: "Courier New", monospace; font-size: 9.5pt; }
 <tr><td>Hydraulik</td><td>18,35 m³/s Prozessstrom plus 14,32 m³/s Bypass ergeben 32,67 m³/s und 437 MW Abfuhr.</td></tr>
 <tr><td>Redundanz</td><td>13 × 80 MW ergeben 1040 MW, nach einem Modulausfall 960 MW. Die Schwellen 12,4 und 11,4 Jahre sind berechnet.</td></tr>
 <tr><td>Wirtschaftlichkeit</td><td>Investition, Ersatzinvestition, Hilfsenergie und jährlicher Ausbau sind getrennt ausgewiesen.</td></tr>
-<tr><td>Unabhängige Gegenprüfung</td><td>Zwei Council-Modelle prüften Bericht und Code. Ihre Einwände zu Phasenwechsel, Hochwasser, Hilfsenergie und Ausbau sind eingearbeitet.</td></tr>
+<tr><td>Unabhängige Gegenprüfung</td><td>Kimi und zwei DeepSeek-Modelle prüften Bericht und Code. Ihre Einwände zu Phasenwechsel, Hochwasser, Hilfsenergie und Ausbau sind eingearbeitet. Eine menschliche Prüfung wird nicht vorweggenommen.</td></tr>
 </table>
 <h2>Formaler Check vor einer echten Einreichung</h2>
 <ul>
@@ -319,7 +328,7 @@ code { font-family: "Courier New", monospace; font-size: 9.5pt; }
 <li>Ein PDF einreichen. Deckblatt, zehn Hauptseiten einschließlich Zusammenfassung sowie vier Seiten für Literatur und Anhang sind bereits getrennt.</li>
 <li>A4, 12 pt, mindestens 2,5 cm Rand und die Darstellung der Formeln vor dem Versand visuell prüfen.</li>
 <li>Szenariowerte nicht als Messdaten ausgeben. Die KI-Offenlegung an die tatsächliche weitere Bearbeitung durch das Team anpassen.</li>
-<li>Die Präsentation vorbereitet das menschliche Team eigenständig. Bericht, Modell und Abbildungen liefern dafür die überprüfbaren Fakten.</li>
+<li>Die Präsentation bereitet das menschliche Team eigenständig vor. Bericht, Modell und Abbildungen liefern dafür die überprüfbaren Fakten.</li>
 </ul>
 <h2>Antwort auf die Gesamtfrage</h2>
 <p>Die Wärmeschleuse verhindert das Sieden durch nachweisbare Wärmeabfuhr vor dem Quelltopf. Ihre Dauerhaftigkeit beruht auf Messung, Reserve und Anpassung. Diese Bedingungen sind Teil des Vorschlags und werden nicht als spätere Ergänzung ausgelagert.</p>
