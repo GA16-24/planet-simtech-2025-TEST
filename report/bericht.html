@@ -166,15 +166,15 @@ code { font-family: "Courier New", monospace; font-size: 12pt; }
 <tr><td>Temperatur- oder Wärmezähler</td><td>Redundante Messung, konservativer Ersatzwert und Nachkühlung bis zur Kontrolle.</td></tr>
 </table>
 <h2>Warum 160 Module</h2>
-<p>Die 160 Module liefern 12,8 GW. Nach einem Ausfall bleiben 12,72 GW, also 5,1 % Reserve über dem Normalbedarf von 12,11 GW. Diese Reserve deckt Ablagerungen und Wartung ab. 159 Module hätten nach einem Ausfall nur 4,4 % Reserve. In Jahr 20 sind 321 Module installiert; nach einem Ausfall bleiben 25,6 GW und damit wieder 5,1 % Reserve.</p>
+<p>Die 160 Module liefern 12,8 GW. Nach einem Ausfall bleiben 12,72 GW, also 5,1 % Reserve über dem Normalbedarf von 12,11 GW. Diese Reserve deckt Ablagerungen und Wartung ab. 159 Module hätten nach einem Ausfall nur 4,4 % Reserve. In Jahr 20 sind 321 Module installiert; nach einem Ausfall bleiben 25,6 GW und damit rund 5,4 % Reserve.</p>
 </section>
 
 <section class="sheet">
 <h1>6. Ergebnisse der Zeitrechnung</h1>
 <img class="figure medium" src="build/temperaturverlauf.svg" alt="Temperaturverlauf ohne Eingriff und mit fester Kälteleistung">
-<p class="caption">Abbildung 2: Kimi Code und Python, keine menschliche Nachbearbeitung. Naturkurve bis 187,6 °C, Festleistung 12,8/12,72 GW und Ausbau auf 25,68 GW. [10]</p>
-<p>Die Kurven folgen dem wörtlichen Temperaturtrend. Die exakten Grenzen bei maximalem Abfluss liegen bei 10,848 Jahren mit 12,8 GW und 10,782 Jahren mit 12,72 GW. Im 0,1-Jahresgitter wird 12 °C erstmals bei 10,9 beziehungsweise 10,8 überschritten.</p>
-<p>Das Wachstumsszenario erweitert deshalb auf 321 Module mit 25,68 GW bis Jahr 20. Nach einem Modulausfall bleiben 25,6 GW und damit weiterhin 5,1 % Reserve. Der Ausbau ist eine Bedingung für diesen Pfad, kein nachträglicher Zusatz.</p>
+<p class="caption">Abbildung 2: Kimi Code und Python, keine menschliche Nachbearbeitung. Natur bis Sieden, geregelter Ausbau bis 187,6 °C und 25,68 GW, Normalziel 9,5 °C. [10]</p>
+<p>Die Naturkurve endet am Siedepunkt. Die exakten Grenzen bei maximalem Abfluss liegen bei 10,848 Jahren mit 12,8 GW und 10,782 Jahren mit 12,72 GW. Im 0,1-Jahresgitter wird 12 °C erstmals bei 10,9 beziehungsweise 10,8 überschritten.</p>
+<p>Das Wachstumsszenario erweitert deshalb auf 321 Module mit 25,68 GW bis Jahr 20. Nach einem Modulausfall bleiben 25,6 GW und damit rund 5,4 % Reserve. Der Ausbau ist eine Bedingung für diesen Pfad, kein nachträglicher Zusatz.</p>
 <img class="figure medium" src="build/schuettung.svg" alt="Einfluss der Schüttung auf die Temperatur">
 <p class="caption">Abbildung 3: Alternative A mit festem Wärmefluss. Nach Siedebeginn endet die gültige Naturbetrachtung. [10]</p>
 <div class="result"><b>Ergebnis.</b> Im Auslegungsfall B bestimmt der Hochabfluss die Kälteleistung. Nur in Alternative A entlastet er. Die Unterscheidung ist deshalb keine Kosmetik, sondern entscheidet über Leistung, Brunnenzahl und Kosten.</div>
@@ -193,14 +193,15 @@ code { font-family: "Courier New", monospace; font-size: 12pt; }
 <tr><td>Ersatz in Jahr 15, konstant mit 160 Modulen</td><td>2.461,5 Mio. €</td></tr>
 <tr><td>Ersatz in Jahr 15, Wachstum mit 229 Modulen</td><td>3.523,1 Mio. €</td></tr>
 <tr><td>Langfristige Jahreskosten, konstanter Fall</td><td>811,8 Mio. €/a</td></tr>
-<tr><td>Barwert mit 67 ertragsschwachen Brunnenpaaren</td><td>etwa 15.024 Mio. €</td></tr>
+<tr><td>Barwert mit 67 ertragsschwachen Brunnenpaaren</td><td>etwa 15.028 Mio. €</td></tr>
+<tr><td>Wachstum plus Quellprüfpfad, abgezinst</td><td>19.170,9 Mio. €</td></tr>
 </table>
 <p>Jedes Zusatzmodul kostet 30 Mio. €: 15,4 Mio. € Kühltechnik und 14,6 Mio. € Hydraulik, Netz und Reserve. Die Ersatzkosten ersetzen nur diese Kühltechnik mit 200 Mio. € pro 13 Modulen. Brunnen, Netz und Leittechnik bleiben erhalten. Ein Jahr Notkühlung mit 50 Mio. € ist in beiden Barwerten enthalten. Wärmeverkäufe werden nicht vorausgesetzt.</p>
 <table>
 <tr><th>Sensitivität im zehnten Jahr</th><td>5 K</td><td>12 K</td><td>2 % Ventilator</td><td>100 m Druckhöhe</td></tr>
 <tr><th>Strom in GWh</th><td>3.193,6</td><td>4.969,3</td><td>5.462,6</td><td>4.224,9</td></tr>
 </table>
-<p>Die Basis nutzt 10 K, 1 % Ventilator und 140 m. Bei mittlerem Abfluss kosten A 1.281/1.563 und B 7.755/11.638 Mrd. €, bei maximalem Abfluss A 3.494/4.180 und B 14.424/18.985 Mrd. €, jeweils konstant/Wachstum. Die Investition beträgt für A 500/800 Mio. € und für B 4.910/9.740 Mio. € in Jahr 10/20. Unbegrenztes Wachstum hat keine endliche Dauerlösung.</p>
+<p>Die Basis nutzt 10 K, 1 % Ventilator und 140 m. Nach zehn Jahren konstant kosten A 1.281/3.494 und B 7.755/14.424 Mrd. €, im Wachstum B 11.918/18.985 Mrd. €, jeweils Mittel/Maximum. Mit Quellprüfpfad sind es 19.171 Mrd. € bei Maximum. Die Investition beträgt für A 500/800 Mio. € und für B 4.910/9.740 Mio. € in Jahr 10/20. A wird nach Siedebeginn nicht als Dauerbetrieb verwendet. Unbegrenztes Wachstum hat keine endliche Lösung.</p>
 </section>
 
 <section class="sheet">
@@ -274,7 +275,7 @@ code { font-family: "Courier New", monospace; font-size: 12pt; }
 <p>Für die Mischung gilt T<sub>M</sub> = (Q<sub>h</sub>T<sub>h</sub> + Q<sub>k</sub>T<sub>k</sub>)/(Q<sub>h</sub> + Q<sub>k</sub>). Auflösen nach dem Kaltwasseranteil ergibt Q<sub>k</sub>/Q<sub>h</sub> = (T<sub>h</sub>−T<sub>M</sub>)/(T<sub>M</sub>−T<sub>k</sub>). Mit 98,3 °C, 12 °C und 9 °C erhält man 28,77. Das ist keine lokale Beimischung mehr, sondern ein neuer Fluss.</p>
 <p>Bei der Flächenkühlung ist P = UAΔT. Für P = 817,6 MW, U = 500 W/(m²K) und ΔT = 30 K folgt A = 54.508 m². Selbst eine höhere Wärmedurchgangszahl ändert nicht die Größenordnung. Zudem würde eine Wärmepumpe im Quelltopf ihre Kondensatorwärme an anderer Stelle abgeben müssen.</p>
 <h2>Barwert</h2>
-<p>Für jede Zahlung K<sub>t</sub> im Jahr t gilt BW = Σ K<sub>t</sub>/(1+i)<sup>t</sup>. Die Anfangszahlung umfasst 110 Mio. € feste Anteile und drei Module. Jedes weitere Modul kostet 30 Mio. € in seinem Baujahr. Betrieb und Wartung werden jährlich berechnet. Die Ersatzinvestition in Jahr 15 beträgt 200 Mio. € × Modulzahl in Jahr 15/13, im Wachstumsfall also 3.523,08 Mio. €. Das erste Jahr enthält 50 Mio. € Notkühlung. So entstehen 14.424,20 Mio. € bei konstanter Temperatur und 18.984,91 Mio. € im Wachstumspfad.</p>
+<p>Für jede Zahlung K<sub>t</sub> im Jahr t gilt BW = Σ K<sub>t</sub>/(1+i)<sup>t</sup>. Die Anfangszahlung umfasst 110 Mio. € feste Anteile und drei Module. Jedes weitere Modul kostet 30 Mio. € in seinem Baujahr. Betrieb und Wartung werden jährlich berechnet. Die Ersatzinvestition in Jahr 15 beträgt 200 Mio. € × Modulzahl in Jahr 15/13, im Wachstumsfall also 3.523,08 Mio. €. Das erste Jahr enthält 50 Mio. € Notkühlung. So entstehen 14.424,20 Mio. € bei konstanter Temperatur und 18.984,91 Mio. € im Wachstumspfad. Der mit 3 % abgezinste Quellprüfpfad von 250 Mio. € in Jahr 10 erhöht den Wachstumsbarwert auf 19.170,88 Mio. €.</p>
 <p class="small">Alle verwendeten Internetquellen sind frei zugänglich. Die Wiedergabe der Aufgabenstellung auf dem Deckblatt ist gekürzt und als solche durch [1] belegt. Die ausführliche Originalfassung bleibt beim Wettbewerb verlinkt.</p>
 </section>
 

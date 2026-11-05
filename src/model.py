@@ -227,7 +227,7 @@ def growth_economics(electricity_eur_mwh=120.0, discount=0.03,
 
 
 def write_svg(path, title, x_label, y_label, series, width=900, height=540):
-    left, right, top, bottom = 120, 30, 130 if len(series) >= 4 else 60, 90
+    left, right, top, bottom = 120, 30, 130 if len(series) >= 4 else 90 if len(series) == 3 else 60, 90
     pw, ph = width - left - right, height - top - bottom
     all_points = [point for _, points, _ in series for point in points]
     xmin = min(p[0] for p in all_points)
@@ -266,7 +266,7 @@ def write_svg(path, title, x_label, y_label, series, width=900, height=540):
     for index, (name, points, color) in enumerate(series):
         coords = " ".join(f"{sx(x):.2f},{sy(y):.2f}" for x, y in points)
         parts.append(f'<polyline points="{coords}" fill="none" stroke="{color}" stroke-width="3"/>')
-        if len(series) >= 4:
+        if len(series) >= 3:
             lx = left + 15 + (index % 2) * 410
             ly = top + 18 + (index // 2) * 40
         else:
@@ -344,10 +344,10 @@ def run(output_dir):
         "Temperaturtrend bei maximalem Abfluss",
         "Zeit in Jahren", "Temperatur in °C",
         [
-            ("ohne Eingriff", [(y, raw_temperature(y, Q_MAX, "B")) for y in years], "#d1495b"),
+            ("Natur bis Sieden", [(y, raw_temperature(y, Q_MAX, "B")) for y in years if y <= 10], "#d1495b"),
             ("12,8 GW fest", [(y, controlled_temperature(y, Q_MAX, installed_b, T_TARGET, "B")) for y in years], "#00798c"),
             ("N+1: 12,72 GW", [(y, controlled_temperature(y, Q_MAX, n_plus_one_b, T_TARGET, "B")) for y in years], "#edae49"),
-            ("Ausbau", [(y, controlled_temperature(y, Q_MAX, required_modules(y, "B") * 80e6, T_TARGET, "B")) for y in years], "#6a8b59"),
+            ("Ausbau", [(y, controlled_temperature(y, Q_MAX, required_modules(y, "B") * 80e6, T_NORMAL, "B")) for y in years], "#6a8b59"),
             ("Grenze", [(y, T_TARGET) for y in years], "#384d48"),
         ],
     )
@@ -356,9 +356,9 @@ def run(output_dir):
         "Alternative A: Wärmeleistung wächst linear",
         "Zeit in Jahren", "Temperatur in °C",
         [
-            ("Minimum", [(y, natural_temperature(y, Q_MIN)) for y in years], "#d1495b"),
-            ("Mittel", [(y, natural_temperature(y, Q_MEAN)) for y in years], "#edae49"),
-            ("Maximum", [(y, natural_temperature(y, Q_MAX)) for y in years], "#00798c"),
+            ("Minimum", [(y, natural_temperature(y, Q_MIN)) for y in years if y <= boiling_year(Q_MIN)], "#d1495b"),
+            ("Mittel", [(y, natural_temperature(y, Q_MEAN)) for y in years if y <= boiling_year(Q_MEAN)], "#edae49"),
+            ("Maximum", [(y, natural_temperature(y, Q_MAX)) for y in years if y <= boiling_year(Q_MAX)], "#00798c"),
         ],
     )
     write_svg(
@@ -418,7 +418,9 @@ def run(output_dir):
         "baseline_low_yield_npv_constant_meur": low_yield_npv_b,
         "baseline_year20_modules": required_modules(20.0, "B"),
         "baseline_year20_n_plus_one_capacity_gw": (required_modules(20.0, "B") - 1) * 0.080,
+        "baseline_year20_n_plus_one_reserve_normal_percent": ((required_modules(20.0, "B") - 1) * 80e6 / required_cooling_model(20.0, Q_MAX, T_NORMAL, "B") - 1) * 100,
         "baseline_year20_capex_meur": 110.0 + required_modules(20.0, "B") * 30.0,
+        "baseline_growth_with_source_control_meur": growth_b["present_cost_20y_meur"] + 250.0 / 1.03 ** 10,
         "source_control_scenario": {
             "method": "Erkundungsbohrung, Packer und Verpressung des heißen Zuflusses",
             "cost_meur": 250.0,
@@ -450,9 +452,9 @@ def run(output_dir):
             "cooling_year10_max_mw": required_cooling(10.0, Q_MAX) / 1e6,
             "annual_mean": annual_a,
             "annual_max": annual_a_max,
-            "growth": growth_a,
+            "mathematical_stress_growth_not_design": growth_a,
             "stationary": stationary_a,
-            "growth_max": growth_a_max,
+            "mathematical_stress_growth_max_not_design": growth_a_max,
             "stationary_max": stationary_a_max,
             "capex_breakdown_meur": CAPEX_BREAKDOWN_MEUR,
         },

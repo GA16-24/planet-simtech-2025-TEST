@@ -6,14 +6,14 @@
 <path class="rock" d="M20 300 Q250 240 460 325 T980 280 L980 500 L20 500 Z"/>
 <path d="M20 300 Q250 240 460 325 T980 280" stroke="#6a8b59" stroke-width="7" fill="none"/>
 <ellipse cx="855" cy="320" rx="105" ry="42" fill="#78c6d4" stroke="#00798c" stroke-width="3"/>
-<text x="800" y="327">Blautopf</text><text class="s" x="805" y="350">9 bis 12 °C</text>
+<text class="s" x="810" y="305">Blautopf</text><text class="s" x="820" y="355">9-12 °C</text>
 <path class="hot" d="M90 425 Q220 390 315 415 L315 175"/>
 <path class="cold" d="M445 175 L445 425 Q620 460 750 365"/>
 <text class="s" x="70" y="465">Zufluss</text>
 <text class="s" x="272" y="465">Pumpe</text><text class="s" x="415" y="465">Injektion</text>
-<rect class="box" x="260" y="85" width="240" height="90" rx="8"/><text x="292" y="122">Wärme</text><text class="s" x="285" y="151">doppelwandig</text>
-<path class="pipe" d="M500 130 L550 130"/><path class="pipe" d="M690 130 L750 130"/>
-<rect class="box" x="550" y="70" width="140" height="120" rx="8"/><text x="572" y="103">Kaskade</text><text class="s" x="570" y="132">Netz</text><text class="s" x="570" y="154">Trocken</text><text class="s" x="570" y="176">Nach</text>
-<rect class="box" x="750" y="85" width="190" height="90" rx="8"/><text x="783" y="122">Regelung</text><text class="s" x="777" y="151">T, Q, Wärme</text>
+<rect class="box" x="260" y="85" width="240" height="90" rx="8"/><text x="292" y="110">Wärme</text><text class="s" x="285" y="166">2 Wände</text>
+<path class="pipe" d="M500 130 L550 130"/><path class="pipe" d="M720 130 L750 130"/>
+<rect class="box" x="540" y="70" width="180" height="120" rx="8"/><text x="555" y="103">Kaskade</text><text class="s" x="570" y="160">3 Stufen</text>
+<rect class="box" x="740" y="85" width="220" height="90" rx="8"/><text x="770" y="110">Regler</text><text class="s" x="777" y="166">T, Q</text>
 <path d="M845 175 L845 250 L780 250 L780 280" stroke="#384d48" stroke-width="3" fill="none" stroke-dasharray="7 6"/>
 </svg>
