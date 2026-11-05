@@ -226,7 +226,7 @@ def growth_economics(electricity_eur_mwh=120.0, discount=0.03,
 
 
 def write_svg(path, title, x_label, y_label, series, width=900, height=540,
-              secondary_series=None, secondary_y_label=""):
+              secondary_series=None, secondary_y_label="", x_ticks=None):
     secondary_series = secondary_series or []
     left = 160
     right = 150 if secondary_series else 30
@@ -274,8 +274,8 @@ def write_svg(path, title, x_label, y_label, series, width=900, height=540,
         y = sy(value)
         parts.append(f'<line class="grid" x1="{left}" y1="{y:.2f}" x2="{width-right}" y2="{y:.2f}"/>')
         parts.append(f'<text x="{left-10}" y="{y+5:.2f}" text-anchor="end">{value:.0f}</text>')
-    for i in range(6):
-        value = xmin + (xmax - xmin) * i / 5
+    tick_values = x_ticks or [xmin + (xmax - xmin) * i / 5 for i in range(6)]
+    for value in tick_values:
         x = sx(value)
         parts.append(f'<line class="grid" x1="{x:.2f}" y1="{top}" x2="{x:.2f}" y2="{height-bottom}"/>')
         parts.append(f'<text x="{x:.2f}" y="{height-bottom+25}" text-anchor="middle">{value:.0f}</text>')
@@ -409,6 +409,7 @@ def run(output_dir):
             ("Strom mit Hilfsenergie", [(r["month"], r["electric_mw"]) for r in rows_b], "#d1495b"),
         ],
         secondary_y_label="Elektrische Leistung in MW",
+        x_ticks=[1, 3, 5, 7, 9, 11],
     )
 
     process_b = required_process_flow(Q_MAX, T_BOIL)

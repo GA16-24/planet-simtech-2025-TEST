@@ -37,7 +37,10 @@ th, td { border: 0.6pt solid #9db4b9; padding: 4pt 5pt; vertical-align: top; }
 .caption { font-size: 12pt; color: #536570; margin: 2pt 0 7pt; text-align: left; }
 .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 10pt; }
 .refs p { font-size: 12pt; margin-bottom: 8pt; overflow-wrap: anywhere; word-break: break-all; hyphens: none; text-align: left; }
-code { font-family: "Courier New", monospace; font-size: 12pt; }
+code { font-family: "Courier New", monospace; font-size: 12pt; hyphens: none; }
+.keys { margin: 3pt 0; }
+.keys th, .keys td { padding: 1pt 3pt; }
+.keys td:first-child { width: 45%; overflow-wrap: anywhere; }
 .checklist li { margin-bottom: 4pt; }
 .dense { line-height: 1.0; }
 .dense p { margin-bottom: 4pt; }
@@ -64,7 +67,7 @@ code { font-family: "Courier New", monospace; font-size: 12pt; }
 <p>Wir schlagen vor, das Wasser schon unter der Erde zu kühlen, bevor es in den Blautopf fließt. Brunnen holen es nach oben. Wärmetauscher entziehen die Hitze. Danach kommt dieselbe Wassermenge in den unterirdischen Fluss zurück. Der sichtbare Quelltopf bleibt frei von Maschinen.</p>
 <p>Die nötige Leistung folgt direkt aus dem genannten Temperaturtrend. Im zehnten Jahr müssen bei maximalem Abfluss 11,77 Gigawatt abgeführt werden. Eine kleine Kühlspirale im Quelltopf reicht deshalb nicht. Die kleinere Anlage mit fester Wärmeleistung gilt nur, falls Messungen stattdessen eine feste Wärmequelle bestätigen.</p>
 <p>Unsere Anlage nutzt zuerst Wärme für Gebäude oder Betriebe. Trockenkühler geben den Rest an die Luft ab. Nur wenn das nicht reicht, springt eine elektrische Nachkühlung an. 160 Module mit zusammen 12,8 Gigawatt schaffen Reserve. Auch nach dem Ausfall eines Moduls bleiben 12,72 Gigawatt.</p>
-<p>Das Kostenszenario nennt 4,91 Milliarden Euro für den Bau bei maximalem Abfluss. Der Strombedarf im zehnten Jahr liegt bei 0,03 Terawattstunden bei Niedrigwasser, 0,30 im Mittel und 4,37 bei maximalem Abfluss. Über zwanzig Jahre ergeben sich je nach Abfluss 7,76 bis 14,42 Milliarden Euro bei konstanter Temperatur nach Jahr zehn und 11,92 bis 18,98 Milliarden bei weiterem Anstieg. Bei unbegrenztem Wachstum ist kein endlicher Barwert möglich.</p>
+<p>Das Kostenszenario nennt 4,91 Milliarden Euro für den Bau bei maximalem Abfluss. Der Strombedarf im zehnten Jahr liegt bei 0,03 Terawattstunden bei Niedrigwasser, 0,30 im Mittel und 4,37 bei maximalem Abfluss. Für mittleren bis maximalen Abfluss ergeben sich über zwanzig Jahre 7,76 bis 14,42 Milliarden Euro bei konstanter Temperatur nach Jahr zehn und 11,92 bis 18,98 Milliarden bei weiterem Anstieg. Bei unbegrenztem Wachstum ist kein endlicher Barwert möglich.</p>
 <div class="result"><b>Antwort.</b> Bei unbegrenzt linearem Temperaturanstieg gibt es keine endliche dauerhafte Lösung. Die Wärmeschleuse ist eine befristete Brücke. Bleibt die Temperatur nach Jahr zehn konstant, kann sie dauerhaft schützen. Steigt sie weiter, muss die Wärmequelle begrenzt werden. Dafür enthalten wir einen 250-Mio.-€-Prüfpfad mit Erkundungsbohrung und Verpressung. Ist er undurchführbar, bleibt die Aufgabe physikalisch unlösbar.</div>
 </section>
 
@@ -111,7 +114,7 @@ code { font-family: "Courier New", monospace; font-size: 12pt; }
 <h1>3. Mathematisches Modell</h1>
 <h2>Auslegung auf den Temperaturtrend</h2>
 <p>Die Temperatur steigt in zehn Jahren von 9 auf 98,3 °C. Mit 8,93 K/a und P = ρcQΔT folgt:</p>
-<span class="eq">T(t) = 9 °C + 8,93 K/a · t und P<sub>K</sub>(t,Q) = ρcQ[T(t)−12 °C]</span>
+<span class="eq">T(t) = 9 °C + 8,93 K/a · t und P<sub>K</sub>(t,Q) = ρcQ·max[0, T(t)−12 °C]</span>
 <p>Damit ist der wörtliche Trend der Auslegungsfall. Nach dem Sieden betrachten wir den Naturzustand nicht weiter; die Anlage wirkt bereits davor.</p>
 <table>
 <tr><th>Fall im zehnten Jahr</th><th>Q = 0,25 m³/s</th><th>Q = 2,27 m³/s</th><th>Q = 32,67 m³/s</th></tr>
@@ -172,7 +175,7 @@ code { font-family: "Courier New", monospace; font-size: 12pt; }
 <section class="sheet">
 <h1>6. Ergebnisse der Zeitrechnung</h1>
 <img class="figure medium" src="build/temperaturverlauf.svg" alt="Temperaturverlauf ohne Eingriff und mit fester Kälteleistung">
-<p class="caption">Abbildung 2: Natur bis Sieden. Ohne Ausbau erreicht die feste 12,8-GW-Anlage in Jahr 20 etwa 93,7 °C, der Ausbau hält 9,5 °C. Für den ungebremsten Trend von 187,6 °C sind 25,68 GW vorgesehen. [10]</p>
+<p class="caption">Abbildung 2: Natur bis Sieden. Ohne Ausbau erreicht die feste 12,8-GW-Anlage in Jahr 20 etwa 93,7 °C, der Ausbau hält 9,5 °C. Bei 187,6 °C beträgt der Normalbedarf 24,3 GW, installiert sind 25,68 GW. [10]</p>
 <p>Die Naturkurve endet am Siedepunkt. Die exakten Grenzen bei maximalem Abfluss liegen bei 10,848 Jahren mit 12,8 GW und 10,782 Jahren mit 12,72 GW. Im 0,1-Jahresgitter wird 12 °C erstmals bei 10,9 beziehungsweise 10,8 überschritten.</p>
 <p>Das Wachstumsszenario erweitert deshalb auf 321 Module mit 25,68 GW bis Jahr 20. Nach einem Modulausfall bleiben 25,6 GW und damit rund 5,4 % Reserve. Der Ausbau ist eine Bedingung für diesen Pfad, kein nachträglicher Zusatz.</p>
 <img class="figure medium" src="build/schuettung.svg" alt="Einfluss der Schüttung auf die Temperatur">
@@ -201,7 +204,7 @@ code { font-family: "Courier New", monospace; font-size: 12pt; }
 <tr><th>Sensitivität im zehnten Jahr</th><th>5 K</th><th>12 K</th><th>2 % Ventilator</th><th>100 m Druckhöhe</th></tr>
 <tr><th>Strom in GWh</th><td>3.193,6</td><td>4.969,3</td><td>5.462,6</td><td>4.224,9</td></tr>
 </table>
-<p>Die Basis nutzt 10 K, 1 % Ventilator und 140 m. Konstante Barwerte für Mittel/Maximum sind A 1.281/3.618 und B 7.755/14.424 Mio. €, Wachstum B 11.918/18.985 Mio. €, mit Quellprüfpfad 19.171 Mio. € bei Maximum. Die kumulierte Investition beträgt für A 590/890 und für B 4.910/9.740 Mio. € in Jahr 10/20, der Zubau in Jahr 20 kostet A 30 und B 930 Mio. €. A wird nach Siedebeginn nicht als Dauerbetrieb verwendet. Unbegrenztes Wachstum hat keine endliche Lösung.</p>
+<p>Die Basis nutzt 10 K, 1 % Ventilator und 140 m. Konstante Barwerte für Mittel/Maximum sind A 1.281/3.618 und B 7.755/14.424 Mio. €, Wachstum B 11.918/18.985 Mio. €, mit Quellprüfpfad 19.171 Mio. € bei Maximum. Die kumulierte Investition in Jahr 10/20 beträgt für A-Mittel 500/800, A-Max 590/890 und B 4.910/9.740 Mio. €. Allein der Zubau in Jahr 20 kostet A 30 und B 930 Mio. €. A wird nach Siedebeginn nicht als Dauerbetrieb verwendet. Unbegrenztes Wachstum hat keine endliche Lösung.</p>
 </section>
 
 <section class="sheet">
@@ -238,7 +241,7 @@ code { font-family: "Courier New", monospace; font-size: 12pt; }
 <h2>Schlussfolgerung</h2>
 <p>Das Kochen lässt sich verhindern, indem man die Überschusswärme aus dem unterirdischen Zufluss entfernt. Unsere Wärmeschleuse fördert erhitztes Wasser, kühlt es außerhalb des Quelltopfs und injiziert dieselbe Menge zurück. Der wörtliche Temperaturtrend erfordert im zehnten Jahr bei maximalem Abfluss 11,77 GW. Eine Kaskade aus Wärmenutzung, Trockenkühlung und mechanischer Nachkühlung hält höchstens 12 °C ein. Der Normalbetrieb bleibt nahe bei der natürlichen Temperatur.</p>
 <p>Die Kosten hängen von der Prognosedeutung ab. Nur in Alternative A entlastet Hochwasser durch Verdünnung und erlaubt die Anlage mit fester Wärmeleistung. Im Auslegungsfall B bestimmt der Hochabfluss die 160 Module, die Brunnen und die Kosten. Diese Unterscheidung muss die Messkampagne aufklären.</p>
-<p>Die Lösung ist aufwendig, aber physikalisch geschlossen und schrittweise prüfbar. Sie verbraucht kein Kühlwasser und schiebt die Wärme nicht in die Blau. Ihre größten Risiken sind die unbekannte räumliche Wärmequelle, die Karsthydraulik und die Kosten der Bohrungen. Deshalb gehören Messkampagne und Pilotanlage untrennbar zum Vorschlag.</p>
+<p>Die Lösung ist aufwendig, aber physikalisch geschlossen und schrittweise prüfbar. Sie verbraucht kein Kühlwasser und leitet keine Wärme in die Blau. Größte Risiken sind Wärmequelle, Karsthydraulik und Bohrkosten. Mit mehr Bearbeitungszeit würden wir stündliche Extremwerte, ein gekoppeltes Grundwasser- und Wärmetransportmodell sowie belastbare Kostenangebote ergänzen. Deshalb gehören Messkampagne und Pilotanlage untrennbar zum Vorschlag.</p>
 <div class="result"><b>Dauerhaft heißt anpassungsfähig.</b> Die Wärmeschleuse ist zunächst eine Brücke. Bei konstanter Temperatur nach Jahr zehn reicht sie mit Wartung und Reserve dauerhaft. Bei weiterem Anstieg muss die Quelle begrenzt werden; unser Prüfpfad kostet 250 Mio. €. Ist diese Begrenzung undurchführbar, existiert keine endliche dauerhafte Lösung.</div>
 </section>
 
@@ -300,9 +303,17 @@ code { font-family: "Courier New", monospace; font-size: 12pt; }
 </table>
 <p>Die Monatswerte bilden ein mildes bis warmes Jahresszenario ab. Sie ersetzen keine Auslegung mit stündlichen Extremwerten. Der separate Sommerfall verwendet deshalb die volle Restlast und den berechneten COP statt der Jahresmittel.</p>
 <h2>Lesen der JSON-Datei</h2>
-<p>baseline_model kennzeichnet den Auslegungsfall B. baseline_cooling_year10_max_mw ist der Bedarf bei maximalem Abfluss. baseline_annual_max enthält die Jahresenergie. baseline_installed_threshold_year und baseline_n_plus_one_threshold_year sind erste Rechengitterjahre oberhalb von 12 °C, keine Anlagenschäden. baseline_growth und baseline_stationary enthalten die Zahlungsströme. alternative_a enthält das Nebenszenario mit fester Wärmeleistung.</p>
-<h2>Grenzen der Dateien</h2>
-<p>Die CSV- und SVG-Dateien sind Rechenergebnisse, keine unabhängigen Belege. Ihre Aussagekraft entsteht aus den im Hauptteil genannten Annahmen. Diese Trennung verhindert, dass ein reproduzierter Rechenfehler als bestätigtes Ergebnis erscheint.</p>
+<table class="keys">
+<tr><th>JSON-Feld</th><th>Bedeutung</th></tr>
+<tr><td><code>baseline_model</code></td><td>Auslegungsfall B</td></tr>
+<tr><td><code>baseline_cooling_year10_max_mw</code></td><td>Bedarf bei maximalem Abfluss</td></tr>
+<tr><td><code>baseline_annual_max</code></td><td>Jahresenergie</td></tr>
+<tr><td><code>baseline_installed_threshold_year</code><br><code>baseline_n_plus_one_threshold_year</code></td><td>Erste Rechengitterjahre oberhalb von 12 °C, keine Anlagenschäden</td></tr>
+<tr><td><code>baseline_growth</code></td><td>Zahlungsströme im Wachstumspfad</td></tr>
+<tr><td><code>baseline_stationary</code></td><td>Zahlungsströme im konstanten Pfad</td></tr>
+<tr><td><code>alternative_a</code></td><td>Nebenszenario mit fester Wärmeleistung</td></tr>
+</table>
+<p><b>Grenzen der Dateien.</b> CSV und SVG sind Rechenergebnisse, keine unabhängigen Belege. Ihre Aussagekraft folgt aus den Annahmen im Hauptteil.</p>
 </section>
 
 <section class="sheet">
