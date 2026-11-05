@@ -12,8 +12,8 @@
 <text class="s" x="70" y="465">Zufluss</text>
 <text class="s" x="272" y="465">Pumpe</text><text class="s" x="415" y="465">Injektion</text>
 <rect class="box" x="260" y="85" width="240" height="90" rx="8"/><text x="292" y="110">Wärme</text><text class="s" x="285" y="166">2 Wände</text>
-<path class="pipe" d="M500 130 L550 130"/><path class="pipe" d="M720 130 L750 130"/>
-<rect class="box" x="540" y="70" width="180" height="120" rx="8"/><text x="555" y="103">Kaskade</text><text class="s" x="570" y="160">3 Stufen</text>
-<rect class="box" x="740" y="85" width="220" height="90" rx="8"/><text x="770" y="110">Regler</text><text class="s" x="777" y="166">T, Q</text>
+<path class="pipe" d="M500 130 L550 130"/><path class="pipe" d="M780 130 L800 130"/>
+<rect class="box" x="540" y="70" width="240" height="120" rx="8"/><text x="555" y="103">Kaskade</text><text class="s" x="570" y="160">3 Stufen</text>
+<rect class="box" x="800" y="85" width="180" height="90" rx="8"/><text x="830" y="110">Regler</text><text class="s" x="837" y="166">T, Q</text>
 <path d="M845 175 L845 250 L780 250 L780 280" stroke="#384d48" stroke-width="3" fill="none" stroke-dasharray="7 6"/>
 </svg>

@@ -227,7 +227,7 @@ def growth_economics(electricity_eur_mwh=120.0, discount=0.03,
 
 
 def write_svg(path, title, x_label, y_label, series, width=900, height=540):
-    left, right, top, bottom = 120, 30, 130 if len(series) >= 4 else 90 if len(series) == 3 else 60, 90
+    left, right, top, bottom = 160, 30, 200 if len(series) >= 3 else 60, 90
     pw, ph = width - left - right, height - top - bottom
     all_points = [point for _, points, _ in series for point in points]
     xmin = min(p[0] for p in all_points)
@@ -268,7 +268,8 @@ def write_svg(path, title, x_label, y_label, series, width=900, height=540):
         parts.append(f'<polyline points="{coords}" fill="none" stroke="{color}" stroke-width="3"/>')
         if len(series) >= 3:
             lx = left + 15 + (index % 2) * 410
-            ly = top + 18 + (index // 2) * 40
+            legend_rows = (len(series) + 1) // 2
+            ly = top - 50 - (legend_rows - 1) * 40 + (index // 2) * 40
         else:
             lx = left + 15 + index * 245
             ly = top + 18
@@ -382,7 +383,7 @@ def run(output_dir):
     annual_a["replacement_meur"] = stationary_a["replacement_meur"]
     annual_b_low = economics(rows_b_low, capex_eur=4910e6)
     annual_a_max = economics(
-        monthly_design(flow=Q_MAX, capacity=13 * 80e6, model="A"), capex_eur=800e6
+        monthly_design(flow=Q_MAX, capacity=13 * 80e6, model="A"), capex_eur=500e6
     )
     annual_a_max["present_cost_20y_meur"] = stationary_a_max["present_cost_20y_meur"]
     annual_a_max["replacement_meur"] = stationary_a_max["replacement_meur"]

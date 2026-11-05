@@ -137,8 +137,8 @@ code { font-family: "Courier New", monospace; font-size: 12pt; }
 <h1>4. Vergleich der Lösungsansätze</h1>
 <table>
 <tr><th>Ansatz</th><th>Physikalische Prüfung</th><th>Bewertung</th></tr>
-<tr><td>Kaltes Wasser beimischen</td><td>Für 12 °C wären 65 m³/s Kaltwasser nötig.</td><td>Verworfen. Abfluss würde stark verändert.</td></tr>
-<tr><td>Flächenkühlung im Quelltopf</td><td>818 MW erfordern rund 54.500 m² statt 1260 m² Oberfläche.</td><td>Verworfen. Zu wenig Fläche.</td></tr>
+<tr><td>Kaltes Wasser beimischen</td><td>Beim maximalen Abfluss wären für 12 °C rund 939,8 m³/s Kaltwasser nötig.</td><td>Verworfen. Abfluss würde stark verändert.</td></tr>
+<tr><td>Flächenkühlung im Quelltopf</td><td>11,77 GW erfordern rund 784.500 m² statt 1260 m² Oberfläche.</td><td>Verworfen. Zu wenig Fläche.</td></tr>
 <tr><td>Abwärme in die Blau leiten</td><td>Die Wärme wird nur verschoben und belastet die Blau. [6]</td><td>Verworfen.</td></tr>
 <tr><td>Wärmequelle abdichten</td><td>Lage und Wege im Karst sind unbekannt.</td><td>Nur nach Ursachenforschung prüfen.</td></tr>
 <tr><td>Wärmeschleuse</td><td>Entzieht die Überschusswärme und injiziert dieselbe Menge.</td><td>Modular und messbar.</td></tr>
@@ -201,7 +201,7 @@ code { font-family: "Courier New", monospace; font-size: 12pt; }
 <tr><th>Sensitivität im zehnten Jahr</th><td>5 K</td><td>12 K</td><td>2 % Ventilator</td><td>100 m Druckhöhe</td></tr>
 <tr><th>Strom in GWh</th><td>3.193,6</td><td>4.969,3</td><td>5.462,6</td><td>4.224,9</td></tr>
 </table>
-<p>Die Basis nutzt 10 K, 1 % Ventilator und 140 m. Nach zehn Jahren konstant kosten A 1.281/3.494 und B 7.755/14.424 Mrd. €, im Wachstum B 11.918/18.985 Mrd. €, jeweils Mittel/Maximum. Mit Quellprüfpfad sind es 19.171 Mrd. € bei Maximum. Die Investition beträgt für A 500/800 Mio. € und für B 4.910/9.740 Mio. € in Jahr 10/20. A wird nach Siedebeginn nicht als Dauerbetrieb verwendet. Unbegrenztes Wachstum hat keine endliche Lösung.</p>
+<p>Die Basis nutzt 10 K, 1 % Ventilator und 140 m. Nach zehn Jahren konstant kosten A 1.281/3.494 Mio. € und B 7.755/14.424 Mio. €, im Wachstum B 11.918/18.985 Mio. €, jeweils Mittel/Maximum. Mit Quellprüfpfad sind es 19.171 Mio. € bei Maximum. Die Investition in Jahr 10 beträgt für A 500 und für B 4.910 Mio. €, der Ausbau in Jahr 20 für A 800 und für B 9.740 Mio. €. A wird nach Siedebeginn nicht als Dauerbetrieb verwendet. Unbegrenztes Wachstum hat keine endliche Lösung.</p>
 </section>
 
 <section class="sheet">
@@ -272,10 +272,10 @@ code { font-family: "Courier New", monospace; font-size: 12pt; }
 <tr><td>U, A</td><td>Wärmedurchgang und Wärmetauscherfläche</td><td>W/(m²K), m²</td></tr>
 </table>
 <h2>Nachrechnen der Alternativen</h2>
-<p>Für die Mischung gilt T<sub>M</sub> = (Q<sub>h</sub>T<sub>h</sub> + Q<sub>k</sub>T<sub>k</sub>)/(Q<sub>h</sub> + Q<sub>k</sub>). Auflösen nach dem Kaltwasseranteil ergibt Q<sub>k</sub>/Q<sub>h</sub> = (T<sub>h</sub>−T<sub>M</sub>)/(T<sub>M</sub>−T<sub>k</sub>). Mit 98,3 °C, 12 °C und 9 °C erhält man 28,77. Das ist keine lokale Beimischung mehr, sondern ein neuer Fluss.</p>
-<p>Bei der Flächenkühlung ist P = UAΔT. Für P = 817,6 MW, U = 500 W/(m²K) und ΔT = 30 K folgt A = 54.508 m². Selbst eine höhere Wärmedurchgangszahl ändert nicht die Größenordnung. Zudem würde eine Wärmepumpe im Quelltopf ihre Kondensatorwärme an anderer Stelle abgeben müssen.</p>
+<p>Für die Mischung gilt T<sub>M</sub> = (Q<sub>h</sub>T<sub>h</sub> + Q<sub>k</sub>T<sub>k</sub>)/(Q<sub>h</sub> + Q<sub>k</sub>). Auflösen nach dem Kaltwasseranteil ergibt Q<sub>k</sub>/Q<sub>h</sub> = (T<sub>h</sub>−T<sub>M</sub>)/(T<sub>M</sub>−T<sub>k</sub>). Mit 98,3 °C, 12 °C und 9 °C erhält man 28,77. Beim Auslegungsabfluss von 32,67 m³/s folgt Q<sub>k</sub> = 28,77 × 32,67 m³/s = 939,8 m³/s. Das ist keine lokale Beimischung mehr, sondern ein neuer Fluss.</p>
+<p>Bei der Flächenkühlung ist P = UAΔT. Für P = 11,767 GW, U = 500 W/(m²K) und ΔT = 30 K folgt A = 784.467 m². Selbst eine höhere Wärmedurchgangszahl ändert nicht die Größenordnung. Zudem würde eine Wärmepumpe im Quelltopf ihre Kondensatorwärme an anderer Stelle abgeben müssen.</p>
 <h2>Barwert</h2>
-<p>Für jede Zahlung K<sub>t</sub> im Jahr t gilt BW = Σ K<sub>t</sub>/(1+i)<sup>t</sup>. Die Anfangszahlung umfasst 110 Mio. € feste Anteile und drei Module. Jedes weitere Modul kostet 30 Mio. € in seinem Baujahr. Betrieb und Wartung werden jährlich berechnet. Die Ersatzinvestition in Jahr 15 beträgt 200 Mio. € × Modulzahl in Jahr 15/13, im Wachstumsfall also 3.523,08 Mio. €. Das erste Jahr enthält 50 Mio. € Notkühlung. So entstehen 14.424,20 Mio. € bei konstanter Temperatur und 18.984,91 Mio. € im Wachstumspfad. Der mit 3 % abgezinste Quellprüfpfad von 250 Mio. € in Jahr 10 erhöht den Wachstumsbarwert auf 19.170,88 Mio. €.</p>
+<p>Für jede Zahlung K<sub>t</sub> im Jahr t gilt BW = Σ K<sub>t</sub>/(1+i)<sup>t</sup>. Die Anfangszahlung umfasst 110 Mio. € feste Anteile und drei Module. Jedes weitere Modul kostet 30 Mio. € in seinem Baujahr. Betrieb und Wartung werden jährlich berechnet. Die Ersatzinvestition in Jahr 15 beträgt 200 Mio. € × Modulzahl in Jahr 15/13, im Wachstumsfall also 3.523,08 Mio. €. Das erste Jahr enthält 50 Mio. € Notkühlung. So entstehen 14.424,20 Mio. € bei konstanter Temperatur und 18.984,91 Mio. € im Wachstumspfad. Der mit 3 % abgezinste Quellprüfpfad von 250 Mio. € in Jahr 10 erhöht den Wachstumsbarwert auf 19.170,92 Mio. €.</p>
 <p class="small">Alle verwendeten Internetquellen sind frei zugänglich. Die Wiedergabe der Aufgabenstellung auf dem Deckblatt ist gekürzt und als solche durch [1] belegt. Die ausführliche Originalfassung bleibt beim Wettbewerb verlinkt.</p>
 </section>
 
