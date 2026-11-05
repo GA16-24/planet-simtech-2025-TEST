@@ -21,4 +21,4 @@ Abrufdatum aller Onlinequellen: 5. November 2026.
 
 ## Eigene Annahmen
 
-Lufttemperaturen im Monatsmodell, 10 K Temperaturabstand des Trockenkühlers, Ventilatoranteil, realer Carnot-Gütegrad, 14 bar Auslegungsdruck, 140 m Gesamtdruckhöhe, Brunnenergiebigkeit, Strom- und Wärmepreise, Investitionskosten, Wartungssatz und Wärmeabsatz sind Szenarioparameter. Sie werden nicht als Messwerte ausgegeben. Das Modell trennt diese Werte von den belegten Standortdaten. Die Höhenannahme von 512 m dient nur zur Siedepunktschätzung nach IAPWS.
+Der Auslegungsfall B überträgt den linearen Temperaturanstieg auf den gesamten Zufluss. Alternative A mit fester Wärmeleistung ist davon getrennt. Lufttemperaturen im Monatsmodell, 10 K Temperaturabstand des Trockenkühlers, Ventilatoranteil, realer Carnot-Gütegrad, 14 bar Auslegungsdruck, 140 m Gesamtdruckhöhe, Brunnenergiebigkeit, Strom- und Wärmepreise, Investitionskosten, Wartungssatz und Wärmeabsatz sind Szenarioparameter. Sie werden nicht als Messwerte ausgegeben. Das Modell trennt diese Werte von den belegten Standortdaten. Die Höhenannahme von 512 m dient nur zur Siedepunktschätzung nach IAPWS.

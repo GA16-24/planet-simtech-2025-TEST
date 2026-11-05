@@ -24,7 +24,7 @@ if len(reader.pages) != 15:
 texts = [(page.extract_text() or "") for page in reader.pages]
 required = {
     0: [args.team_id, "PlaNeT SimTech"],
-    1: ["Zusammenfassung", "843"],
+    1: ["Zusammenfassung", "11,77"],
     10: ["Schlussfolgerung"],
     11: ["Literaturverzeichnis"],
     13: ["Anhang", "Reproduktion"],

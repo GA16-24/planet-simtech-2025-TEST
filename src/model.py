@@ -75,10 +75,28 @@ def required_cooling_temperature_slope(year, flow, target=T_TARGET):
     return RHO * CP * flow * max(0.0, raw - target)
 
 
-def controlled_temperature(year, flow, capacity, target=T_TARGET):
-    removed = min(capacity, required_cooling(year, flow, target))
-    remaining_heat = heat_input(year) - removed
-    return min(T_BOIL, T0 + remaining_heat / (RHO * CP * flow))
+def raw_temperature(year, flow, model="B"):
+    if model == "B":
+        return T0 + (T_BOIL - T0) * year / YEARS_TO_BOIL
+    return liquid_temperature_before_capping(year, flow)
+
+
+def required_cooling_model(year, flow, target=T_TARGET, model="B"):
+    if model == "B":
+        return required_cooling_temperature_slope(year, flow, target)
+    return required_cooling(year, flow, target)
+
+
+def controlled_temperature(year, flow, capacity, target=T_TARGET, model="B"):
+    removed = min(capacity, required_cooling_model(year, flow, target, model))
+    return raw_temperature(year, flow, model) - removed / (RHO * CP * flow)
+
+
+def required_modules(year, model="B"):
+    flow = Q_MAX if model == "B" else Q_MIN
+    required = required_cooling_model(year, flow, T_NORMAL, model)
+    baseline = (160 if model == "B" else 13) if year >= 10 else 3
+    return max(3, baseline, math.ceil(required / 80e6) + 1)
 
 
 def carnot_cooling_cop(t_cold_c=7.0, t_hot_c=45.0):
@@ -96,19 +114,19 @@ def required_process_flow(flow, raw, cooled=9.5, target=T_TARGET):
 
 
 def monthly_design(flow=Q_MEAN, capacity=None, year=10.0, target=T_NORMAL,
-                   approach=10.0, fan_fraction=0.01, head=140.0):
+                   approach=10.0, fan_fraction=0.01, head=140.0, model="B"):
     """Monatsmodell mit Wärmeabfuhr, Kondensatorlast und Hilfsenergie."""
     if capacity is None:
-        capacity = 13 * 80e6
+        capacity = (160 if model == "B" else 13) * 80e6
     air_temperatures = [0.0, 1.0, 4.0, 8.0, 13.0, 16.0, 18.0, 18.0, 14.0, 9.0, 4.0, 1.0]
     month_hours = [744, 672, 744, 720, 744, 720, 744, 744, 720, 744, 720, 744]
     cop = real_cooling_cop()
-    raw = T0 + heat_input(year) / (RHO * CP * flow)
+    raw = raw_temperature(year, flow, model)
     process_flow = required_process_flow(flow, raw, cooled=target, target=target)
     pump_mw = RHO * 9.81 * process_flow * head / 0.75 / 1e6
     rows = []
     for month, (air, hours) in enumerate(zip(air_temperatures, month_hours), start=1):
-        heat = min(capacity, required_cooling(year, flow, target))
+        heat = min(capacity, required_cooling_model(year, flow, target, model))
         dry_outlet = max(target, min(raw, air + approach))
         dry = min(heat, RHO * CP * flow * max(0.0, raw - dry_outlet))
         trim = heat - dry
@@ -168,18 +186,18 @@ def economics(rows, capex_eur=500e6, electricity_eur_mwh=120.0,
 
 def growth_economics(electricity_eur_mwh=120.0, discount=0.03,
                      module_eur=30e6, constant_after_year=None,
-                     monthly_options=None):
+                     monthly_options=None, model="B"):
     fixed_eur = 110e6
     modules = 3
-    monthly_options = monthly_options or {}
+    monthly_options = dict(monthly_options or {})
+    monthly_options.setdefault("flow", Q_MAX if model == "B" else Q_MEAN)
+    monthly_options["model"] = model
     npv = fixed_eur + modules * module_eur
     schedule = []
     replacement_eur = 0.0
     for year in range(1, 21):
         design_year = min(year, constant_after_year) if constant_after_year else year
-        needed = max(3, math.ceil(required_cooling(design_year, Q_MIN) / 80e6) + 1)
-        if year >= 10:
-            needed = max(13, needed)
+        needed = required_modules(design_year, model)
         new_modules = max(0, needed - modules)
         modules = max(modules, needed)
         expansion = new_modules * module_eur
@@ -191,7 +209,7 @@ def growth_economics(electricity_eur_mwh=120.0, discount=0.03,
         if year == 1:
             operating += 50e6
         if year == 15:
-            replacement_eur = 100e6 * modules / 13
+            replacement_eur = 200e6 * modules / 13
         npv += operating / (1 + discount) ** year
         schedule.append({
             "year": year,
@@ -257,52 +275,70 @@ def write_svg(path, title, x_label, y_label, series, width=900, height=480):
 
 def run(output_dir):
     output_dir.mkdir(parents=True, exist_ok=True)
-    design_cooling = required_cooling(10.0, Q_MIN)
-    installed_capacity = 13 * 80e6
-    n_plus_one_capacity = 12 * 80e6
-    rows = monthly_design(capacity=installed_capacity)
-    growth = growth_economics()
-    stationary = growth_economics(constant_after_year=10)
+    installed_b = 160 * 80e6
+    n_plus_one_b = 159 * 80e6
+    rows_b = monthly_design(flow=Q_MAX, capacity=installed_b, model="B")
+    rows_b_mean = monthly_design(flow=Q_MEAN, capacity=installed_b, model="B")
+    rows_a = monthly_design(flow=Q_MEAN, capacity=13 * 80e6, model="A")
+    growth_b = growth_economics(model="B")
+    stationary_b = growth_economics(model="B", constant_after_year=10)
+    growth_a = growth_economics(model="A")
+    stationary_a = growth_economics(model="A", constant_after_year=10)
 
     with (output_dir / "verlauf.csv").open("w", newline="", encoding="utf-8") as handle:
         writer = csv.writer(handle)
-        writer.writerow(["jahr", "waerme_mw", "natur_mean_c", "natur_min_c", "natur_max_c", "bedarf_mean_mw", "bedarf_min_mw", "geregelt_1040mw_c", "geregelt_nplus1_960mw_c"])
+        writer.writerow(["jahr", "natur_max_c", "bedarf_max_mw", "geregelt_12800mw_c", "geregelt_nplus1_12720mw_c", "natur_a_mittel_c", "bedarf_a_niedrig_mw"])
         for step in range(201):
             year = step / 10
             writer.writerow([
-                year, heat_input(year) / 1e6,
-                natural_temperature(year, Q_MEAN), natural_temperature(year, Q_MIN),
-                natural_temperature(year, Q_MAX), required_cooling(year, Q_MEAN) / 1e6,
+                year, raw_temperature(year, Q_MAX, "B"),
+                required_cooling_model(year, Q_MAX, T_TARGET, "B") / 1e6,
+                controlled_temperature(year, Q_MAX, installed_b, T_TARGET, "B"),
+                controlled_temperature(year, Q_MAX, n_plus_one_b, T_TARGET, "B"),
+                natural_temperature(year, Q_MEAN),
                 required_cooling(year, Q_MIN) / 1e6,
-                controlled_temperature(year, Q_MEAN, installed_capacity),
-                controlled_temperature(year, Q_MEAN, n_plus_one_capacity),
             ])
 
     with (output_dir / "monate.csv").open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
+        writer = csv.DictWriter(handle, fieldnames=list(rows_b[0]))
         writer.writeheader()
-        writer.writerows(rows)
-
+        writer.writerows(rows_b)
+    with (output_dir / "monate-mittel.csv").open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=list(rows_b_mean[0]))
+        writer.writeheader()
+        writer.writerows(rows_b_mean)
+    with (output_dir / "monate-waermeleistung.csv").open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=list(rows_a[0]))
+        writer.writeheader()
+        writer.writerows(rows_a)
     with (output_dir / "ausbau.csv").open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=list(growth["schedule"][0]))
+        writer = csv.DictWriter(handle, fieldnames=list(growth_b["schedule"][0]))
         writer.writeheader()
-        writer.writerows(growth["schedule"])
+        writer.writerows(growth_b["schedule"])
+    with (output_dir / "konstant.csv").open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=list(stationary_b["schedule"][0]))
+        writer.writeheader()
+        writer.writerows(stationary_b["schedule"])
+    with (output_dir / "ausbau-waermeleistung.csv").open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=list(growth_a["schedule"][0]))
+        writer.writeheader()
+        writer.writerows(growth_a["schedule"])
 
     years = [step / 10 for step in range(201)]
     write_svg(
         output_dir / "temperaturverlauf.svg",
-        "Reale Anlagenreserve bei weiter wachsender Wärme",
+        "Temperaturtrend bei maximalem Abfluss",
         "Zeit in Jahren", "Temperatur in °C",
         [
-            ("ohne Eingriff, MQ", [(y, natural_temperature(y, Q_MEAN)) for y in years], "#d1495b"),
-            ("1040 MW", [(y, controlled_temperature(y, Q_MEAN, installed_capacity)) for y in years], "#00798c"),
-            ("N+1: 960 MW", [(y, controlled_temperature(y, Q_MEAN, n_plus_one_capacity)) for y in years], "#edae49"),
-            ("Sollwert", [(y, T_TARGET) for y in years], "#384d48"),
+            ("ohne Eingriff", [(y, min(T_BOIL, raw_temperature(y, Q_MAX, "B"))) for y in years], "#d1495b"),
+            ("12,8 GW", [(y, controlled_temperature(y, Q_MAX, installed_b, T_TARGET, "B")) for y in years], "#00798c"),
+            ("N+1: 12,72 GW", [(y, controlled_temperature(y, Q_MAX, n_plus_one_b, T_TARGET, "B")) for y in years], "#edae49"),
+            ("Grenze", [(y, T_TARGET) for y in years], "#384d48"),
         ],
     )
     write_svg(
         output_dir / "schuettung.svg",
-        "Temperatur bis zur Siedegrenze",
+        "Alternative A: Wärmeleistung wächst linear",
         "Zeit in Jahren", "Temperatur in °C",
         [
             ("Minimum", [(y, natural_temperature(y, Q_MIN)) for y in years], "#d1495b"),
@@ -312,38 +348,32 @@ def run(output_dir):
     )
     write_svg(
         output_dir / "kaelte-monate.svg",
-        "Kaskade im zehnten Jahr bei mittlerer Schüttung",
+        "Kaskade im zehnten Jahr bei maximalem Abfluss",
         "Monat", "Leistung in MW",
         [
-            ("Trockenkühlung", [(r["month"], r["dry_cooling_mw"]) for r in rows], "#00798c"),
-            ("Nachkühlung", [(r["month"], r["trim_cooling_mw"]) for r in rows], "#edae49"),
-            ("Strom mit Hilfsenergie", [(r["month"], r["electric_mw"]) for r in rows], "#d1495b"),
+            ("Trockenkühlung", [(r["month"], r["dry_cooling_mw"]) for r in rows_b], "#00798c"),
+            ("Nachkühlung", [(r["month"], r["trim_cooling_mw"]) for r in rows_b], "#edae49"),
+            ("Strom mit Hilfsenergie", [(r["month"], r["electric_mw"]) for r in rows_b], "#d1495b"),
         ],
     )
 
-    raw_max = liquid_temperature_before_capping(10.0, Q_MAX)
-    process_max = required_process_flow(Q_MAX, raw_max)
-    low_flow = low_flow_prevention(10.0)
-    low_flow_annual_gwh = 8.76 * (
-        low_flow["full_mechanical_electric_mw"] + low_flow["fan_mw"] + low_flow["pump_mw"]
-    )
-    low_flow_annual_cost_meur = low_flow_annual_gwh * 0.12 + 12.5
-    annual_base = economics(rows)
-    annual_base["present_cost_20y_meur"] = stationary["present_cost_20y_meur"]
-    annual_base["replacement_meur"] = stationary["replacement_meur"]
+    process_b = required_process_flow(Q_MAX, T_BOIL)
+    annual_b = economics(rows_b, capex_eur=4910e6)
+    annual_b["present_cost_20y_meur"] = stationary_b["present_cost_20y_meur"]
+    annual_b["replacement_meur"] = stationary_b["replacement_meur"]
+    annual_b_mean = economics(rows_b_mean, capex_eur=4910e6)
+    annual_a = economics(rows_a)
+    annual_a["present_cost_20y_meur"] = stationary_a["present_cost_20y_meur"]
+    annual_a["replacement_meur"] = stationary_a["replacement_meur"]
     annuity = (1 - 1.03 ** -20) / 0.03
-    sensitivity = {}
-    for name, capex, price in [("low_capex_low_power", 250e6, 80.0), ("high_capex_high_power", 650e6, 200.0)]:
-        module_eur = (capex - 110e6) / 13
-        annual = economics(rows, capex_eur=capex, electricity_eur_mwh=price)
-        annual["present_cost_20y_meur"] = growth_economics(
-            electricity_eur_mwh=price, module_eur=module_eur, constant_after_year=10
-        )["present_cost_20y_meur"]
-        sensitivity[name] = annual
-    sensitivity["with_100gwh_heat_sales"] = economics(rows, heat_sales_gwh=100)
-    sensitivity["with_100gwh_heat_sales"]["present_cost_20y_meur"] = (
-        stationary["present_cost_20y_meur"] - 4.5e6 * annuity / 1e6
-    )
+    low_yield_npv_b = stationary_b["present_cost_20y_meur"] + 430.0 + 0.025 * 430.0 * annuity
+    low_a = low_flow_prevention(10.0)
+    low_a_gwh = 8.76 * (low_a["full_mechanical_electric_mw"] + low_a["fan_mw"] + low_a["pump_mw"])
+    low_b_heat = required_cooling_model(10.0, Q_MIN, T_TARGET, "B")
+    low_b_electric = low_b_heat / real_cooling_cop()
+    low_b_fan = low_b_heat * 0.01 * (1 + 1 / real_cooling_cop())
+    low_b_pump = RHO * 9.81 * Q_MIN * 140.0 / 0.75
+    low_b_gwh = 8.76 * (low_b_electric + low_b_fan + low_b_pump) / 1e6
     energy_sensitivity = {}
     for name, options in [
         ("approach_5k", {"approach": 5.0}),
@@ -352,84 +382,71 @@ def run(output_dir):
         ("head_100m", {"head": 100.0}),
     ]:
         energy_sensitivity[name] = sum(
-            row["electric_gwh"] for row in monthly_design(capacity=math.inf, **options)
+            row["electric_gwh"] for row in monthly_design(flow=Q_MAX, capacity=math.inf, model="B", **options)
         )
     summary = {
-        "h10_mw": H10 / 1e6,
-        "hot_rate_mw_per_year": HOT_RATE / 1e6,
-        "cooling_year10_mean_mw": required_cooling(10.0, Q_MEAN) / 1e6,
-        "cooling_year10_min_mw": design_cooling / 1e6,
-        "cooling_year10_max_mw": required_cooling(10.0, Q_MAX) / 1e6,
-        "low_flow_prevention": low_flow,
-        "low_flow_continuous_annual_gwh": low_flow_annual_gwh,
-        "low_flow_continuous_annual_cost_meur": low_flow_annual_cost_meur,
-        "low_yield_npv_constant_meur": stationary["present_cost_20y_meur"] + 240.0 + 0.025 * 240.0 * annuity,
-        "steady_annual_cost_constant_meur": annual_base["annual_cost_meur"] + 100.0 / 15.0,
-        "natural_year10_min_c": natural_temperature(10.0, Q_MIN),
-        "natural_year10_max_c": natural_temperature(10.0, Q_MAX),
-        "uncapped_year10_min_c": liquid_temperature_before_capping(10.0, Q_MIN),
-        "boiling_year_min": boiling_year(Q_MIN),
-        "boiling_year_mean": boiling_year(Q_MEAN),
-        "boiling_year_max": boiling_year(Q_MAX),
-        "temperature_slope_cooling_year10_min_mw": required_cooling_temperature_slope(10.0, Q_MIN) / 1e6,
-        "temperature_slope_cooling_year10_mean_mw": required_cooling_temperature_slope(10.0, Q_MEAN) / 1e6,
-        "temperature_slope_cooling_year10_max_mw": required_cooling_temperature_slope(10.0, Q_MAX) / 1e6,
-        "process_flow_year10_mean_m3s": required_process_flow(Q_MEAN, T_BOIL),
-        "process_flow_year10_max_m3s": process_max,
-        "bypass_flow_year10_max_m3s": Q_MAX - process_max,
-        "well_pairs": 14,
-        "flow_per_well_pair_m3s": 1.55,
-        "pump_power_year10_max_mw": RHO * 9.81 * process_max * 140.0 / 0.75 / 1e6,
-        "well_sensitivity": {
-            "low_yield_flow_per_pair_m3s": 0.5,
-            "low_yield_pairs_with_reserve": math.ceil(process_max / 0.5) + 1,
-            "specific_capacity_l_per_s_m": 15.5,
-            "drawdown_m_at_design_yield": 100.0,
-            "pressure_rating_bar": 14.0,
-            "total_dynamic_head_m": 140.0,
-        },
-        "year20_raw_mean_c": T0 + heat_input(20.0) / (RHO * CP * Q_MEAN),
-        "capex_breakdown_meur": CAPEX_BREAKDOWN_MEUR,
-        "installed_modules": 13,
-        "module_capacity_mw": 80.0,
-        "installed_capacity_mw": installed_capacity / 1e6,
-        "capacity_after_one_module_failure_mw": n_plus_one_capacity / 1e6,
-        "installed_capacity_threshold_year": next(
-            y for y in years if controlled_temperature(y, Q_MIN, installed_capacity) > T_TARGET + 1e-9
+        "baseline_model": "B",
+        "baseline_cooling_year10_min_mw": required_cooling_model(10.0, Q_MIN, T_TARGET, "B") / 1e6,
+        "baseline_cooling_year10_mean_mw": required_cooling_model(10.0, Q_MEAN, T_TARGET, "B") / 1e6,
+        "baseline_cooling_year10_max_mw": required_cooling_model(10.0, Q_MAX, T_TARGET, "B") / 1e6,
+        "baseline_normal_cooling_year10_max_mw": required_cooling_model(10.0, Q_MAX, T_NORMAL, "B") / 1e6,
+        "baseline_installed_modules": 160,
+        "baseline_module_capacity_mw": 80.0,
+        "baseline_installed_capacity_mw": installed_b / 1e6,
+        "baseline_n_plus_one_capacity_mw": n_plus_one_b / 1e6,
+        "baseline_n_plus_one_reserve_normal_percent": (n_plus_one_b / required_cooling_model(10.0, Q_MAX, T_NORMAL, "B") - 1) * 100,
+        "baseline_capex_meur": 110.0 + 160 * 30.0,
+        "baseline_process_flow_year10_max_m3s": process_b,
+        "baseline_bypass_flow_year10_max_m3s": Q_MAX - process_b,
+        "baseline_pump_power_year10_max_mw": RHO * 9.81 * process_b * 140.0 / 0.75 / 1e6,
+        "baseline_well_pairs": math.ceil(process_b / 1.55) + 1,
+        "baseline_low_yield_well_pairs": math.ceil(process_b / 0.5) + 1,
+        "baseline_low_yield_npv_constant_meur": low_yield_npv_b,
+        "baseline_installed_threshold_year": next(
+            y for y in years if controlled_temperature(y, Q_MAX, installed_b, T_TARGET, "B") > T_TARGET + 1e-9
         ),
-        "n_plus_one_threshold_year": next(
-            y for y in years if controlled_temperature(y, Q_MIN, n_plus_one_capacity) > T_TARGET + 1e-9
+        "baseline_n_plus_one_threshold_year": next(
+            y for y in years if controlled_temperature(y, Q_MAX, n_plus_one_b, T_TARGET, "B") > T_TARGET + 1e-9
         ),
-        "carnot_cooling_cop": carnot_cooling_cop(),
-        "real_cooling_cop": real_cooling_cop(),
-        "design_summer_electric_min_mw": design_cooling / real_cooling_cop() / 1e6,
-        "economics_base": annual_base,
-        "economics_sensitivity": sensitivity,
+        "baseline_annual_max": annual_b,
+        "baseline_annual_mean": annual_b_mean,
+        "baseline_low_flow_annual_gwh": low_b_gwh,
+        "baseline_low_flow_annual_cost_meur": low_b_gwh * 0.12 + 122.75,
+        "baseline_steady_annual_cost_meur": annual_b["annual_cost_meur"] + 200.0 / 15.0,
+        "baseline_growth": growth_b,
+        "baseline_stationary": stationary_b,
         "energy_sensitivity_gwh": energy_sensitivity,
-        "economics_growth": growth,
-        "economics_stationary": stationary,
+        "alternative_a": {
+            "h10_mw": H10 / 1e6,
+            "cooling_year10_min_mw": required_cooling(10.0, Q_MIN) / 1e6,
+            "cooling_year10_mean_mw": required_cooling(10.0, Q_MEAN) / 1e6,
+            "cooling_year10_max_mw": required_cooling(10.0, Q_MAX) / 1e6,
+            "low_flow_prevention": low_a,
+            "low_flow_annual_gwh": low_a_gwh,
+            "annual_mean": annual_a,
+            "growth": growth_a,
+            "stationary": stationary_a,
+            "capex_breakdown_meur": CAPEX_BREAKDOWN_MEUR,
+        },
     }
     (output_dir / "kennwerte.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
 
-    assert math.isclose(natural_temperature(10.0, Q_MEAN), T_BOIL, rel_tol=1e-12)
-    assert math.isclose(natural_temperature(10.0, Q_MIN), T_BOIL, rel_tol=1e-12)
-    assert liquid_temperature_before_capping(10.0, Q_MIN) > 800
-    assert math.isclose(boiling_year(Q_MEAN), 10.0, rel_tol=1e-12)
-    assert math.isclose(boiling_year(Q_MIN), 1.101321586, rel_tol=1e-8)
-    assert math.isclose(boiling_year(Q_MAX), 143.920704846, rel_tol=1e-8)
-    assert controlled_temperature(10.0, Q_MIN, design_cooling) <= T_TARGET + 1e-9
-    assert math.isclose(RHO * CP * process_max * (raw_max - 9.5), required_cooling(10.0, Q_MAX), rel_tol=1e-12)
-    assert 13 * 1.55 >= process_max
+    assert math.isclose(summary["baseline_cooling_year10_max_mw"], 11767.236984756, rel_tol=1e-12)
+    assert math.isclose(summary["baseline_cooling_year10_min_mw"], 90.0461967, rel_tol=1e-12)
+    assert n_plus_one_b >= required_cooling_model(10.0, Q_MAX, T_NORMAL, "B")
+    assert math.isclose(RHO * CP * process_b * (T_BOIL - T_NORMAL), required_cooling_model(10.0, Q_MAX, T_TARGET, "B"), rel_tol=1e-12)
+    assert (summary["baseline_well_pairs"] - 1) * 1.55 >= process_b
+    assert required_modules(10.0, "B") == 160
+    assert required_modules(10.0, "A") == 13
+    assert math.isclose(growth_a["replacement_meur"], 200 * 17 / 13, rel_tol=1e-12)
+    assert math.isclose(growth_b["replacement_meur"], 200 * 229 / 13, rel_tol=1e-12)
     assert math.isclose(sum(CAPEX_BREAKDOWN_MEUR.values()), 500.0)
-    assert math.isclose(low_flow["total_mw"] * 1e6, design_cooling, rel_tol=1e-12)
-    assert math.isclose(low_flow["raw_c"], T_BOIL)
-    assert math.isclose(low_flow["outlet_c"], T_TARGET)
-    assert math.isclose(growth["replacement_meur"], 130.769230769, rel_tol=1e-8)
-    assert abs(sum(row["hours"] for row in rows) - 8760) == 0
-    assert all(row["raw_c"] >= T_BOIL - 1e-9 for row in rows)
-    assert all(row["heat_removed_mw"] >= row["dry_cooling_mw"] + row["trim_cooling_mw"] - 1e-8 for row in rows)
-    assert all(row["rejected_mw"] >= row["dry_cooling_mw"] + row["trim_cooling_mw"] for row in rows)
-    assert max(row["electric_mw"] for row in rows) < 300.0
+    assert math.isclose(low_a["total_mw"] * 1e6, required_cooling(10.0, Q_MIN), rel_tol=1e-12)
+    assert all(math.isclose(row["outlet_c"], T_NORMAL) for row in monthly_design(flow=Q_MIN, model="B"))
+    assert abs(sum(row["hours"] for row in rows_b) - 8760) == 0
+    assert all(row["raw_c"] >= T_BOIL - 1e-9 for row in rows_b)
+    assert all(row["heat_removed_mw"] >= row["dry_cooling_mw"] + row["trim_cooling_mw"] - 1e-8 for row in rows_b)
+    assert all(row["rejected_mw"] >= row["dry_cooling_mw"] + row["trim_cooling_mw"] for row in rows_b)
     print(json.dumps(summary, indent=2))
 
 
