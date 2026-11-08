@@ -411,6 +411,42 @@ def run(output_dir):
         secondary_y_label="Elektrische Leistung in MW",
         x_ticks=[1, 3, 5, 7, 9, 11],
     )
+    write_svg(
+        output_dir / "temperature-trend.svg",
+        "Temperature at maximum discharge",
+        "Time in years", "Temperature in °C",
+        [
+            ("Natural", [(y, raw_temperature(y, Q_MAX, "B")) for y in years if y <= 10], "#d1495b"),
+            ("Fixed 12.8 GW", [(y, controlled_temperature(y, Q_MAX, installed_b, T_TARGET, "B")) for y in years], "#00798c"),
+            ("N+1: 12.72 GW", [(y, controlled_temperature(y, Q_MAX, n_plus_one_b, T_TARGET, "B")) for y in years], "#edae49"),
+            ("Expansion", [(y, controlled_temperature(y, Q_MAX, required_modules(y, "B") * 80e6, T_NORMAL, "B")) for y in years], "#6a8b59"),
+            ("Limit", [(y, T_TARGET) for y in years], "#384d48"),
+        ],
+    )
+    write_svg(
+        output_dir / "flow-rate.svg",
+        "Alternative A: growing heat input",
+        "Time in years", "Temperature in °C",
+        [
+            ("Minimum", [(y, natural_temperature(y, Q_MIN)) for y in years if y <= boiling_year(Q_MIN)], "#d1495b"),
+            ("Mean", [(y, natural_temperature(y, Q_MEAN)) for y in years if y <= boiling_year(Q_MEAN)], "#edae49"),
+            ("Maximum", [(y, natural_temperature(y, Q_MAX)) for y in years if y <= boiling_year(Q_MAX)], "#00798c"),
+        ],
+    )
+    write_svg(
+        output_dir / "cooling-months.svg",
+        "Cascade, year 10, maximum discharge",
+        "Month", "Thermal power in MW",
+        [
+            ("Dry cooling", [(r["month"], r["dry_cooling_mw"]) for r in rows_b], "#00798c"),
+            ("Trim cooling", [(r["month"], r["trim_cooling_mw"]) for r in rows_b], "#edae49"),
+        ],
+        secondary_series=[
+            ("Electricity incl. auxiliaries", [(r["month"], r["electric_mw"]) for r in rows_b], "#d1495b"),
+        ],
+        secondary_y_label="Electrical power in MW",
+        x_ticks=[1, 3, 5, 7, 9, 11],
+    )
 
     process_b = required_process_flow(Q_MAX, T_BOIL)
     annual_b = economics(rows_b, capex_eur=4910e6)

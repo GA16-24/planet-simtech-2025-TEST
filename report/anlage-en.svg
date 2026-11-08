@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="520" viewBox="0 0 1000 520">
+<rect width="1000" height="520" fill="white"/>
+<style>text{font-family:Arial,sans-serif;fill:#18242c;font-size:46px}.h{font-size:55px;font-weight:700}.s{font-size:40px;fill:#536570}.box{fill:#edf4f5;stroke:#00798c;stroke-width:2}.rock{fill:#f2eee8;stroke:#9d9589;stroke-width:2}.hot{stroke:#d1495b;stroke-width:8;fill:none;marker-end:url(#r)}.cold{stroke:#00798c;stroke-width:8;fill:none;marker-end:url(#b)}.pipe{stroke:#384d48;stroke-width:5;fill:none}</style>
+<defs><marker id="r" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#d1495b"/></marker><marker id="b" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#00798c"/></marker></defs>
+<text class="h" x="30" y="48">Karst heat-extraction circuit</text>
+<path class="rock" d="M20 300 Q250 240 460 325 T980 280 L980 500 L20 500 Z"/>
+<path d="M20 300 Q250 240 460 325 T980 280" stroke="#6a8b59" stroke-width="7" fill="none"/>
+<ellipse cx="855" cy="320" rx="105" ry="42" fill="#78c6d4" stroke="#00798c" stroke-width="3"/>
+<text class="s" x="810" y="305">Blautopf</text><text class="s" x="820" y="355">9-12 °C</text>
+<path class="hot" d="M90 425 Q220 390 315 415 L315 175"/>
+<path class="cold" d="M445 175 L445 425 Q570 450 680 360"/>
+<text class="s" x="70" y="465">Inflow</text>
+<text class="s" x="272" y="465">Pump</text><text class="s" x="415" y="465">Injection</text>
+<rect class="box" x="260" y="85" width="240" height="90" rx="8"/><text x="292" y="110">Heat</text><text class="s" x="285" y="166">2 walls</text>
+<path class="pipe" d="M500 130 L550 130"/><path class="pipe" d="M780 130 L800 130"/>
+<rect class="box" x="540" y="70" width="240" height="120" rx="8"/><text x="555" y="103">Cooling</text><text class="s" x="570" y="160">3 stages</text>
+<rect class="box" x="800" y="85" width="180" height="90" rx="8"/><text x="820" y="110">Control</text><text class="s" x="837" y="166">T, Q</text>
+<path d="M845 175 L845 250 L780 250 L780 280" stroke="#384d48" stroke-width="3" fill="none" stroke-dasharray="7 6"/>
+</svg>

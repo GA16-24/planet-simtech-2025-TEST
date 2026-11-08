@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Blautopf heat-extraction circuit</title>
+<style>
+@page { size: A4; margin: 25mm; @bottom-left { content: "PlaNeT SimTech 2025/26"; font: 9pt Arial, sans-serif; color: #536570; } @bottom-right { content: counter(page); font: 9pt Arial, sans-serif; color: #536570; } }
+@page cover { @bottom-left { content: none; } @bottom-right { content: none; } }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 12pt; line-height: 1.0; color: #18242c; }
+.cover { page: cover; }
+.sheet { break-after: page; }
+.sheet:last-child { break-after: auto; }
+h1 { font-size: 20pt; line-height: 1.1; margin: 0 0 12pt; color: #075d69; }
+h2 { font-size: 14pt; line-height: 1.1; margin: 12pt 0 6pt; color: #075d69; }
+h3 { font-size: 12pt; margin: 9pt 0 4pt; }
+p { margin: 0 0 7pt; text-align: justify; hyphens: auto; }
+ul, ol { margin: 4pt 0 7pt 18pt; padding: 0; }
+li { margin-bottom: 3pt; }
+.cover { padding-top: 25mm; }
+.cover .kicker { color: #075d69; font-size: 15pt; letter-spacing: 1px; }
+.cover h1 { font-size: 32pt; margin-top: 28mm; }
+.cover .subtitle { font-size: 17pt; text-align: left; max-width: 135mm; }
+.cover .task { margin-top: 20mm; padding: 12pt; border-left: 4px solid #00798c; background: #edf4f5; }
+.cover .meta { margin-top: 22mm; line-height: 1.5; }
+.small { font-size: 12pt; line-height: 1.05; }
+.tiny { font-size: 12pt; line-height: 1.05; }
+.eq { display: block; margin: 8pt auto; text-align: center; font-family: "Times New Roman", serif; font-size: 14pt; }
+.note { border-left: 3px solid #edae49; padding: 6pt 9pt; background: #fff8e8; margin: 8pt 0; }
+.result { border-left: 4px solid #00798c; padding: 7pt 10pt; background: #edf4f5; margin: 8pt 0; }
+table { border-collapse: collapse; width: 100%; margin: 6pt 0 9pt; font-size: 12pt; line-height: 1.0; }
+th { background: #dfeff1; color: #153e45; text-align: left; }
+th, td { border: 0.6pt solid #9db4b9; padding: 4pt 5pt; vertical-align: top; }
+.figure { width: 100%; margin: 5pt 0 2pt; }
+.figure.short { height: 65mm; object-fit: contain; }
+.figure.medium { height: 70mm; object-fit: contain; }
+.caption { font-size: 12pt; color: #536570; margin: 2pt 0 7pt; text-align: left; }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 10pt; }
+.refs p { font-size: 12pt; margin-bottom: 8pt; overflow-wrap: anywhere; word-break: break-all; hyphens: none; text-align: left; }
+code { font-family: "Courier New", monospace; font-size: 12pt; hyphens: none; }
+.keys { margin: 3pt 0; }
+.keys th, .keys td { padding: 1pt 3pt; }
+.keys td:first-child { width: 62%; overflow-wrap: normal; }
+.checklist li { margin-bottom: 4pt; }
+.dense { line-height: 1.0; }
+.dense p { margin-bottom: 4pt; }
+.dense h2 { margin: 7pt 0 3pt; }
+.dense table { font-size: 12pt; margin: 4pt 0 6pt; }
+.dense th, .dense td { padding: 3pt 4pt; }
+.dense .figure.short { height: 65mm; }
+.model p { margin-bottom: 4pt; }
+.model h2 { margin: 6pt 0 3pt; }
+.model .eq { margin: 5pt auto; }
+</style>
+</head>
+<body>
+<section class="sheet cover">
+<div class="kicker">PlaNeT SimTech 2025/26</div>
+<h1>Blautopf heat-extraction circuit</h1>
+<p class="subtitle">Removing heat from the karst inflow before the spring boils</p>
+<div class="task"><b>Problem statement</b><br>The Blautopf is a karst spring in Blaubeuren near Ulm. A constant increase in the deep water temperature is expected to make the water boil in ten years. How can we permanently prevent the water in the Blautopf from reaching its boiling point? The measures should be as inexpensive and economical as possible. [1]</div>
+<div class="meta"><b>Team ID:</b> TEST-0000<br><b>Date:</b> 7 November 2026, English test edition<br><b>Competition:</b> PlaNeT SimTech</div>
+</section>
+
+<section class="sheet">
+<h1>Summary</h1>
+<p>We propose cooling the water underground before it flows into the Blautopf. Wells pump it to the surface, where heat exchangers remove the heat. The same quantity of water then returns to the underground river. No machinery is installed in the visible spring basin.</p>
+<p>The required capacity follows directly from the stated temperature trend. In year ten, 11.77 gigawatts of heat must be removed at maximum discharge. A small cooling coil in the spring basin cannot do this. The smaller system with fixed heat input applies only if measurements instead confirm a fixed heat source.</p>
+<p>Our system first supplies heat to buildings or industrial sites. Dry coolers reject the remaining heat to the air. Electric trim cooling starts only when these stages are insufficient. The 160 modules provide 12.8 gigawatts in total. If one module fails, 12.72 gigawatts remain available.</p>
+<p>The cost scenario estimates construction at maximum discharge at €4.91 billion. Electricity demand in year ten is 0.03 terawatt-hours at low flow, 0.30 at mean flow, and 4.37 at maximum flow. Over twenty years, costs for mean to maximum flow range from €7.76 billion to €14.42 billion if temperature remains constant after year ten, and from €11.92 billion to €18.98 billion if it continues rising. Undiscounted life-cycle costs are infinite under unlimited growth. The present value of linearly growing payments converges at 3%.</p>
+<div class="result"><b>Answer.</b> Unlimited linear temperature growth has no finite permanent solution. The heat-extraction circuit is a temporary bridge. It can protect the spring permanently if temperature stabilizes after year ten. If temperature continues rising, the heat source must be controlled. We include a €250 million assessment path with an exploration well and grouting. If that proves infeasible, no finite permanent solution remains possible.</div>
+</section>
+
+<section class="sheet">
+<h1>1. Introduction and approach</h1>
+<p>The Blautopf connects a large karst catchment with the River Blau. Rain infiltrates the Swabian Alb and sometimes reaches the spring within a few days. Mean discharge is 2.27 m³/s, with a range from 0.25 to 32.67 m³/s. Its natural temperature is about 9 °C. [2][3] These values make the task a problem of flowing water. The small volume in the visible spring basin is only a short-term buffer.</p>
+<p>We address four questions. How much heat does the forecast produce? At which discharge is the largest intervention required? Where can the heat go without harming the Blautopf and Blau? What limits a permanent solution?</p>
+<h2>Method</h2>
+<ol>
+<li>We apply the linear temperature rise from 9 to 98.3 °C over ten years directly to the inflow.</li>
+<li>We derive the required cooling capacity from the energy balance and examine minimum, mean, and maximum discharge.</li>
+<li>We compare dilution with cold water, cooling in the spring basin, and our heat-extraction circuit.</li>
+<li>We design a controllable cascade, calculate a summer case and an annual scenario, and examine costs, failures, and environmental risks.</li>
+</ol>
+<h2>Our contribution</h2>
+<p>Our design combines power-based flood dilution, a hydraulically closed heat-extraction circuit, and a demand-controlled cooling cascade. The control variable is the measured heat flow rather than temperature in the spring basin alone. The system can therefore respond to changes in inflow before the spring warms noticeably.</p>
+<h2>Transparency and sources</h2>
+<p>Kimi Code by Moonshot AI, model K3.1 Pro, developed the solution approach, program code, report, and SVG figures, and produced this English translation. DeepSeek V4 Pro reviewed round 1. DeepSeek V4.1 Flash and Kimi K3.1 Pro reviewed round 2. Their objections led to several revisions. No human review has taken place so far, and none is claimed. The independent derivation by the AI team is documented in the review log. No earlier solutions or winning reports were used. Before an actual submission, the human team must check every derivation and adapt this disclosure to its own work. [4]</p>
+</section>
+
+<section class="sheet">
+<h1>2. Data, assumptions, and model limits</h1>
+<table>
+<tr><th>Quantity</th><th>Value</th><th>Source and use</th></tr>
+<tr><td>Natural temperature T₀</td><td>9 °C</td><td>City of Blaubeuren [3]</td></tr>
+<tr><td>Mean discharge Q̄</td><td>2.27 m³/s</td><td>LGRB [2], calibration</td></tr>
+<tr><td>Minimum and maximum discharge</td><td>0.25 and 32.67 m³/s</td><td>LGRB [2], extreme cases</td></tr>
+<tr><td>Boiling temperature T<sub>b</sub></td><td>98.3 °C</td><td>Our elevation assumption of 512 m, formula [8]</td></tr>
+<tr><td>Temperature rise</td><td>8.93 K/year</td><td>From 9 to 98.3 °C in 10 years</td></tr>
+<tr><td>Cooling capacity in year ten</td><td>11.77 GW</td><td>At maximum discharge, our calculation</td></tr>
+<tr><td>Control limit T<sub>Z</sub></td><td>12 °C</td><td>Our assumption, normal target 9.5 °C</td></tr>
+<tr><td>Density and heat capacity</td><td>998 kg/m³, 4182 J/(kg K)</td><td>Constant approximation for water</td></tr>
+</table>
+<h2>Model assumptions</h2>
+<p><b>A1.</b> Design case B follows the stated linear temperature rise at the inflow. Heat input therefore rises in proportion to discharge, and high flow is the most expensive case. Model A is only an alternative. A localized heat source with fixed power would be diluted by additional water. We do not assume that model.</p>
+<p><b>A2.</b> The heat source distributes its power across the inflow under consideration. Cold water from other karst areas mixes with it. We neglect heat losses to rock and air in the natural case, which is conservative. Once boiling begins, the natural model no longer provides a complete water-steam balance, so we do not evaluate it further.</p>
+<p><b>A3.</b> The heat-extraction circuit returns the entire pumped mass flow. The underground discharge remains unchanged in the balance. At high flow, an uncooled share may bypass the system because dilution lowers the temperature.</p>
+<p><b>A4.</b> After year ten, heat input either remains constant or continues growing linearly. In the first case, the fixed system suffices with maintenance. In the second, only an adaptive path is possible. Unlimited growth requires unlimited capacity and produces infinite undiscounted costs. No fixed finite expansion can suffice.</p>
+<p><b>A5.</b> Weather, prices, and investments are scenario values rather than quotations. Heat sales are not safety-critical. The circuit is designed for 14 bar in hot years. Water remains liquid at this pressure and 187.6 °C in year 20. The total head of 140 m includes the assumed drawdown of 100 m plus 40 m for static elevation differences, pipe losses, pressure maintenance, and injection. Drawdown is therefore not counted twice.</p>
+<div class="note"><b>Cause still unknown.</b> Volcanic activity is a hypothesis, not a measurement. Our system works independently of the cause. Site planning nevertheless requires temperature profiles, water chemistry, gases, seismic data, and tracer tests. Only these data can show where the heat enters each inflow and in what quantity.</div>
+</section>
+
+<section class="sheet dense model">
+<h1>3. Mathematical model</h1>
+<h2>Design based on the temperature trend</h2>
+<p>Temperature rises from 9 to 98.3 °C in ten years. With 8.93 K/year and P = ρcQΔT, we obtain:</p>
+<span class="eq">T(t) = 9 °C + 8.93 K/year · t and P<sub>K</sub>(t,Q) = ρcQ·max[0, T(t)−12 °C]</span>
+<p>The stated trend is therefore the design case. We stop examining the natural state after boiling begins because the system acts before that point.</p>
+<table>
+<tr><th>Case in year ten</th><th>Q = 0.25 m³/s</th><th>Q = 2.27 m³/s</th><th>Q = 32.67 m³/s</th></tr>
+<tr><th>Temperature without intervention</th><td>98.3 °C</td><td>98.3 °C</td><td>98.3 °C</td></tr>
+<tr><th>Cooling capacity for 12 °C</th><td>90.0 MW</td><td>817.6 MW</td><td>11.77 GW</td></tr>
+<tr><th>Process flow for 12 °C</th><td>0.243 m³/s</td><td>2.206 m³/s</td><td>31.750 m³/s</td></tr>
+</table>
+<p>The process flow is cooled to 9.5 °C and mixed with the uncooled remainder. At maximum discharge, this requires 31.750 m³/s, with a bypass of 0.920 m³/s. The normal target of 9.5 °C requires cooling the entire discharge, which takes 12.11 GW.</p>
+<h2>Reserve and time limits</h2>
+<p>The 160 modules provide 80 MW each, or 12.8 GW in total. One module failure leaves 12.72 GW, a reserve of 5.1% above normal demand. The exact 12 °C limits are 10.848 years with 12.8 GW and 10.782 years with 12.72 GW. On the 0.1-year calculation grid, the limit is first exceeded at 10.9 and 10.8 years respectively. Additional modules must be operational before then.</p>
+<h2>Alternative heat-input interpretation</h2>
+<p>Model A describes a localized heat source whose power grows by 84.6 MW/year independently of discharge. At mean discharge, it also produces 98.3 °C after ten years. The low-flow case would begin boiling after only 1.10 years. Because of the phase change, we do not use that case for liquid-water cooling design or cost calculations. At maximum discharge, 437.0 MW suffices. This interpretation could justify a smaller system, but we do not assume it.</p>
+<table>
+<tr><th>Cooling capacity in year ten</th><th>Minimum</th><th>Mean</th><th>Maximum</th></tr>
+<tr><td>Design B: temperature grows linearly</td><td>90.0 MW</td><td>817.6 MW</td><td>11.77 GW</td></tr>
+<tr><td>Alternative A: heat input grows linearly</td><td>No liquid-water design</td><td>817.6 MW</td><td>437.0 MW</td></tr>
+</table>
+<h2>Storage in the spring basin</h2>
+<p>The geometric scenario uses a circle 40 m in diameter with a mean depth of 6.84 m. Mean depth is a scenario value; maximum spring depth is 20.6 m. [2] This gives A = π·(20 m)² = 1,257 m² and V = A·6.84 m = 8,598 m³. This approximation is not a measured value. Storage or shading cannot solve the problem.</p>
+</section>
+
+<section class="sheet dense model">
+<h1>4. Comparison of solution approaches</h1>
+<table>
+<tr><th>Approach</th><th>Physical assessment</th><th>Evaluation</th></tr>
+<tr><td>Add cold water</td><td>At maximum discharge, reaching 12 °C would require about 939.8 m³/s of cold water.</td><td>Rejected. Discharge would change drastically.</td></tr>
+<tr><td>Surface cooling in the spring basin</td><td>Removing 11.77 GW would require about 784,500 m² instead of the assumed surface area of 1,260 m².</td><td>Rejected. Insufficient area.</td></tr>
+<tr><td>Reject waste heat to the Blau</td><td>Even 817.6 MW would raise the temperature of 2.27 m³/s by a calculated 86.3 K. [6]</td><td>Rejected. Ecologically unacceptable.</td></tr>
+<tr><td>Seal the heat source</td><td>Its location and pathways through the karst are unknown.</td><td>Assess only after investigating the cause.</td></tr>
+<tr><td>Heat-extraction circuit</td><td>Removes excess heat and injects the same quantity of water.</td><td>Modular and measurable.</td></tr>
+</table>
+<h2>Design of the heat-extraction circuit</h2>
+<img class="figure short" src="report/anlage-en.svg" alt="Schematic heat-extraction circuit">
+<p class="caption">Figure 1: Extraction and injection are located in the inflow, not in the visible spring basin. [10]</p>
+<p>Tracer tests and geophysics determine well locations outside the spring area. Directional drilling protects caves, while packers separate cold injected water from warm intake water.</p>
+<p>In design case B, the temperature is 98.3 °C throughout. For a mixed temperature of 12 °C, q·9.5 °C + q<sub>B</sub>·98.3 °C = Q·12 °C. This gives q = 31.750 m³/s and q<sub>B</sub> = 0.920 m³/s. The heat balance gives ρcq(98.3−9.5) = 11.77 GW. The normal target of 9.5 °C requires pumping the entire discharge.</p>
+<p>After one failure, 23 pairs at 1.55 m³/s each provide 34.10 m³/s. The assumed yield of 15.5 L/s per metre produces 100 m of drawdown, which is included in the total head of 140 m. The process flow of 31.75 m³/s requires 58.02 MW at 75% efficiency. Using 67 low-yield pairs at 0.5 m³/s each adds €440 million. Pilot wells must test these assumptions. Alternative A uses 14 pairs and 18.35 m³/s at 12 °C. At 9.5 °C and maximum discharge under alternative A costs, it uses 23 pairs and 32.67 m³/s, with additional costs of €90 million.</p>
+</section>
+
+<section class="sheet dense">
+<h1>5. Cooling cascade and control</h1>
+<h2>Three stages instead of one large chiller</h2>
+<p><b>Stage 1 uses heat.</b> Heat exchangers first supply a heating network or industrial site. Blaubeuren is already investigating an expansion of its heating networks. [9] The safety calculation assumes no heat sales.</p>
+<p><b>Stage 2 uses dry cooling.</b> Closed water-to-air coolers reach air temperature plus 10 K in the base scenario. There is no evaporation and no discharge into the Blau. Their fans consume 1% of total heat rejection, including condenser heat from the refrigeration cycle.</p>
+<p><b>Stage 3 provides trim cooling.</b> The refrigeration cycle covers the remaining load. Evaporation at 7 °C and condensation at 45 °C give a Carnot COP of 7.37. Our efficiency scenario of 0.55 gives COP = 4.05. [5] Fully mechanical cooling to 9.5 °C requires 3.20 GW in year 10 and about 6.35 GW in year 20, including auxiliary power. Two 7.5 GW grid connections and a 7.0 GW backup power system cover trim cooling, fans, and pumps throughout the growth path.</p>
+<h2>Control rules instead of price optimization</h2>
+<p>Heat meters measure ρcq(T<sub>in</sub>−T<sub>out</sub>) on each line. Their sum controls the cascade. The system first supplies confirmed heat customers, then the dry coolers. If this cannot maintain 9.5 °C, trim cooling follows. At 11 °C, heat sales and price logic are disabled. At 12 °C, all available modules operate. If a sensor fails, the higher reading from two independent probes is used.</p>
+<table>
+<tr><th>Failure</th><th>Response and reserve</th></tr>
+<tr><td>Refrigeration, dry-cooling, or pump module</td><td>N+1 suffices in the design year. Maintenance occurs only within this reserve.</td></tr>
+<tr><td>Grid or backup power</td><td>Two separate supply lines, then 7.0 GW of backup power. Safe permanent operation is impossible without both.</td></tr>
+<tr><td>Temperature sensor or heat meter</td><td>Redundant measurement, conservative substitute value, and trim cooling until inspection.</td></tr>
+</table>
+<h2>Why 160 modules</h2>
+<p>The 160 modules provide 12.8 GW. One failure leaves 12.72 GW, a reserve of 5.1% above normal demand of 12.11 GW. This reserve covers fouling and maintenance. With 159 modules, one failure would leave only 4.4% reserve. In year 20, 321 modules are installed. One failure then leaves 25.6 GW, a reserve of about 5.4%.</p>
+</section>
+
+<section class="sheet">
+<h1>6. Time-series results</h1>
+<img class="figure medium" src="build/temperature-trend.svg" alt="Temperature trend without intervention and with fixed cooling capacity">
+<p class="caption">Figure 2: Natural conditions through boiling. Without expansion, the fixed 12.8 GW system reaches about 93.7 °C in year 20, while expansion maintains 9.5 °C. At 187.6 °C, normal demand is 24.3 GW and installed capacity is 25.68 GW. [10]</p>
+<p>The natural curve ends at the boiling point. At maximum discharge, the exact limits are 10.848 years with 12.8 GW and 10.782 years with 12.72 GW. On the 0.1-year grid, 12 °C is first exceeded at 10.9 and 10.8 years respectively.</p>
+<p>The growth scenario therefore expands to 321 modules with 25.68 GW by year 20. One module failure leaves 25.6 GW, a reserve of about 5.4%. This expansion is a condition of the path, not an optional later addition.</p>
+<img class="figure medium" src="build/flow-rate.svg" alt="Effect of discharge on temperature">
+<p class="caption">Figure 3: Alternative A with fixed heat flow. The valid natural assessment ends when boiling begins. [10]</p>
+<div class="result"><b>Result.</b> In design case B, high discharge determines cooling capacity. It reduces demand only in alternative A. This distinction affects capacity, well count, and costs.</div>
+</section>
+
+<section class="sheet dense model">
+<h1>7. Summer operation and economics</h1>
+<img class="figure short" src="build/cooling-months.svg" alt="Monthly cooling cascade">
+<p class="caption">Figure 4: Monthly cascade at maximum discharge and a 9.5 °C target. [10]</p>
+<p>All cases use the monthly cascade with a 9.5 °C target. Design-year electricity is 33.5 GWh at low flow, 303.9 at mean flow, and 4,374.3 GWh at maximum flow. Annual costs with maintenance are €126.8, €159.2, and €647.7 million respectively. Electricity costs €120/MWh, annual maintenance is 2.5% of investment, and discounting is 3%. Heat sales are zero. A weighted average requires a discharge hydrograph.</p>
+<table>
+<tr><th>Design B at maximum discharge</th><th>Value</th></tr>
+<tr><td>Investment through year 10</td><td>110 + 160 × 30 = €4,910 million</td></tr>
+<tr><td>Present value, constant after year 10</td><td>€14,424.2 million</td></tr>
+<tr><td>Present value, continued warming</td><td>€18,984.9 million</td></tr>
+<tr><td>Year-15 replacement, constant 160 modules</td><td>€2,461.5 million</td></tr>
+<tr><td>Year-15 replacement, growth 229 modules</td><td>€3,523.1 million</td></tr>
+<tr><td>Long-term annual cost, constant case</td><td>€811.8 million/year</td></tr>
+<tr><td>Present value with 67 low-yield well pairs</td><td>About €15,028 million</td></tr>
+<tr><td>Discounted growth plus source control</td><td>€19,170.9 million</td></tr>
+</table>
+<p>Each module adds €30 million: €15.4 million for cooling and €14.6 million for hydraulics, grid connection, and reserve. Replacement covers only cooling at €200 million per 13 modules; wells, grid connections, and controls remain. Both present values include €50 million for one year of emergency cooling. Heat sales are not assumed.</p>
+<table>
+<tr><th>Sensitivity in year ten</th><th>5 K</th><th>12 K</th><th>2% fan power</th><th>100 m head</th></tr>
+<tr><th>Electricity in GWh</th><td>3,193.6</td><td>4,969.3</td><td>5,462.6</td><td>4,224.9</td></tr>
+</table>
+<p>Base settings are 10 K, 1% fans, and 140 m head. Mean/maximum present values are A €1,281/3,618 million and B €7,755/14,424 million constant, and B €11,918/18,985 million with growth. Source control raises maximum growth to €19,171 million. Year-10/20 investment is A mean €500/800, A maximum €590/890, and B €4,910/9,740 million. Year-20 additions are A €30 million for one module and B €930 million for 31 modules. Post-boiling A and unlimited growth have no finite permanent solution.</p>
+</section>
+
+<section class="sheet">
+<h1>8. Critical discussion</h1>
+<h2>What the model establishes</h2>
+<p>The stated temperature trend requires 11.77 GW at maximum discharge. This order of magnitude depends little on equipment details. The heat-extraction circuit closes the balance without consuming water or rejecting waste heat to the Blau. Its costs make it especially important to investigate the heat source and possible interventions there.</p>
+<h2>Questions the current calculation cannot answer</h2>
+<ul>
+<li><b>Thermal capture.</b> We do not know the share or pathways of heated deep water. If several inflows mix only in the spring basin, one well pair will not suffice. Tracers and temperature profiles must determine capture effectiveness.</li>
+<li><b>Forecast form.</b> A local deep measurement need not apply to the entire inflow. The report conservatively applies it to that inflow. Alternative A must remain strictly separate. The cause remains unknown.</li>
+<li><b>Karst hydraulics.</b> Extraction and injection can alter flow paths. A coupled groundwater and heat-transport model must calculate short circuits, pressure, and interaction with other inflows.</li>
+<li><b>Ecology.</b> The 12 °C limit is a technical ceiling, not permission for 3 K of warming. The normal target of 9.5 °C must be checked against species, seasonal variation, and oxygen.</li>
+<li><b>Costs.</b> The cost range is a sensitivity analysis, not a statistical confidence interval. Karst drilling in particular could change the price substantially.</li>
+</ul>
+<h2>Operating and material risks</h2>
+<p>Calcareous water can form deposits when pressure drops and gas escapes. We keep the groundwater circuit pressurized and use double-wall, cleanable heat exchangers. Differential pressure and heat transfer reveal fouling early. [7] The closed secondary circuit prevents contamination. A leak between the walls triggers shutdown.</p>
+<p>Backup power and redundancy reduce failure probabilities but do not eliminate them. Natural hazards and common-cause failures require a separate risk analysis. Without these data, claiming that boiling will "never again" occur would be too strong.</p>
+<h2>Decisions under uncertainty</h2>
+<p>We do not recommend immediate full-scale construction. The first steps are a measurement network and a three-module pilot plant. Its energy balance determines whether the heat-extraction circuit reaches the hot inflow. Expansion follows only after that test. The historical minimum discharge need not persist from the start of the project. If such a drought threatens before commissioning, rented mobile refrigeration modules with 120 MW and their own power supply provide interim cooling. We estimate one year at €20 million for rental plus about €30 million for electricity. This is a scenario, not a guaranteed schedule. Permitting, delivery, and construction remain critical paths.</p>
+</section>
+
+<section class="sheet dense model">
+<h1>9. Implementation and conclusion</h1>
+<h2>Phased plan</h2>
+<table>
+<tr><th>Phase</th><th>Work and decision threshold</th></tr>
+<tr><td>Immediately to year 0.5</td><td>Measure temperature, discharge, chemistry, gases, seismicity, tracers, and geophysics in parallel. During an acute drought, rented mobile 120 MW modules cover the period until the pilot plant operates. One year costs €20 million in rent plus about €30 million for electricity.</td></tr>
+<tr><td>By year 1.0</td><td>Commission three 240 MW pilot modules and the first wells. One module failure leaves 160 MW. This also covers the early low-flow case of alternative A. Do not expand if capture effectiveness is inadequate.</td></tr>
+<tr><td>Years 1 to 10</td><td>Expand to 160 modules with 12.8 GW according to measured demand. Build hydraulics and bypass for 31.75 m³/s of process flow and 0.92 m³/s of bypass flow. Alternative A would remain at 13 modules.</td></tr>
+<tr><td>Years 10 to 20</td><td>No expansion is needed if temperature remains constant. On the growth path, build up to 321 modules with 25.68 GW, always before the N+1 threshold.</td></tr>
+<tr><td>Source control</td><td>If temperature continues rising, start with an exploration well and packer test. Grout the hot inflow only after demonstrating sealing and pressure resistance. Scenario cost: €250 million. Otherwise, no permanent solution is possible.</td></tr>
+<tr><td>Permanent operation</td><td>Target 9.5 °C, alarm at 12 °C. Check N+1 annually, order modules in time, and replace them every 15 years. Unlimited growth still has no finite solution.</td></tr>
+</table>
+<h2>Conclusion</h2>
+<p>Boiling can be prevented by removing excess heat from the underground inflow. Our heat-extraction circuit pumps heated water, cools it outside the spring basin, and injects the same quantity back. The stated temperature trend requires 11.77 GW at maximum discharge in year ten. A cascade of heat recovery, dry cooling, and mechanical trim cooling maintains at most 12 °C. Normal operation remains close to the natural temperature.</p>
+<p>Costs depend on the forecast interpretation. Only in alternative A does high water provide relief through dilution and permit the fixed-heat-input system. In design case B, high discharge determines the 160 modules, wells, and costs. The measurement campaign must resolve this distinction.</p>
+<p>The solution is complex, but its physics are closed and it can be tested in stages. It consumes no cooling water and rejects no heat to the Blau. The largest risks are the heat source, karst hydraulics, and drilling costs. With more development time, we would add hourly extremes, a coupled groundwater and heat-transport model, and firm cost quotations. The measurement campaign and pilot plant are therefore integral to this proposal.</p>
+<div class="result"><b>Permanence requires adaptation.</b> The heat-extraction circuit starts as a bridge. With maintenance and reserve, it suffices permanently if temperature stabilizes after year ten. If temperature continues rising, the source must be controlled. Our assessment path costs €250 million. If such control is infeasible, no finite permanent solution exists.</div>
+</section>
+
+<section class="sheet refs">
+<h1>References</h1>
+<p>[1] PlaNeT SimTech: Wie kann verhindert werden, dass das Wasser im Blautopf kocht? Problem statement 2025/26. https://www.planet-simtech.de/archiv/ (accessed 5 November 2026)</p>
+<p>[2] Landesamt für Geologie, Rohstoffe und Bergbau Baden-Württemberg: Der Blautopf. https://lgrbwissen.lgrb-bw.de/geotourismus/quellen/karstquellen/blautopf (accessed 5 November 2026)</p>
+<p>[3] Stadt Blaubeuren: Geopoint Blautopf. https://www.blaubeuren.de/Geopoint-Blautopf (accessed 5 November 2026)</p>
+<p>[4] PlaNeT SimTech: Vorgaben für den Bericht, version 10/2026. https://www.planet-simtech.de/wp-content/uploads/2023/05/PlaNeT_Vorgaben-Bericht.pdf (accessed 5 November 2026)</p>
+<p>[5] Agora Energiewende, Fraunhofer IEG: Roll-out von Großwärmepumpen in Deutschland. Strategien für den Markthochlauf in Wärmenetzen und Industrie. Version 1.3, July 2023. https://www.agora-energiewende.de/fileadmin/Projekte/2022/2022-11_DE_Large_Scale_Heatpumps/A-EW_293_Rollout_Grosswaermepumpen_WEB.pdf (accessed 5 November 2026)</p>
+<p>[6] Bayerisches Landesamt für Umwelt: Beurteilung von Wärmeeinleitungen. Merkblatt Nr. 4.5/18, January 2023. https://www.lfu.bayern.de/publikationen/get_pdf.htm?art_nr=lfu_was_00325 (accessed 5 November 2026)</p>
+<p>[7] Penot, C. et al.: Corrosion and Scaling in Geothermal Heat Exchangers. Applied Sciences 13, 11549, 2023. https://doi.org/10.3390/app132011549 (accessed 5 November 2026)</p>
+<p>[8] International Association for the Properties of Water and Steam: IAPWS Industrial Formulation 1997 for the Thermodynamic Properties of Water and Steam. Saturation pressure and boiling temperature. https://www.iapws.org/relguide/IF97-Rev.html (accessed 5 November 2026)</p>
+<p>[9] Stadt Blaubeuren: Kommunale Wärmeplanung. https://www.blaubeuren.de/de/Aktuelles/Kommunale-Waermeplanung (accessed 5 November 2026)</p>
+<p>[10] Our program code: src/model.py, repository version. The generated files build/kennwerte.json, build/verlauf.csv, and build/monate.csv contain every calculated result used in the report.</p>
+<h2>Note on source selection</h2>
+<p>Site data come from the city and the responsible state geological agency. Technical assumptions are based on specialist literature and explicitly stated scenarios. No earlier competition solutions were used.</p>
+</section>
+
+<section class="sheet refs">
+<h1>References and calculations</h1>
+<h2>Symbols</h2>
+<table>
+<tr><th>Symbol</th><th>Meaning</th><th>Unit</th></tr>
+<tr><td>H(t)</td><td>Heat input to the water</td><td>W</td></tr>
+<tr><td>P<sub>K</sub></td><td>Heat removed by the system</td><td>W</td></tr>
+<tr><td>Q, q</td><td>Volumetric flow of the spring or a module</td><td>m³/s</td></tr>
+<tr><td>ρ, c</td><td>Density and specific heat capacity of water</td><td>kg/m³, J/(kg K)</td></tr>
+<tr><td>T₀, T<sub>Z</sub>, T<sub>b</sub></td><td>Natural temperature, control limit, and boiling temperature</td><td>°C</td></tr>
+<tr><td>COP</td><td>Ratio of cooling capacity to electrical power</td><td>1</td></tr>
+<tr><td>U, A</td><td>Heat-transfer coefficient and heat-exchanger area</td><td>W/(m²K), m²</td></tr>
+</table>
+<h2>Checking the alternatives</h2>
+<p>For mixing, T<sub>M</sub> = (Q<sub>h</sub>T<sub>h</sub> + Q<sub>k</sub>T<sub>k</sub>)/(Q<sub>h</sub> + Q<sub>k</sub>). Solving for the cold-water share gives Q<sub>k</sub>/Q<sub>h</sub> = (T<sub>h</sub>−T<sub>M</sub>)/(T<sub>M</sub>−T<sub>k</sub>). With 98.3 °C, 12 °C, and 9 °C, this ratio is 28.77. At the design discharge of 32.67 m³/s, Q<sub>k</sub> = 28.77 × 32.67 m³/s = 939.8 m³/s. This is no longer local dilution but a new river.</p>
+<p>For surface cooling, P = UAΔT. With P = 11.767 GW, U = 500 W/(m²K), and ΔT = 30 K, A = 784,467 m². The value of U is deliberately generous to this alternative and is not a measured coefficient for a free water surface. Even then, the required area is more than two orders of magnitude too large. A heat pump in the spring basin would also have to reject its condenser heat elsewhere.</p>
+<h2>Present value</h2>
+<p>For each payment K<sub>t</sub> in year t, PV = Σ K<sub>t</sub>/(1+i)<sup>t</sup>. For K<sub>t</sub> = a + bt and t = 1, 2, ..., PV = a/i + b(1+i)/i² converges at i = 0.03, including linear growth. The initial payment comprises €110 million in fixed costs and three modules. Each additional module costs €30 million in its construction year. Operation and maintenance are calculated annually. Replacement investment in year 15 is €200 million × module count in year 15/13, or €3,523.08 million on the growth path. The first year includes €50 million for emergency cooling. This produces €14,424.20 million at constant temperature and €18,984.91 million on the growth path. The €250 million source-control assessment in year 10, discounted at 3%, raises the growth present value to €19,170.92 million.</p>
+<p class="small">All online sources used are freely accessible. The problem statement on the cover is abridged and cited as such in [1]. The full original remains linked on the competition website.</p>
+</section>
+
+<section class="sheet">
+<h1>Appendix A: Reproduction and checks</h1>
+<h2>Execution</h2>
+<p>The model uses only the Python standard library. The following command regenerates the results:</p>
+<p><code>python3 src/model.py --output-dir build</code></p>
+<p>The file kennwerte.json contains the design values. verlauf.csv contains the annual series from 0 to 20 years in steps of 0.1 years. monate.csv contains the monthly cascade, and ausbau.csv contains the growth path. The SVG figures are generated from the same data as the tables.</p>
+<h2>Built-in consistency checks</h2>
+<ul class="checklist">
+<li>The temperature trend reaches 98.3 °C in year ten. Cooling demand is 90.0 MW, 817.6 MW, and 11.77 GW.</li>
+<li>The 160 modules handle even maximum discharge at the normal target of 9.5 °C. One module failure leaves 5.1% reserve.</li>
+<li>The high-flow mixture satisfies the mass and energy balances. Capacity after one well-pair failure suffices for the process flow.</li>
+<li>Monthly hours sum to 8760. Replacement costs use the module count in year 15.</li>
+<li>Dry cooling and trim cooling together do not exceed total heat removal.</li>
+</ul>
+<h2>Monthly assumptions</h2>
+<table>
+<tr><th>Month</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th></tr>
+<tr><th>Air in °C</th><td>0</td><td>1</td><td>4</td><td>8</td><td>13</td><td>16</td><td>18</td><td>18</td><td>14</td><td>9</td><td>4</td><td>1</td></tr>
+</table>
+<p>The monthly values represent a mild to warm annual scenario. They do not replace a design based on hourly extremes. The separate summer case therefore uses the full remaining load and calculated COP rather than annual averages.</p>
+<h2>Reading the JSON file</h2>
+<table class="keys">
+<tr><th>JSON field</th><th>Meaning</th></tr>
+<tr><td><code>baseline_model</code></td><td>Design case B</td></tr>
+<tr><td><code>baseline_cooling_year10_max_mw</code></td><td>Demand at maximum discharge</td></tr>
+<tr><td><code>baseline_annual_max</code></td><td>Annual energy</td></tr>
+<tr><td><code>baseline_installed_threshold_year</code><br><code>baseline_n_plus_one_threshold_year</code></td><td>First calculation-grid years above 12 °C, not equipment damage</td></tr>
+<tr><td><code>baseline_growth</code></td><td>Cash flows on the growth path</td></tr>
+<tr><td><code>baseline_stationary</code></td><td>Cash flows on the constant path</td></tr>
+<tr><td><code>alternative_a</code></td><td>Secondary scenario with fixed heat input</td></tr>
+</table>
+<p><b>Limits of the files.</b> CSV and SVG files are calculated results, not independent evidence. Their validity follows from the assumptions in the main report.</p>
+</section>
+
+<section class="sheet">
+<h1>Appendix B: Review log and submission check</h1>
+<h2>Derivation and independent work</h2>
+<p>This work uses no earlier competition solutions. Its starting points are the task, cited site data, and the energy balance. The heat-extraction circuit and heat-flow-based control were developed from these foundations. The mixing formula is a classical mass and energy balance. Combining it with power-based high-flow control is part of our solution. Every central figure can be reproduced with the supplied program.</p>
+<table>
+<tr><th>Check</th><th>Result and evidence</th></tr>
+<tr><td>Heat demand</td><td>The temperature trend requires 90.0 MW, 817.6 MW, and 11.77 GW depending on discharge.</td></tr>
+<tr><td>Forecast alternatives</td><td>Design B is the stated temperature trend. Alternative A remains separately identified.</td></tr>
+<tr><td>Hydraulics</td><td>Process flow of 31.750 m³/s plus a bypass of 0.920 m³/s gives 32.67 m³/s and 11.77 GW of heat removal.</td></tr>
+<tr><td>Redundancy</td><td>160 × 80 MW gives 12.8 GW, with 12.72 GW after one module failure. The limits of 10.848 and 10.782 years are calculated.</td></tr>
+<tr><td>Economics</td><td>Investment, replacement, auxiliary power, and annual expansion are reported separately.</td></tr>
+<tr><td>Independent review</td><td>Kimi and two DeepSeek models reviewed the report and code. Their objections concerning phase change, high flow, auxiliary power, and expansion have been addressed. No human review is implied.</td></tr>
+</table>
+<h2>Formal check before an actual submission</h2>
+<ul>
+<li>Replace the test ID TEST-0000 on the cover and in the PDF filename with the actual team ID. Do not add names or a school.</li>
+<li>Submit one PDF. The cover, ten main pages including the summary, and four pages for references and appendices are already separate.</li>
+<li>Visually check A4, 12 pt type, margins of at least 2.5 cm, and formula rendering before sending.</li>
+<li>Do not present scenario values as measurements. Adapt the AI disclosure to the team's actual subsequent work.</li>
+<li>The human team prepares the presentation independently. The report, model, and figures provide verifiable facts for it.</li>
+</ul>
+<h2>Answer to the overall question</h2>
+<p>The heat-extraction circuit prevents boiling through measurable heat removal before the spring basin. Its permanence depends on measurement, reserve, and adaptation. These conditions are part of the proposal rather than later additions.</p>
+</section>
+</body>
+</html>
